@@ -20,12 +20,8 @@ namespace OCRApp
 
 			app.UseAuthorization();
 
-<!--#if (WebAssembly)
-
 			app.UseUnoFrameworkFiles();
 			app.MapFallbackToFile("index.html");
-
-#endif -->
 
 			app.MapControllers();
 			app.UseStaticFiles();
