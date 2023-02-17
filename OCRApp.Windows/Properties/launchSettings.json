@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "OCRApp.Windows": {
+      "commandName": "MsixPackage"
+    }
+  }
+}
