@@ -5,10 +5,17 @@
     xmlns:local="using:OCRApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"    
+    xmlns:not_win="http://uno.ui/not_win"
+    mc:Ignorable="d not_win"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-      <TextBlock Text="Hello, world!" Margin="20" FontSize="30" />
-    </Grid>
+    <StackPanel Spacing="15" Padding="15">
+
+        <TextBlock Text="Arabic OCR" FontSize="24" HorizontalAlignment="Center" />
+
+        <StackPanel Orientation="Horizontal">
+            <not_win:Button Content="Take a photo" />
+            <Button Content="Select a file" />
+        </StackPanel>
+    </StackPanel>
 </Page>
