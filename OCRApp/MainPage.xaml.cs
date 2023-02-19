@@ -1,30 +1,64 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+namespace OCRApp;
 
-namespace OCRApp
+public sealed partial class MainPage : Page
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
+    public MainPage()
     {
-        public MainPage()
+        this.InitializeComponent();
+    }
+
+    private async void SelectFileButton_Click(object sender, RoutedEventArgs e)
+    {
+        var picker = new FileOpenPicker()
         {
-            this.InitializeComponent();
+            FileTypeFilter =
+            {
+                ".jpg", ".png",
+            },
+        };
+
+        // Get the current window's HWND by passing a Window object
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+        // Associate the HWND with the file picker
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+
+        StorageFile file = await picker.PickSingleFileAsync();
+        if (file != null)
+        {
+            using var stream = await file.OpenReadAsync();
+            var bitmapImage = new BitmapImage();
+            await bitmapImage.SetSourceAsync(stream);
+            ImageToScan.Source = bitmapImage;
         }
+        else
+        {
+            ImageToScan.Source = null;
+        }
+    }
+
+    private async void ScanButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (ImageToScan.Source is null)
+        {
+            return;
+        }
+
+        var dialog = new ContentDialog()
+        {
+            Title = "Title",
+            Content = "Content",
+            XamlRoot = this.XamlRoot,
+            PrimaryButtonText = "Ok",
+        };
+        await dialog.ShowAsync();
+
     }
 }
