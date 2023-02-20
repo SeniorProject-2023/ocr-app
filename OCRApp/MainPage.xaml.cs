@@ -2,6 +2,7 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -59,6 +60,33 @@ public sealed partial class MainPage : Page
             PrimaryButtonText = "Ok",
         };
         await dialog.ShowAsync();
-
     }
+
+#if __ANDROID__ || __IOS__
+    private async void CaptureFromCameraButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var captureUI = new CameraCaptureUI();
+
+            var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+            if (file != null)
+            {
+                using var stream = await file.OpenReadAsync();
+                var bitmapImage = new BitmapImage();
+                await bitmapImage.SetSourceAsync(stream);
+                ImageToScan.Source = bitmapImage;
+            }
+            else
+            {
+                ImageToScan.Source = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+    }
+#endif
 }

@@ -16,8 +16,8 @@
             <TextBlock Text="Arabic OCR" FontSize="24" HorizontalAlignment="Center" />
             <TextBlock FontSize="18">Welcome to our Arabic OCR. Please select the image to scan.</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15">
-                <android:Button Content="Take a photo" />
-                <ios:Button Content="Take a photo" />
+                <android:Button Content="Take a photo" x:Name="CaptureFromCameraButton" Click="CaptureFromCameraButton_Click" />
+                <ios:Button Content="Take a photo" x:Name="CaptureFromCameraButton" Click="CaptureFromCameraButton_Click" />
                 <Button Content="Select an image file to scan" x:Name="SelectFileButton" Click="SelectFileButton_Click" />
             </StackPanel>
             <Image x:Name="ImageToScan" Stretch="None" />
