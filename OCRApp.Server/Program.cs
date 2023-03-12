@@ -4,29 +4,29 @@ using Uno.Wasm.Bootstrap.Server;
 
 namespace OCRApp
 {
-	public sealed class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
+    public sealed class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
+            // Add services to the container.
 
-			builder.Services.AddControllers();
+            builder.Services.AddControllers();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline.
 
-			app.UseAuthorization();
+            app.UseAuthorization();
 
-			app.UseUnoFrameworkFiles();
-			app.MapFallbackToFile("index.html");
+            app.UseUnoFrameworkFiles();
+            app.MapFallbackToFile("index.html");
 
-			app.MapControllers();
-			app.UseStaticFiles();
+            app.MapControllers();
+            app.UseStaticFiles();
 
-			app.Run();
-		}
-	}
+            app.Run();
+        }
+    }
 }
