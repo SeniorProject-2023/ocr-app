@@ -2,10 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <MaterialColors xmlns="using:Uno.Material" />
-
-        <!-- Load the Material control resources -->
-        <MaterialResources xmlns="using:Uno.Material" />
+        <!-- Load Uno.Material resources -->
+        <MaterialTheme xmlns="using:Uno.Material" />
 
         <!--
             Add resource dictionaries.
