@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <UnoVersion>4.9.0-dev.29</UnoVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="Uno.WinUI" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.Lottie" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.Skia.Linux.FrameBuffer" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.Skia.Wpf" Version="$(UnoVersion)" />
+    <PackageReference Update="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" />
+  </ItemGroup>
+</Project>
