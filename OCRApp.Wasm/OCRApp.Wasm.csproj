@@ -2,17 +2,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <NoWarn>NU1701</NoWarn>
-	</PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
     <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <!--
-		IL Linking is disabled in Debug configuration.
-		When building in Release, see https://aka.platform.uno/wasm-il-linker
-		-->
+    IL Linking is disabled in Debug configuration.
+    When building in Release, see https://aka.platform.uno/wasm-il-linker
+    -->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -25,7 +24,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.png" />
-	</ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
@@ -35,11 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <!--
-		This item group is required by the project template because of the
-		new SDK-Style project, otherwise some files are not added automatically.
+    This item group is required by the project template because of the
+    new SDK-Style project, otherwise some files are not added automatically.
 
-		You can safely remove this ItemGroup completely.
-		-->
+    You can safely remove this ItemGroup completely.
+    -->
     <None Include="Program.cs" />
     <None Include="LinkerConfig.xml" />
     <None Include="wwwroot\web.config" />

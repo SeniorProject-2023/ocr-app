@@ -3,15 +3,15 @@ using Microsoft.UI.Xaml;
 
 namespace OCRApp.Wasm
 {
-	public sealed class Program
-	{
-		private static App _app;
+    public sealed class Program
+    {
+        private static App? _app;
 
-		static int Main(string[] args)
-		{
-			Microsoft.UI.Xaml.Application.Start(_ => _app = new AppHead());
+        static int Main(string[] args)
+        {
+            Microsoft.UI.Xaml.Application.Start(_ => _app = new AppHead());
 
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 }

@@ -2,15 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows')) or '$(EnableWindowsTargeting)' == 'true'">$(TargetFrameworks);net7.0-windows10.0.18362</TargetFrameworks>
     <TargetFrameworks>$(TargetFrameworks);net7.0</TargetFrameworks>
-    <!-- 
-			This condition is used when building under Linux. If you're not building under
-			 Linux, you can remove this line and the conditions below.
-		-->
-    <_CanUseMobileTargets Condition="!$([MSBuild]::IsOSPlatform('Linux'))">true</_CanUseMobileTargets>
 
-    <TargetFrameworks Condition="'$(_CanUseMobileTargets)'=='true'">$(TargetFrameworks);net7.0-android</TargetFrameworks>
-    <TargetFrameworks Condition="'$(_CanUseMobileTargets)'=='true'">$(TargetFrameworks);net7.0-ios</TargetFrameworks>
-    <TargetFrameworks Condition="'$(_CanUseMobileTargets)'=='true'">$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('Linux'))">$(TargetFrameworks);net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 
     <DefaultLanguage>en</DefaultLanguage>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
