@@ -35,8 +35,7 @@
                               HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
                                 <!-- Addition Grid to match the background page -->
                                 <Grid HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Background="#000b2e">
+                                    VerticalAlignment="Center">
                                     <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource AppBackground}" />
 
                                     <toolkit:ElevatedView x:Name="ElevatedView"
