@@ -20,6 +20,7 @@
             <!-- Include additional resources here, or in OCRApp/AppResources.xaml -->
             <CornerRadius x:Key="MaterialFabTabBarItemCornerRadius">100</CornerRadius>
             <x:Double x:Key="MaterialFabTabBarItemOffset">-40</x:Double>
+            <Color x:Key="AppBackground">#000B2E</Color>
             <Style x:Key="MaterialRoundedBottomFabTabBarItemStyle" TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomFabTabBarItemStyle}">
                 <Setter Property="CornerRadius" Value="{StaticResource MaterialFabTabBarItemCornerRadius}" />
                 <Setter Property="RenderTransform">
