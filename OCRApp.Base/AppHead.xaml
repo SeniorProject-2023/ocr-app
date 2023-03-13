@@ -19,68 +19,79 @@
             
             <!-- Include additional resources here, or in OCRApp/AppResources.xaml -->
             <CornerRadius x:Key="MaterialFabTabBarItemCornerRadius">100</CornerRadius>
-            <Color x:Key="AppBackground">#000B2E</Color>
+            <x:Double x:Key="MaterialFabTabBarItemOffset">-40</x:Double>
             <Style x:Key="MaterialRoundedBottomFabTabBarItemStyle" TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomFabTabBarItemStyle}">
                 <Setter Property="CornerRadius" Value="{StaticResource MaterialFabTabBarItemCornerRadius}" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="{StaticResource MaterialFabTabBarItemOffset}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="utu:TabBarItem">
                             <Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
-                                <toolkit:ElevatedView x:Name="ElevatedView"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Background="Transparent"
-                                    CornerRadius="{TemplateBinding CornerRadius}"
-                                    Elevation="6">
+                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                                <!-- Addition Grid to match the background page -->
+                                <Grid CornerRadius="{TemplateBinding CornerRadius}"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Background="#000b2e">
+                                    <toolkit:ElevatedView x:Name="ElevatedView"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Background="Transparent"
+                                                      Margin="8"
+                                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                                      Elevation="6">
 
-                                    <um:Ripple x:Name="Ripple"
-                                        CornerRadius="{TemplateBinding CornerRadius}"
-                                        Feedback="{TemplateBinding Foreground}"
-                                        FeedbackOpacity="{StaticResource PressedOpacity}">
-                                        <Grid CornerRadius="{TemplateBinding CornerRadius}">
-                                            <Grid x:Name="Root"
-                                                Background="{TemplateBinding Background}">
-                                                <StackPanel x:Name="ContentPanel"
-                                                    Margin="{TemplateBinding Padding}"
-                                                    Orientation="Horizontal">
+                                        <um:Ripple x:Name="Ripple"
+                                               CornerRadius="{TemplateBinding CornerRadius}"
+                                               Feedback="{TemplateBinding Foreground}"
+                                               FeedbackOpacity="{StaticResource PressedOpacity}">
+                                            <Grid CornerRadius="{TemplateBinding CornerRadius}">
+                                                <Grid x:Name="Root"
+                                                  Background="{TemplateBinding Background}">
+                                                    <StackPanel x:Name="ContentPanel"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            Orientation="Horizontal">
 
-                                                    <!--  Icon  -->
-                                                    <Viewbox Width="{StaticResource MaterialFabTabBarItemContentWidthOrHeight}"
-                                                     Height="{StaticResource MaterialFabTabBarItemContentWidthOrHeight}"
-                                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                     Visibility="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-                                                        <ContentPresenter x:Name="IconPresenter"
-                                                                  Content="{TemplateBinding Icon}"
-                                                                  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                    </Viewbox>
+                                                        <!--  Icon  -->
+                                                        <Viewbox Width="{StaticResource MaterialFabTabBarItemContentWidthOrHeight}"
+                                                             Height="{StaticResource MaterialFabTabBarItemContentWidthOrHeight}"
+                                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                             Visibility="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                                                            <ContentPresenter x:Name="IconPresenter"
+                                                                          Content="{TemplateBinding Icon}"
+                                                                          Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                        </Viewbox>
 
-                                                    <!--  Icon/Content spacing  -->
-                                                    <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-                                                        <Border Width="{StaticResource MaterialFabTabBarItemIconTextPadding}"
-                                                        Visibility="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-                                                    </Border>
+                                                        <!--  Icon/Content spacing  -->
+                                                        <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                                                            <Border Width="{StaticResource MaterialFabTabBarItemIconTextPadding}"
+                                                                Visibility="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                                                        </Border>
 
-                                                    <!--  Content  -->
-                                                    <ContentPresenter x:Name="ContentPresenter"
-                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                              Content="{TemplateBinding Content}"
-                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                              ContentTransitions="{TemplateBinding ContentTransitions}"
-                                                              FontFamily="{TemplateBinding FontFamily}"
-                                                              FontWeight="{TemplateBinding FontWeight}"
-                                                              FontSize="{TemplateBinding FontSize}" />
-                                                </StackPanel>
-                                                <Ellipse Stroke="{StaticResource AppBackground}" StrokeThickness="5" />
+                                                        <!--  Content  -->
+                                                        <ContentPresenter x:Name="ContentPresenter"
+                                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                      Content="{TemplateBinding Content}"
+                                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                      ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                                      FontFamily="{TemplateBinding FontFamily}"
+                                                                      FontWeight="{TemplateBinding FontWeight}"
+                                                                      FontSize="{TemplateBinding FontSize}" />
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Border x:Name="StateOverlay"
+                                                    Background="Transparent"
+                                                    CornerRadius="{TemplateBinding CornerRadius}" />
                                             </Grid>
-                                            <Border x:Name="StateOverlay"
-                                            Background="Transparent"
-                                            CornerRadius="{TemplateBinding CornerRadius}" />
-                                        </Grid>
-                                    </um:Ripple>
-                                </toolkit:ElevatedView>
+                                        </um:Ripple>
+                                    </toolkit:ElevatedView>
+                                </Grid>
 
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
@@ -90,23 +101,23 @@
                                         <VisualState x:Name="PointerOver">
                                             <VisualState.Setters>
                                                 <Setter Target="StateOverlay.Background"
-                                                Value="{ThemeResource OnPrimaryContainerHoverBrush}" />
+                                                    Value="{ThemeResource OnPrimaryContainerHoverBrush}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                         <VisualState x:Name="Pressed">
                                             <VisualState.Setters>
                                                 <Setter Target="StateOverlay.Background"
-                                                Value="{ThemeResource OnPrimaryContainerPressedBrush}" />
+                                                    Value="{ThemeResource OnPrimaryContainerPressedBrush}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                         <VisualState x:Name="Disabled">
                                             <VisualState.Setters>
                                                 <Setter Target="IconPresenter.Foreground"
-                                                Value="{ThemeResource OnSurfaceDisabledBrush}" />
+                                                    Value="{ThemeResource OnSurfaceDisabledBrush}" />
                                                 <Setter Target="ContentPresenter.Foreground"
-                                                Value="{ThemeResource OnSurfaceDisabledBrush}" />
+                                                    Value="{ThemeResource OnSurfaceDisabledBrush}" />
                                                 <Setter Target="StateOverlay.Background"
-                                                Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
+                                                    Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
@@ -116,7 +127,7 @@
                                         <VisualState x:Name="Focused">
                                             <VisualState.Setters>
                                                 <Setter Target="StateOverlay.Background"
-                                                Value="{ThemeResource OnPrimaryContainerFocusedBrush}" />
+                                                    Value="{ThemeResource OnPrimaryContainerFocusedBrush}" />
                                             </VisualState.Setters>
                                         </VisualState>
 
