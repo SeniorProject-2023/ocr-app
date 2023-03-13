@@ -7,21 +7,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:android="http://uno.ui/android"
     xmlns:ios="http://uno.ui/ios"
+    xmlns:utu="using:Uno.Toolkit.UI"
     mc:Ignorable="d android ios"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#000b2e">
 
-    <ScrollViewer>
-        <StackPanel Spacing="15" Padding="15">
-            <TextBlock Text="Arabic OCR" FontSize="24" HorizontalAlignment="Center" />
-            <TextBlock FontSize="18">Welcome to our Arabic OCR. Please select the image to scan.</TextBlock>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15">
-                <android:Button Content="Take a photo" x:Name="CaptureFromCameraButton" Click="CaptureFromCameraButton_Click" />
-                <ios:Button Content="Take a photo" x:Name="CaptureFromCameraButton" Click="CaptureFromCameraButton_Click" />
-                <Button Content="Select an image file to scan" x:Name="SelectFileButton" Click="SelectFileButton_Click" />
-            </StackPanel>
-            <Image x:Name="ImageToScan" Stretch="None" />
-            <Button x:Name="ScanButton" Content="Scan image" Click="ScanButton_Click" HorizontalAlignment="Center"/>
-        </StackPanel>
-    </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <utu:TabBar SelectedIndex="1" Grid.Row="1" Background="#46C8E5"
+		    Style="{StaticResource BottomTabBarStyle}">
+            <utu:TabBar.Items>
+                <utu:TabBarItem>
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE10F;" Foreground="#666666" FontSize="30" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem Style="{StaticResource MaterialBottomFabTabBarItemStyle}">
+
+                    <utu:TabBarItem.Icon>
+                        <SymbolIcon Symbol="Add" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+                <utu:TabBarItem>
+                    <utu:TabBarItem.Icon>
+                        <FontIcon Glyph="&#xE13D;" Foreground="#666666" />
+                    </utu:TabBarItem.Icon>
+                </utu:TabBarItem>
+            </utu:TabBar.Items>
+        </utu:TabBar>
+
+    </Grid>
+    
 
 </Page>

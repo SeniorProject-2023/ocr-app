@@ -2,6 +2,7 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Uno.Toolkit.UI;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -13,8 +14,9 @@ public sealed partial class MainPage : Page
     public MainPage()
     {
         this.InitializeComponent();
-    }
 
+    }
+    /*
     private async void SelectFileButton_Click(object sender, RoutedEventArgs e)
     {
         var picker = new FileOpenPicker()
@@ -89,4 +91,5 @@ public sealed partial class MainPage : Page
         }
     }
 #endif
+    */
 }
