@@ -18,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
             
             <!-- Include additional resources here, or in OCRApp/AppResources.xaml -->
-            <CornerRadius x:Key="MaterialFabTabBarItemCornerRadius">100</CornerRadius>
+            <CornerRadius x:Key="MaterialFabTabBarItemCornerRadius">50</CornerRadius>
             <x:Double x:Key="MaterialFabTabBarItemOffset">-40</x:Double>
             <Color x:Key="AppBackground">#000B2E</Color>
             <Style x:Key="MaterialRoundedBottomFabTabBarItemStyle" TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomFabTabBarItemStyle}">
@@ -34,10 +34,11 @@
                             <Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
                                 <!-- Addition Grid to match the background page -->
-                                <Grid CornerRadius="{TemplateBinding CornerRadius}"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Background="#000b2e">
+                                <Grid HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="#000b2e">
+                                    <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource AppBackground}" />
+
                                     <toolkit:ElevatedView x:Name="ElevatedView"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center"
