@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="OCRApp.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OCRApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource AppBackground}">
+
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Ideally this should be auto. But WinUI crashes for unknown reason. -->
+            <!-- https://github.com/microsoft/microsoft-ui-xaml/issues/8299 -->
+            <RowDefinition Height="12" />
+        </Grid.RowDefinitions>
+
+        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
+            <FlipView.ItemTemplate>
+                <DataTemplate x:DataType="BitmapImage">
+                    <Grid>
+                        <Image Source="{x:Bind}" />
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+        <PipsPager NumberOfPages="{x:Bind VM.ImagesToScan.Count, Mode=OneWay}"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center" />
+    </Grid>
+
+
+</Page>

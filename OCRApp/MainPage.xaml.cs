@@ -2,7 +2,7 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Uno.Toolkit.UI;
+using OCRApp.ViewModels;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -14,9 +14,10 @@ public sealed partial class MainPage : Page
     public MainPage()
     {
         this.InitializeComponent();
-
     }
-    /*
+
+    public HomeViewModel VM { get; set; } = new();
+
     private async void SelectFileButton_Click(object sender, RoutedEventArgs e)
     {
         var picker = new FileOpenPicker()
@@ -32,24 +33,20 @@ public sealed partial class MainPage : Page
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
-
         StorageFile file = await picker.PickSingleFileAsync();
         if (file != null)
         {
             using var stream = await file.OpenReadAsync();
             var bitmapImage = new BitmapImage();
             await bitmapImage.SetSourceAsync(stream);
-            ImageToScan.Source = bitmapImage;
-        }
-        else
-        {
-            ImageToScan.Source = null;
+
+            VM.ImagesToScan.Add(bitmapImage);
         }
     }
 
     private async void ScanButton_Click(object sender, RoutedEventArgs e)
     {
-        if (ImageToScan.Source is null)
+        if (VM.ImagesToScan.Count == 0)
         {
             return;
         }
@@ -67,29 +64,18 @@ public sealed partial class MainPage : Page
 #if __ANDROID__ || __IOS__
     private async void CaptureFromCameraButton_Click(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            var captureUI = new CameraCaptureUI();
+        var captureUI = new CameraCaptureUI();
 
-            var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+        var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
 
-            if (file != null)
-            {
-                using var stream = await file.OpenReadAsync();
-                var bitmapImage = new BitmapImage();
-                await bitmapImage.SetSourceAsync(stream);
-                ImageToScan.Source = bitmapImage;
-            }
-            else
-            {
-                ImageToScan.Source = null;
-            }
-        }
-        catch (Exception ex)
+        if (file != null)
         {
-            System.Diagnostics.Debug.WriteLine(ex);
+            using var stream = await file.OpenReadAsync();
+            var bitmapImage = new BitmapImage();
+            await bitmapImage.SetSourceAsync(stream);
+            VM.ImagesToScan.Add(bitmapImage);
         }
     }
 #endif
-    */
+
 }

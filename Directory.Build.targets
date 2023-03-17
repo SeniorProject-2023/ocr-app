@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>4.9.0-dev.29</UnoVersion>
+    <UnoVersion>4.9.0-dev.119</UnoVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Uno.WinUI" Version="$(UnoVersion)" />
