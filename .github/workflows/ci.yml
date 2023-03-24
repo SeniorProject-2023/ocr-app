@@ -27,4 +27,4 @@ jobs:
       run: msbuild -t:restore OCRApp.sln
 
     - name: Build
-      run: msbuild OCRApp.sln
+      run: msbuild -m OCRApp.sln
