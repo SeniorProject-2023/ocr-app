@@ -1,7 +1,8 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Imaging;
 using OCRApp.ViewModels;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -34,13 +35,19 @@ public sealed partial class MainPage : Page
         WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
         StorageFile file = await picker.PickSingleFileAsync();
+        await AddStorageFileAsync(file);
+    }
+
+    private async Task AddStorageFileAsync(StorageFile? file)
+    {
         if (file != null)
         {
-            using var stream = await file.OpenReadAsync();
-            var bitmapImage = new BitmapImage();
-            await bitmapImage.SetSourceAsync(stream);
+            using var stream = await file.OpenStreamForReadAsync();
+            var bytes = new byte[(int)stream.Length];
+            stream.Read(bytes, 0, (int)stream.Length);
 
-            VM.ImagesToScan.Add(bitmapImage);
+            VM.ImagesToScan.Add(new ByteArrayWrapper(bytes, VM));
+            VM.SelectedIndex = VM.ImagesToScan.Count - 1;
         }
     }
 
@@ -67,14 +74,7 @@ public sealed partial class MainPage : Page
         var captureUI = new CameraCaptureUI();
 
         var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
-
-        if (file != null)
-        {
-            using var stream = await file.OpenReadAsync();
-            var bitmapImage = new BitmapImage();
-            await bitmapImage.SetSourceAsync(stream);
-            VM.ImagesToScan.Add(bitmapImage);
-        }
+        await AddStorageFileAsync(file);
     }
 #endif
 
