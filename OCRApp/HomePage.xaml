@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="OCRApp.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OCRApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource AppBackground}">
+
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
+            <FlipView.ItemTemplate>
+                <DataTemplate x:DataType="local:ByteArrayWrapper">
+                    <Grid>
+                        <Image Source="{x:Bind local:Helpers.ConvertByteArrayToBitmapImage((local:ByteArrayWrapper))}" />
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Disabled"
+                      VerticalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{x:Bind VM.ImagesToScan}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Height="50" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:ByteArrayWrapper">
+                        <Grid>
+                            <Image Width="50" Height="50" Source="{x:Bind local:Helpers.ConvertByteArrayToBitmapImage((local:ByteArrayWrapper))}" />
+                            <Border Width="50" Height="50" BorderThickness="2" BorderBrush="{ThemeResource SystemColorHighlightColor}" Visibility="{x:Bind Visibility, Mode=OneWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>
