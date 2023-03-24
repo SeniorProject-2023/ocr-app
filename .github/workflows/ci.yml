@@ -19,7 +19,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - run: |
-        & dotnet tool update --global uno.check --version 1.12.0-dev.26
+        & dotnet tool update --global uno.check --version 1.12.1
         & uno-check -v --ci --non-interactive --fix
       name: Run Uno Check
 
