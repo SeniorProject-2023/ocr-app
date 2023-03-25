@@ -13,8 +13,8 @@
     <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
     <PackageReference Include="Uno.WinUI.Lottie" />
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" />
-    <PackageReference Include="SkiaSharp.Skottie" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
+    <PackageReference Include="SkiaSharp.Skottie" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OCRApp\OCRApp.csproj" />
