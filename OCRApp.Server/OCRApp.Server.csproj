@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OCRApp.Wasm\OCRApp.Wasm.csproj" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.Server" Version="7.0.0-dev.195" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.Server" />
   </ItemGroup>
 
 </Project>
