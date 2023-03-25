@@ -157,13 +157,11 @@
                                       VerticalAlignment="Center">
                                     <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource AppBackground}" />
 
-                                    <toolkit:ElevatedView x:Name="ElevatedView"
-                                                          HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"
-                                                          Background="Transparent"
-                                                          Margin="8"
-                                                          CornerRadius="{TemplateBinding CornerRadius}"
-                                                          Elevation="6">
+                                    <Grid HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Background="Transparent"
+                                          Margin="8"
+                                          CornerRadius="{TemplateBinding CornerRadius}">
 
                                         <um:Ripple x:Name="Ripple"
                                                    CornerRadius="{TemplateBinding CornerRadius}"
@@ -210,7 +208,7 @@
                                                     CornerRadius="{TemplateBinding CornerRadius}" />
                                             </Grid>
                                         </um:Ripple>
-                                    </toolkit:ElevatedView>
+                                    </Grid>
                                 </Grid>
 
                                 <VisualStateManager.VisualStateGroups>
