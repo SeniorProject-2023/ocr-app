@@ -25,7 +25,7 @@
             <x:Double x:Key="MaterialNavigationTabBarItemIconHeight">22</x:Double>
             <Color x:Key="AppBackground">#000B2E</Color>
 
-            <Style x:Key="CustomizedMaterialBottomTabBarItemStyle" TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomTabBarItemStyle}">
+            <Style TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomTabBarItemStyle}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="utu:TabBarItem">
