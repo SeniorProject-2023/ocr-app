@@ -21,9 +21,8 @@
             <CornerRadius x:Key="MaterialFabTabBarItemCornerRadius">50</CornerRadius>
 
             <x:Double x:Key="MaterialFabTabBarItemOffset">-40</x:Double>
-            
+
             <x:Double x:Key="MaterialNavigationTabBarItemIconHeight">22</x:Double>
-            <Color x:Key="AppBackground">#000B2E</Color>
 
             <Style TargetType="utu:TabBarItem" BasedOn="{StaticResource MaterialBottomTabBarItemStyle}">
                 <Setter Property="Template">
@@ -155,7 +154,7 @@
                                 <!-- Addition Grid to match the background page -->
                                 <Grid HorizontalAlignment="Center"
                                       VerticalAlignment="Center">
-                                    <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource AppBackground}" />
+                                    <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
 
                                     <Grid HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
