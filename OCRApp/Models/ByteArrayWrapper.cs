@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using OCRApp.ViewModels;
 
 namespace OCRApp;
@@ -14,7 +13,7 @@ public sealed class ByteArrayWrapper : BindableBase
         Bytes = bytes;
     }
 
-    public byte[] Bytes { get; set; }
+    public byte[] Bytes { get; }
 
     public Visibility Visibility => _viewModel.ImagesToScan[_viewModel.SelectedIndex].Bytes == this.Bytes ? Visibility.Visible : Visibility.Collapsed;
 
