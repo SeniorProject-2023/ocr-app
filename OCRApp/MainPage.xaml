@@ -9,7 +9,7 @@
     xmlns:ios="http://uno.ui/ios"
     xmlns:utu="using:Uno.Toolkit.UI"
     mc:Ignorable="d android ios"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource BackgroundColor}">
 
     <Grid>
         <Grid.RowDefinitions>

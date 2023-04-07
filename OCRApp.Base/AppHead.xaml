@@ -154,7 +154,7 @@
                                 <!-- Addition Grid to match the background page -->
                                 <Grid HorizontalAlignment="Center"
                                       VerticalAlignment="Center">
-                                    <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                                    <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource BackgroundColor}" />
 
                                     <Grid HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
