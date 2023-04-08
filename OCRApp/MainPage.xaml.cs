@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
+using Uno.Toolkit.UI;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -68,6 +69,18 @@ public sealed partial class MainPage : Page
         await dialog.ShowAsync();
     }
 
+    private void TabBar_SelectionChanged(TabBar sender, TabBarSelectionChangedEventArgs args)
+    {
+        if (ReferenceEquals(args.NewItem, HomeTabBarItem))
+        {
+            VM.ActivePage = new HomePage(VM);
+        }
+        else if (ReferenceEquals(args.NewItem, AccountTabBarItem))
+        {
+            VM.ActivePage = new LoginPage();
+        }
+    }
+
 #if __ANDROID__ || __IOS__
     private async void CaptureFromCameraButton_Click(object sender, RoutedEventArgs e)
     {
@@ -77,5 +90,4 @@ public sealed partial class MainPage : Page
         await AddStorageFileAsync(file);
     }
 #endif
-
 }
