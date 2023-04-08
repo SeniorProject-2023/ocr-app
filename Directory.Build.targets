@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>4.9.0-dev.119</UnoVersion>
+    <UnoVersion>4.9.0-dev.439</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <MicrosoftWindowsSDKNETRefVersion>10.0.22621.28</MicrosoftWindowsSDKNETRefVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>

@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.UI.Xaml.Controls;
 
 namespace OCRApp.ViewModels;
@@ -8,15 +7,13 @@ public sealed class HomeViewModel : BindableBase
 {
     public ObservableCollection<ByteArrayWrapper> ImagesToScan { get; } = new();
 
-    private Page _activePage;
+    private Page? _activePage;
     private int _selectedIndex;
 
-    public Page ActivePage
+    public Page? ActivePage
     {
         get => _activePage;
-
-        [MemberNotNull(nameof(_activePage))]
-        set => SetProperty(ref _activePage!, value);
+        set => SetProperty(ref _activePage, value);
     }
 
     public int SelectedIndex
@@ -30,10 +27,5 @@ public sealed class HomeViewModel : BindableBase
                 image.NotifyVisibilityChanged();
             }
         }
-    }
-
-    public HomeViewModel()
-    {
-        ActivePage = new HomePage(this);
     }
 }
