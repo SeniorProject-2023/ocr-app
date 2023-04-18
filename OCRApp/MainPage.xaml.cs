@@ -88,6 +88,11 @@ public sealed partial class MainPage : Page
 
         var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
         await AddStorageFileAsync(file);
+
+        // Workaround https://github.com/unoplatform/uno/issues/11935
+        var temp = this.content.Content;
+        this.content.Content = null;
+        this.content.Content = temp;
     }
 #endif
 }
