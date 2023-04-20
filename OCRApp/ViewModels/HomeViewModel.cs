@@ -9,6 +9,7 @@ public sealed class HomeViewModel : BindableBase
 
     private Page? _activePage;
     private int _selectedIndex;
+    private string? _loggedInUsername;
 
     public Page? ActivePage
     {
@@ -26,6 +27,15 @@ public sealed class HomeViewModel : BindableBase
             {
                 image.NotifyVisibilityChanged();
             }
+        }
+    }
+
+    public string? LoggedInUsername
+    {
+        get => _loggedInUsername;
+        set
+        {
+            SetProperty(ref _loggedInUsername, value);
         }
     }
 }
