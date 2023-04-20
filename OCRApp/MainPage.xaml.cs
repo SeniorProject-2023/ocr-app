@@ -77,7 +77,7 @@ public sealed partial class MainPage : Page
         }
         else if (ReferenceEquals(args.NewItem, AccountTabBarItem))
         {
-            VM.ActivePage = new LoginPage();
+            VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new WelcomePage(VM);
         }
     }
 

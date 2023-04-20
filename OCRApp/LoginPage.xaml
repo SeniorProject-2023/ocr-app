@@ -11,10 +11,10 @@
     <StackPanel Spacing="20" Margin="100" HorizontalAlignment="Stretch" VerticalAlignment="Center">
         <TextBlock Text="Welcome!" HorizontalAlignment="Center" />
         <TextBlock Text="Login to your account" HorizontalAlignment="Center" />
-        <TextBox PlaceholderText="Username" />
-        <TextBox PlaceholderText="Password" />
+        <TextBox x:Name="UsernameTextBox" PlaceholderText="Username" />
+        <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" />
 
-        <Button Content="Login" HorizontalAlignment="Center" />
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" Click="LoginButton_Click" />
 
     </StackPanel>
 </Page>
