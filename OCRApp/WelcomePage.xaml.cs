@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using OCRApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -22,8 +23,11 @@ namespace OCRApp
     /// </summary>
     public sealed partial class WelcomePage : Page
     {
-        public WelcomePage()
+        public HomeViewModel VM { get; }
+
+        public WelcomePage(HomeViewModel vm)
         {
+            VM = vm;
             this.InitializeComponent();
         }
     }
