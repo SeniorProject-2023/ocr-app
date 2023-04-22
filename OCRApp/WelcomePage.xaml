@@ -12,6 +12,6 @@
         <TextBlock>
             <Run Text="Welcome, " /><Run Text="{x:Bind VM.LoggedInUsername}" /><Run Text="!" />
         </TextBlock>
-        <Button Content="Logout" HorizontalAlignment="Center" />
+        <Button Content="Logout" HorizontalAlignment="Center" Click="LogoutButton_Click" />
     </StackPanel>
 </Page>

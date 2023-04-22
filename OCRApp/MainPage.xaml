@@ -42,7 +42,11 @@
                                     <SymbolIcon Symbol="OpenFile" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-
+                            <MenuFlyoutItem Style="{StaticResource MaterialMenuFlyoutItemStyle}" Click="DoneButton_Click" Text="Done">
+                                <MenuFlyoutItem.Icon>
+                                    <SymbolIcon Symbol="Accept" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
                         </MenuFlyout>
                     </utu:TabBarItem.Flyout>
 

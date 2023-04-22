@@ -22,6 +22,12 @@ public sealed partial class MainPage : Page
 
     private async void SelectFileButton_Click(object sender, RoutedEventArgs e)
     {
+        if (VM.LoggedInUsername == null)
+        {
+            await AskToLogin();
+            return;
+        }
+
         var picker = new FileOpenPicker()
         {
             FileTypeFilter =
@@ -52,17 +58,12 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private async void ScanButton_Click(object sender, RoutedEventArgs e)
+    private async Task AskToLogin()
     {
-        if (VM.ImagesToScan.Count == 0)
-        {
-            return;
-        }
-
         var dialog = new ContentDialog()
         {
-            Title = "Title",
-            Content = "Content",
+            Title = "Authentication required",
+            Content = "You need to login first.",
             XamlRoot = this.XamlRoot,
             PrimaryButtonText = "Ok",
         };
@@ -81,9 +82,20 @@ public sealed partial class MainPage : Page
         }
     }
 
+    private void DoneButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
 #if __ANDROID__ || __IOS__
     private async void CaptureFromCameraButton_Click(object sender, RoutedEventArgs e)
     {
+        if (VM.LoggedInUsername == null)
+        {
+            await AskToLogin();
+            return;
+        }
+
         var captureUI = new CameraCaptureUI();
 
         var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
