@@ -49,11 +49,11 @@ public sealed partial class MainPage : Page
     {
         if (file != null)
         {
-            using var stream = await file.OpenStreamForReadAsync();
-            var bytes = new byte[(int)stream.Length];
-            stream.Read(bytes, 0, (int)stream.Length);
-
-            VM.ImagesToScan.Add(new ByteArrayWrapper(bytes, VM));
+            var fileName = $"{Guid.NewGuid()}.jpg";
+            await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
+            await file.DeleteAsync();
+            var uri = new Uri($"ms-appdata:///Local/{fileName}");
+            VM.ImagesToScan.Add(new ImageWrapper(uri));
             VM.SelectedIndex = VM.ImagesToScan.Count - 1;
         }
     }

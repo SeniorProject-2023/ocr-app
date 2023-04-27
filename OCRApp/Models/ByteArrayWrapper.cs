@@ -1,22 +1,25 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media.Imaging;
 using OCRApp.ViewModels;
 
 namespace OCRApp;
 
-public sealed class ByteArrayWrapper : BindableBase
+public sealed class ImageWrapper : BindableBase
 {
-    private readonly HomeViewModel _viewModel;
+    private readonly Uri _uri;
+    private Visibility _visibility;
 
-    public ByteArrayWrapper(byte[] bytes, HomeViewModel viewModel)
+    public ImageWrapper(Uri uri)
     {
-        _viewModel = viewModel;
-        Bytes = bytes;
+        _uri = uri;
     }
 
-    public byte[] Bytes { get; }
+    public BitmapImage Image => new(_uri);
 
-    public Visibility Visibility => _viewModel.ImagesToScan[_viewModel.SelectedIndex].Bytes == this.Bytes ? Visibility.Visible : Visibility.Collapsed;
-
-    internal void NotifyVisibilityChanged()
-        => OnPropertyChanged(nameof(Visibility));
+    public Visibility Visibility
+    {
+        get => _visibility;
+        set => SetProperty(ref _visibility, value);
+    }
 }
