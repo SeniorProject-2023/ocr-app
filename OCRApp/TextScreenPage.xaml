@@ -8,11 +8,11 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
-    <StackPanel Margin="20">
+    <StackPanel Spacing="20" Margin="100">
     <TextBox AcceptsReturn="True" TextWrapping="Wrap"
-         MaxHeight="172" Width="300" Header="OCR Result"
+         MaxHeight="1000" Width="1000" Header="OCR Result"
          ScrollViewer.VerticalScrollBarVisibility="Auto"/>
     
-    <Button Content = "Save Results"    HorizontalAlignment="Right"     Click=""/>
+    <Button Content = "Save Results"    HorizontalAlignment="Center"/>
     </StackPanel>
 </Page>

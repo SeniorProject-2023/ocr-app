@@ -82,8 +82,15 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private void DoneButton_Click(object sender, RoutedEventArgs e)
+    private async void DoneButton_Click(object sender, RoutedEventArgs e)
     {
+        if (VM.LoggedInUsername == null)
+        {
+            await AskToLogin();
+            return;
+        }
+
+        VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new TextScreenPage(VM);
     }
 
 #if __ANDROID__ || __IOS__
