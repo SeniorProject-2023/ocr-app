@@ -84,7 +84,6 @@ public sealed partial class MainPage : Page
 
     private void DoneButton_Click(object sender, RoutedEventArgs e)
     {
-
     }
 
 #if __ANDROID__ || __IOS__
