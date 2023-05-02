@@ -82,9 +82,9 @@ DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arabic_ocr_database',
-        "HOST": os.environ["ARABIC_OCR_DATABASE_HOST"],
-        "USER": os.environ["ARABIC_OCR_DATABASE_USER"],
-        "PASSWORD": os.environ["ARABIC_OCR_DATABASE_PASS"]
+        "HOST": 'localhost',
+        "USER": 'root',
+        "PASSWORD": '123456'
     }
 }
 
