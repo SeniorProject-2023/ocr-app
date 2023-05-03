@@ -18,9 +18,7 @@
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="local:ImageWrapper">
                     <Grid>
-                        <!-- TODO: Possible x:Bind bug in Uno? -->
-                        <!--<Image Source="{x:Bind (local:ImageWrapper).Image}" />-->
-                        <Image Source="{Binding Image}" />
+                        <Image Source="{x:Bind Image}" />
                     </Grid>
                 </DataTemplate>
             </FlipView.ItemTemplate>
@@ -39,9 +37,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local:ImageWrapper">
                         <Grid>
-                            <!-- TODO: Possible x:Bind bug in Uno? -->
-                            <!--<Image Width="50" Height="50" Source="{x:Bind (local:ImageWrapper).Image}" />-->
-                            <Image Width="50" Height="50" Source="{Binding Image}" />
+                            <Image Width="50" Height="50" Source="{x:Bind Image}" />
                             <Border Width="50" Height="50" BorderThickness="2" BorderBrush="{ThemeResource SystemColorHighlightColor}" Visibility="{x:Bind Visibility, Mode=OneWay}" />
                         </Grid>
                     </DataTemplate>
