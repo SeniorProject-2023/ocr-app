@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="OCRApp.LoginPage"
+    x:Class="OCRApp.SignUpPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:OCRApp"
@@ -9,13 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Spacing="20" Margin="100" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-        <TextBlock Text="Welcome!" HorizontalAlignment="Center" />
-        <TextBlock Text="Login to your account" HorizontalAlignment="Center" />
+        <InfoBar x:Name="SignupInfoBar" Title="Signup error" Severity="Error" />
+        <TextBlock Text="Signup" HorizontalAlignment="Center" />
         <TextBox x:Name="UsernameTextBox" PlaceholderText="Username" />
         <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" />
+        <PasswordBox x:Name="ConfirmPasswordTextBox" PlaceholderText="Confirm Password" />
 
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" Click="LoginButton_Click" />
+        <Button x:Name="SignupButton" Content="Signup" HorizontalAlignment="Center" Click="SignupButton_Click" />
 
-        <HyperlinkButton x:Name="SignupHyperlink" Content="Don't have an account? Signup!" Click="SignupHyperlink_Click" />
     </StackPanel>
 </Page>
