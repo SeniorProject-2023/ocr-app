@@ -16,7 +16,7 @@ def signup(req):
         serializer.save()
         return Response({"success": "User created successfully."})
     else:
-        return Response({"error": "Invalid body fromat."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def login(request):

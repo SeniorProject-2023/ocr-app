@@ -1,8 +1,10 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using OCRApp.Models;
 using OCRApp.ViewModels;
 using Uno.Toolkit.UI;
 using Windows.Media.Capture;
@@ -51,7 +53,6 @@ public sealed partial class MainPage : Page
         {
             var fileName = $"{Guid.NewGuid()}.jpg";
             await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
-            await file.DeleteAsync();
             var uri = new Uri($"ms-appdata:///Local/{fileName}");
             VM.ImagesToScan.Add(new ImageWrapper(uri));
             VM.SelectedIndex = VM.ImagesToScan.Count - 1;
@@ -82,9 +83,27 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private void DoneButton_Click(object sender, RoutedEventArgs e)
+    private async void DoneButton_Click(object sender, RoutedEventArgs e)
     {
+        if (VM.LoggedInUsername is null)
+        {
+            await AskToLogin();
+            return;
+        }
+        else if (VM.ImagesToScan.Count == 0)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "No images to scan",
+                Content = "You should first add some images to perform OCR on.",
+                XamlRoot = this.XamlRoot,
+                PrimaryButtonText = "Ok",
+            };
+            await dialog.ShowAsync();
+            return;
+        }
 
+        await BackendConnector.SendImages(VM.ImagesToScan);
     }
 
 #if __ANDROID__ || __IOS__
