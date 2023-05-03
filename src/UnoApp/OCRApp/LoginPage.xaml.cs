@@ -4,13 +4,8 @@ using Microsoft.UI.Xaml.Controls;
 using OCRApp.Models;
 using OCRApp.ViewModels;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace OCRApp;
 
-/// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
-/// </summary>
 public sealed partial class LoginPage : Page
 {
     public HomeViewModel VM { get; }
@@ -23,8 +18,7 @@ public sealed partial class LoginPage : Page
 
     private async void LoginButton_Click(object sender, RoutedEventArgs e)
     {
-        var authenticator = TemporaryAuthenticator.Instance;
-        if (authenticator.IsValidCredentials(UsernameTextBox.Text, PasswordTextBox.Password))
+        if (await BackendConnector.LoginAsync(UsernameTextBox.Text, PasswordTextBox.Password))
         {
             VM.LoggedInUsername = UsernameTextBox.Text;
             VM.ActivePage = new WelcomePage(VM);
@@ -40,5 +34,10 @@ public sealed partial class LoginPage : Page
             };
             await dialog.ShowAsync();
         }
+    }
+
+    private void SignupHyperlink_Click(object sender, RoutedEventArgs e)
+    {
+        VM.ActivePage = new SignUpPage(VM);
     }
 }
