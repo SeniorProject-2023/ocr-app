@@ -18,7 +18,7 @@ jobs:
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
-          name: wasm-app
+          name: github-pages
           path: |
             ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
 
