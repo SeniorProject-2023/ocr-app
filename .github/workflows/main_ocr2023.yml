@@ -38,7 +38,8 @@ jobs:
           cd src/UnoApp/OCRApp.Wasm
           dotnet publish -c Release
           mkdir ../../Backend/static
-          mv ./bin/Release/net7.0/publish/* ../../Backend/static
+          mkdir ../../Backend/static2
+          cp ./bin/Release/net7.0/publish/* ../../Backend/static
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
