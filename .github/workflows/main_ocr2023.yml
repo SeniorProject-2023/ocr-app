@@ -37,7 +37,8 @@ jobs:
         run: |
           cd src/UnoApp/OCRApp.Wasm
           dotnet publish -c Release
-          mv ./bin/Release/net7.0/publish ../../Backend
+          mkdir ../../Backend/static
+          mv ./bin/Release/net7.0/publish ../../Backend/static
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
@@ -45,7 +46,6 @@ jobs:
           name: python-app
           path: |
             ./src/Backend
-            ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
             !venv/
 
   deploy:
