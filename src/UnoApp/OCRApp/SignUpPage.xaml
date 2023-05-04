@@ -16,7 +16,7 @@
         <PasswordBox x:Name="ConfirmPasswordTextBox" PlaceholderText="Confirm Password" />
 
         <Button x:Name="SignupButton" Content="Signup" HorizontalAlignment="Center" Click="SignupButton_Click" />
-        <HyperlinkButton x:Name="LoginHyperLink" Content="Already have an account? Login!" Click="LoginHyperLink_Click"></HyperlinkButton>
+        <HyperlinkButton x:Name="LoginHyperLink" Content="Already have an account? Login!" Click="LoginHyperLink_Click" />
 
     </StackPanel>
 </Page>
