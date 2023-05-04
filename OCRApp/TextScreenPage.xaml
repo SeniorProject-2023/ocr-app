@@ -7,12 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
     <StackPanel Spacing="20" Margin="100">
-    <TextBox AcceptsReturn="True" TextWrapping="Wrap"
-         MaxHeight="1000" Width="1000" Header="OCR Result"
-         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-    
-    <Button Content = "Save Results"    HorizontalAlignment="Center"/>
+        <FlipView x:Name="OCR_Results" Width="480" Height="270" BorderBrush="Black" BorderThickness="1" 
+                  ItemsSource="{x:Bind Path=VM.OcrResults}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBox AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="1000" Width="1000"
+                                 Header="OCR Result" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 Text="{Binding  }" />
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+        <Button Content = "Save Results"    HorizontalAlignment="Center"/>
     </StackPanel>
 </Page>
+
