@@ -1,7 +1,0 @@
-Assets/SplashScreen.png
-Uno.Fonts.Fluent/Fonts/uno-fluentui-assets.ttf
-OCRApp/Assets/Fonts/Lato-Heavy.ttf
-OCRApp/Assets/Fonts/Lato-Light.ttf
-OCRApp/Assets/Fonts/Lato-Medium.ttf
-OCRApp/Assets/Fonts/Lato-Regular.ttf
-OCRApp.Wasm
