@@ -14,8 +14,6 @@ jobs:
         run: |
           cd src/UnoApp/OCRApp.Wasm
           dotnet publish -c Release
-          mkdir ../../Backend/static
-          cp ./bin/Release/net7.0/publish/* ../../Backend/static
 
   # Deploy job
   deploy:
