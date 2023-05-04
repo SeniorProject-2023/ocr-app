@@ -36,6 +36,7 @@ jobs:
       - name: Publish Wasm
         run: |
           cd src/UnoApp/OCRApp.Wasm
+          mv ./bin/Release/net7.0/publish /src/Backend
           dotnet publish -c Release
 
       - name: Upload artifact for deployment jobs
