@@ -15,6 +15,13 @@ jobs:
           cd src/UnoApp/OCRApp.Wasm
           dotnet publish -c Release
 
+      - name: Upload artifact for deployment jobs
+        uses: actions/upload-artifact@v2
+        with:
+          name: wasm-app
+          path: |
+            ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
+
   # Deploy job
   deploy:
     # Add a dependency to the build job
