@@ -15,12 +15,11 @@ jobs:
           cd src/UnoApp/OCRApp.Wasm
           dotnet publish -c Release
 
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v2
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: github-pages
-          path: |
-            ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
 
   # Deploy job
   deploy:
