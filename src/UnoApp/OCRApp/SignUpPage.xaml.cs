@@ -44,4 +44,9 @@ public sealed partial class SignUpPage : Page
         await dialog.ShowAsync();
         VM.ActivePage = new LoginPage(VM);
     }
+
+    private void LoginHyperLink_Click(object sender, RoutedEventArgs e)
+    {
+        VM.ActivePage = new LoginPage(VM);
+    }
 }
