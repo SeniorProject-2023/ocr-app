@@ -27,20 +27,24 @@ jobs:
           cd src/Backend
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: |
           cd src/Backend
           pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
+
+      - name: Publish Wasm
+        run: |
+          cd src/UnoApp/OCRApp.Wasm
+          dotnet publish -c Release
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            ./src/Backend 
+            ./src/Backend
+            ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish
             !venv/
 
   deploy:
