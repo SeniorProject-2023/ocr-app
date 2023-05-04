@@ -33,14 +33,6 @@ jobs:
           cd src/Backend
           pip install -r requirements.txt
 
-      - name: Publish Wasm
-        run: |
-          cd src/UnoApp/OCRApp.Wasm
-          dotnet publish -c Release
-          mkdir ../../Backend/static
-          mkdir ../../Backend/static2
-          cp ./bin/Release/net7.0/publish/* ../../Backend/static
-
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
