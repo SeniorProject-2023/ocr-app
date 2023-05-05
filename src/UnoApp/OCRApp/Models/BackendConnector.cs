@@ -7,7 +7,6 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 
 namespace OCRApp.Models;
@@ -18,7 +17,12 @@ internal record struct LoginResult(string Refresh, string Access);
 
 internal static class BackendConnector
 {
+#if DEBUG
     private const string BaseUri = "http://127.0.0.1:8000";
+#else
+    private const string BaseUri = "https://ocr2023.azurewebsites.net";
+#endif
+
     private static HttpClient s_httpClient = new();
     private static LoginResult s_loginResult;
 
