@@ -18,17 +18,31 @@ public sealed partial class LoginPage : Page
 
     private async void LoginButton_Click(object sender, RoutedEventArgs e)
     {
-        if (await BackendConnector.LoginAsync(UsernameTextBox.Text, PasswordTextBox.Password))
+        try
         {
-            VM.LoggedInUsername = UsernameTextBox.Text;
-            VM.ActivePage = new WelcomePage(VM);
+            if (await BackendConnector.LoginAsync(UsernameTextBox.Text, PasswordTextBox.Password))
+            {
+                VM.LoggedInUsername = UsernameTextBox.Text;
+                VM.ActivePage = new WelcomePage(VM);
+            }
+            else
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = "Incorrect credentials",
+                    Content = "The entered username or password is not correct.",
+                    XamlRoot = this.XamlRoot,
+                    PrimaryButtonText = "Ok",
+                };
+                await dialog.ShowAsync();
+            }
         }
-        else
+        catch (Exception ex)
         {
             var dialog = new ContentDialog()
             {
-                Title = "Incorrect credentials",
-                Content = "The entered username or password is not correct.",
+                Title = "Unknown error",
+                Content = ex.ToString(),
                 XamlRoot = this.XamlRoot,
                 PrimaryButtonText = "Ok",
             };
