@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-v^h^3cfwta8=uhvixjb$)&7z-mestgw(1#md3#&!e37)2f77u3"
+SECRET_KEY = os.environ('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,9 +82,9 @@ DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arabic_ocr_database',
-        "HOST": 'localhost',
-        "USER": 'root',
-        "PASSWORD": '123456'
+        "HOST": os.environ["ARABIC_OCR_DATABASE_HOST"],
+        "USER": os.environ["ARABIC_OCR_DATABASE_USER"],
+        "PASSWORD": os.environ["ARABIC_OCR_DATABASE_PASS"]
     }
 }
 
@@ -135,10 +135,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'static2/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
