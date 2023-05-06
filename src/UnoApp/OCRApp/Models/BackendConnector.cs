@@ -18,7 +18,8 @@ internal record struct LoginResult(string Refresh, string Access);
 internal static class BackendConnector
 {
 #if DEBUG
-    private const string BaseUri = "http://127.0.0.1:8000";
+    private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    //private const string BaseUri = "http://127.0.0.1:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -28,16 +29,23 @@ internal static class BackendConnector
 
     public static async Task<SignupResult> SignupAsync(string username, string password)
     {
-        // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
-        var message = await s_httpClient.PostAsync($"{BaseUri}/users/signup/", new StringContent($$"""
+        try
+        {
+            // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
+            var message = await s_httpClient.PostAsync($"{BaseUri}/users/signup/", new StringContent($$"""
             { "username": "{{username}}", "password": "{{password}}" }
             """, Encoding.UTF8, "application/json"));
-        if (message.StatusCode != HttpStatusCode.OK)
-        {
-            return new SignupResult(false, await message.Content.ReadAsStringAsync());
-        }
+            if (message.StatusCode != HttpStatusCode.OK)
+            {
+                return new SignupResult(false, await message.Content.ReadAsStringAsync());
+            }
 
-        return new SignupResult(true, null);
+            return new SignupResult(true, null);
+        }
+        catch (Exception ex)
+        {
+            return new SignupResult(false, ex.ToString());
+        }
     }
 
     public static async Task<bool> LoginAsync(string username, string password)
