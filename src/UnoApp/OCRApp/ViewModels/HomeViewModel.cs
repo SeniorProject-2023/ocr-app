@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
+
 namespace OCRApp.ViewModels;
 
 public sealed class HomeViewModel : BindableBase

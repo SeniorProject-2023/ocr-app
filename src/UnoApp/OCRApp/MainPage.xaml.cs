@@ -85,19 +85,11 @@ public sealed partial class MainPage : Page
 
     private async void DoneButton_Click(object sender, RoutedEventArgs e)
     {
-<<<<<<< HEAD:OCRApp/MainPage.xaml.cs
-        if (VM.LoggedInUsername == null)
-=======
         if (VM.LoggedInUsername is null)
->>>>>>> main:src/UnoApp/OCRApp/MainPage.xaml.cs
         {
             await AskToLogin();
             return;
         }
-<<<<<<< HEAD:OCRApp/MainPage.xaml.cs
-
-        VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new TextScreenPage(VM);
-=======
         else if (VM.ImagesToScan.Count == 0)
         {
             var dialog = new ContentDialog()
@@ -112,7 +104,6 @@ public sealed partial class MainPage : Page
         }
 
         await BackendConnector.SendImages(VM.ImagesToScan);
->>>>>>> main:src/UnoApp/OCRApp/MainPage.xaml.cs
     }
 
 #if __ANDROID__ || __IOS__
