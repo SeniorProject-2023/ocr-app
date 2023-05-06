@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="OCRApp.SignUpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OCRApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Spacing="20" Margin="100" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <InfoBar x:Name="SignupInfoBar" Title="Signup error" Severity="Error" />
+        <TextBlock Text="Signup" HorizontalAlignment="Center" />
+        <TextBox x:Name="UsernameTextBox" PlaceholderText="Username" />
+        <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" />
+        <PasswordBox x:Name="ConfirmPasswordTextBox" PlaceholderText="Confirm Password" />
+
+        <Button x:Name="SignupButton" Content="Signup" HorizontalAlignment="Center" Click="SignupButton_Click" />
+        <HyperlinkButton x:Name="LoginHyperLink" Content="Already have an account? Login!" Click="LoginHyperLink_Click" />
+
+    </StackPanel>
+</Page>

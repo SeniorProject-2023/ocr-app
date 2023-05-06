@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>4.9.0-dev.439</UnoVersion>
+    <UnoVersion>4.9.0-dev.890</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <MicrosoftWindowsSDKNETRefVersion>10.0.22621.28</MicrosoftWindowsSDKNETRefVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>
@@ -16,8 +16,8 @@
     <PackageReference Update="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" />
     <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Update="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-    <PackageReference Update="Uno.Toolkit.WinUI.Material" Version="2.5.0-dev.56" />
-    <PackageReference Update="Uno.Fonts.Fluent" Version="2.2.0-dev.7" />
+    <PackageReference Update="Uno.Toolkit.WinUI.Material" Version="2.6.0-dev.40" />
+    <PackageReference Update="Uno.Fonts.Fluent" Version="2.2.0" />
     <PackageReference Update="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaSharpVersion)" />
     <PackageReference Update="SkiaSharp.Skottie" Version="$(SkiaSharpVersion)" />
     <PackageReference Update="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />

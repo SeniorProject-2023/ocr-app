@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <StackPanel Spacing="20" Margin="100">
         <FlipView x:Name="OCR_Results" Width="480" Height="270" BorderBrush="Black" BorderThickness="1" 
-                  ItemsSource="{x:Bind Path=VM.OcrResults}">
+                  ItemsSource="{Binding OcrResult}">
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

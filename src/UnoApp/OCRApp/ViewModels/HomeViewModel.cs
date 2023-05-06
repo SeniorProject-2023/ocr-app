@@ -1,12 +1,10 @@
 using System.Collections.ObjectModel;
-using System.Numerics;
 using Microsoft.UI.Xaml.Controls;
-
 namespace OCRApp.ViewModels;
 
 public sealed class HomeViewModel : BindableBase
 {
-    public ObservableCollection<ByteArrayWrapper> ImagesToScan { get; } = new();
+    public ObservableCollection<ImageWrapper> ImagesToScan { get; } = new();
 
     private Page? _activePage;
     private int _selectedIndex;
@@ -25,10 +23,17 @@ public sealed class HomeViewModel : BindableBase
         get => _selectedIndex;
         set
         {
+            var oldSelected = _selectedIndex;
             SetProperty(ref _selectedIndex, value);
-            foreach (var image in ImagesToScan)
+
+            if (oldSelected > -1 && oldSelected < ImagesToScan.Count)
             {
-                image.NotifyVisibilityChanged();
+                ImagesToScan[oldSelected].Visibility = Visibility.Collapsed;
+            }
+
+            if (value > -1 && value < ImagesToScan.Count)
+            {
+                ImagesToScan[value].Visibility = Visibility.Visible;
             }
         }
     }
@@ -43,18 +48,14 @@ public sealed class HomeViewModel : BindableBase
     }
 
  
-    public ObservableCollection<string> OcrResults { get; } = new();
+    public ObservableCollection<string> OcrResults { get; set; } = new();
 
-    public int SelectedIndexOcr
+    public ObservableCollection<string> OcrResult
     {
-        get => _selectedIndex;
+        get { return OcrResults; }
         set
         {
-            SetProperty(ref _selectedIndex, value);
-            foreach (var result in OcrResults)
-            {
-                
-            }
+            OcrResults = value;
         }
     }
 }

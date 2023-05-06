@@ -1,0 +1,23 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # Build job
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish Wasm
+        run: |
+          cd src/UnoApp/OCRApp.Wasm
+          dotnet publish -c Release
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./src/UnoApp/OCRApp.Wasm/bin/Release/net7.0/publish

@@ -16,5 +16,6 @@
 
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" Click="LoginButton_Click" />
 
+        <HyperlinkButton x:Name="SignupHyperlink" Content="Don't have an account? Signup!" Click="SignupHyperlink_Click" />
     </StackPanel>
 </Page>

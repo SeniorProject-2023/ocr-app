@@ -11,7 +11,199 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7dab934-210b-439b-8415-db4bfdb6d4f9" name="Changes" comment="" />
+    <list default="true" id="d7dab934-210b-439b-8415-db4bfdb6d4f9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.github/workflows/main_ocr2023.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.github/workflows/publish_Wasm.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/arabic_ocr_backend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/arabic_ocr_backend/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/arabic_ocr_backend/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/arabic_ocr_backend/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/arabic_ocr_backend/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/home/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/home/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/ocr_api/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/users/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OCRApp/Models/BackendConnector.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OCRApp/Models/ImageWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OCRApp/SignUpPage.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OCRApp/SignUpPage.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Directory.Build.props" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Build.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Directory.Build.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Directory.Build.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp-vsmac.slnf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp-vsmac.slnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Base/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Base/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Base/AppHead.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Base/AppHead.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Base/AppHead.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Base/AppHead.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Base/base.props" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Base/base.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Assets/AboutAssets.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Assets/AboutAssets.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Main.Android.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Main.Android.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/MainActivity.Android.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/MainActivity.Android.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/AboutResources.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/AboutResources.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-hdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-hdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-ldpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-ldpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-mdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-mdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-tvdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-tvdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-xhdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-xhdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-xxhdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-xxhdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/mipmap-xxxhdpi/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/mipmap-xxxhdpi/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/values/Strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/values/Strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/Resources/values/Styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/Resources/values/Styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/Android/environment.conf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/Android/environment.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Entitlements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Entitlements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/LaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Main.maccatalyst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Main.maccatalyst.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon1024.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon1024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon120.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon120.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon152.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon152.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon167.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon167.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon180.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon180.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon20.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon29.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon40.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon58.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon58.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon60.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon76.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon80.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon80.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon87.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Media.xcassets/AppIcons.appiconset/Icon87.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Resources/Default-568h@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Resources/Default-568h@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Resources/Fonts/uno-fluentui-assets.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Resources/Fonts/uno-fluentui-assets.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Resources/SplashScreen@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Resources/SplashScreen@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/MacCatalyst/Resources/SplashScreen@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/MacCatalyst/Resources/SplashScreen@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/OCRApp.Mobile.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/OCRApp.Mobile.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Entitlements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Entitlements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/LaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Main.iOS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Main.iOS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon1024.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon1024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon120.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon120.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon152.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon152.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon167.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon167.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon180.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon180.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon20.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon29.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon40.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon58.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon58.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon60.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon76.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon80.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon80.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon87.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon87.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Media.xcassets/LaunchImages.launchimage/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Media.xcassets/LaunchImages.launchimage/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Resources/Default-568h@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Resources/Default-568h@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Resources/Fonts/uno-fluentui-assets.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Resources/Fonts/uno-fluentui-assets.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Resources/SplashScreen@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Resources/SplashScreen@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/iOS/Resources/SplashScreen@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/iOS/Resources/SplashScreen@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-128.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-128.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-128@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-128@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-16.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-16@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-16@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-256.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-256.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-256@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-256@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-32.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-32@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-32@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-512.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/unologo.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/unologo.imageset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Assets.xcassets/unologo.imageset/unoplatform.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Assets.xcassets/unologo.imageset/unoplatform.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Entitlements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Entitlements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Main.macOS.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Main.macOS.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Mobile/macOS/Resources/Fonts/uno-fluentui-assets.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Mobile/macOS/Resources/Fonts/uno-fluentui-assets.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/Controllers/WeatherForecastController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/OCRApp.Server.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/OCRApp.Server.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/WeatherForecast.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Server/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Server/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.Gtk/OCRApp.Skia.Gtk.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.Gtk/OCRApp.Skia.Gtk.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.Gtk/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.Gtk/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.Linux.FrameBuffer/OCRApp.Skia.Linux.FrameBuffer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.Linux.FrameBuffer/OCRApp.Skia.Linux.FrameBuffer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.Linux.FrameBuffer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.Linux.FrameBuffer/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.WPF/OCRApp.Skia.WPF.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.WPF/OCRApp.Skia.WPF.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.WPF/Wpf/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.WPF/Wpf/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.WPF/Wpf/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.WPF/Wpf/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.WPF/Wpf/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.WPF/Wpf/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Skia.WPF/Wpf/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Skia.WPF/Wpf/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/Assets/SplashScreen.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/Assets/SplashScreen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/LinkerConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/LinkerConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/OCRApp.Wasm.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/OCRApp.Wasm.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/WasmCSS/Fonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/WasmCSS/Fonts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/WasmScripts/AppManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/WasmScripts/AppManifest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Wasm/wwwroot/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Wasm/wwwroot/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/LockScreenLogo.scale-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/LockScreenLogo.scale-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/SplashScreen.scale-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/SplashScreen.scale-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/Square150x150Logo.scale-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/Square150x150Logo.scale-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/Square44x44Logo.scale-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/Square44x44Logo.scale-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/Square44x44Logo.targetsize-24_altform-unplated.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/Square44x44Logo.targetsize-24_altform-unplated.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/StoreLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/StoreLogo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Images/Wide310x150Logo.scale-200.png" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Images/Wide310x150Logo.scale-200.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/OCRApp.Windows.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/OCRApp.Windows.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Package.appxmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Package.appxmanifest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.Windows/app.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.Windows/app.manifest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp.sln" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/App.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/App.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/AppResources.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/AppResources.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Assets/Fonts/Lato-Heavy.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Assets/Fonts/Lato-Heavy.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Assets/Fonts/Lato-Light.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Assets/Fonts/Lato-Light.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Assets/Fonts/Lato-Medium.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Assets/Fonts/Lato-Medium.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Assets/Fonts/Lato-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Assets/Fonts/Lato-Regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Helpers/Helpers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/HomePage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/HomePage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/HomePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/HomePage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/LoginPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/LoginPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/LoginPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/LoginPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/MainPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/MainPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Models/ByteArrayWrapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Models/IAuthenticator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Models/TemporaryAuthenticator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/OCRApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/OCRApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Strings/en/Resources.resw" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Strings/en/Resources.resw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/Styles/MaterialColorsOverride.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/Styles/MaterialColorsOverride.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/TextScreenPage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/TextScreenPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/ViewModels/BindableBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/ViewModels/BindableBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/ViewModels/HomeViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/WelcomePage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/WelcomePage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OCRApp/WelcomePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/WelcomePage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../global.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../global.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OCRApp-vsmac/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OCRApp-vsmac/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OCRApp/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/MainPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OCRApp/TextScreenPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/TextScreenPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OCRApp/TextScreenPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/TextScreenPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OCRApp/ViewModels/HomeViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OCRApp/ViewModels/HomeViewModel.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +233,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "rider.run.widget.enabled.cache": "false",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -119,6 +312,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683191723224</updated>
       <workItem from="1683191724123" duration="1792000" />
+      <workItem from="1683399728164" duration="627000" />
     </task>
     <servers />
   </component>

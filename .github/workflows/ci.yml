@@ -13,7 +13,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        global-json-file: global.json
+        global-json-file: src/UnoApp/global.json
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
@@ -24,7 +24,7 @@ jobs:
       name: Run Uno Check
 
     - name: Restore
-      run: msbuild -t:restore OCRApp.sln
+      run: msbuild -t:restore src/UnoApp/OCRApp.sln
 
     - name: Build
-      run: msbuild -m OCRApp.sln
+      run: msbuild -m src/UnoApp/OCRApp.sln
