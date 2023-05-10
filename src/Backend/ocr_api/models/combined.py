@@ -4,6 +4,7 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+import torch
 from PIL import Image
 from more_itertools import split_when
 from ultralytics import YOLO
@@ -66,10 +67,13 @@ def load_image(img_path: str):
     return frame
 
 
+def get_device():
+    return 0 if torch.cuda.is_available() else "cpu"
+
 def infer_words(img: np.ndarray):
     global word_model
     # returns List[(word_image, bb, class)]
-    results = word_model.predict(img, device=0,verbose=False)
+    results = word_model.predict(img, device=get_device(),verbose=False)
     returnable = []
     while len(results[0]) != 0:
         for r in results:
@@ -94,7 +98,7 @@ def preprocess_box(img):
 
 
 def infer_letters(img: np.ndarray, conf=0.5):
-    results = letter_model.predict(img, conf=conf, verbose=False)[0]
+    results = letter_model.predict(img, device=get_device(), conf=conf, verbose=False)[0]
     boxes = [box.xyxy[0].tolist() for box in results.boxes]  # x1, y1, x2, y2
     xs = [box[2] for box in boxes]
     sorted_indices = np.argsort(xs)[::-1]  # sort by max x2
