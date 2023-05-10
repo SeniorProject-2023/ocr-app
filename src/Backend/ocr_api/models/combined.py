@@ -10,8 +10,9 @@ from ultralytics import YOLO
 from ultralytics.yolo.utils.plotting import Annotator
 from datasets import load_metric
 
-word_model = YOLO("./word_model.pt")
-letter_model = YOLO("./letter_model.pt")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+word_model = YOLO(f'{current_dir}/word_model.pt')
+letter_model = YOLO(f'{current_dir}/letter_model.pt')
 
 name_to_unicode = {
     'baa': 1576,
@@ -68,7 +69,7 @@ def load_image(img_path: str):
 def infer_words(img: np.ndarray):
     global word_model
     # returns List[(word_image, bb, class)]
-    results = word_model.predict(img, verbose=False)
+    results = word_model.predict(img, device=0,verbose=False)
     returnable = []
     while len(results[0]) != 0:
         for r in results:
