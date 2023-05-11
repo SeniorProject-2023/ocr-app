@@ -7,13 +7,17 @@ import numpy as np
 import torch
 from PIL import Image
 from more_itertools import split_when
-from ultralytics import YOLO
-from ultralytics.yolo.utils.plotting import Annotator
 from datasets import load_metric
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-word_model = YOLO(f'{current_dir}/word_model.pt')
-letter_model = YOLO(f'{current_dir}/letter_model.pt')
+
+# Load Model
+# TODO: The work done here is only loading onnx.
+# TODO: Continue remaining adjustments to properly run inference
+# TODO: See https://alimustoofaa.medium.com/how-to-load-model-yolov8-onnx-cv2-dnn-3e176cde16e6
+word_model = cv2.dnn.readNet(f'{current_dir}/word_model.onnx')
+letter_model = cv2.dnn.readNet(f'{current_dir}/letter_model.onnx')
+
 
 name_to_unicode = {
     'baa': 1576,
