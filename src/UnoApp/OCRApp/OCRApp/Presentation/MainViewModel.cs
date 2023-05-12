@@ -1,33 +1,27 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+using OCRApp.Services;
 
 namespace OCRApp.Presentation;
 
-public sealed partial class LoginViewModel : ObservableObject
+internal sealed partial class MainViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private Page? _activePage;
+    private readonly IOCRService _ocrService;
+    private readonly IImageManagerService _imageManagerService;
 
-    [ObservableProperty]
-    private int _selectedIndex;
-
-    [ObservableProperty]
-    public string? _loggedInUsername;
-
-    public ObservableCollection<ImageWrapper> ImagesToScan { get; } = new();
-
-    partial void OnSelectedIndexChanged(int oldValue, int newValue)
+    public MainViewModel(IOCRService ocrService, IImageManagerService imageManagerService)
     {
-        if (oldValue > -1 && oldValue < ImagesToScan.Count)
-        {
-            ImagesToScan[oldValue].Visibility = Visibility.Collapsed;
-        }
-
-        if (newValue > -1 && newValue < ImagesToScan.Count)
-        {
-            ImagesToScan[newValue].Visibility = Visibility.Visible;
-        }
+        _ocrService = ocrService;
+        _imageManagerService = imageManagerService;
     }
+
+    public string? LoggedInUsername => _ocrService.LoggedInUsername;
+
+    public ObservableCollection<ImageWrapper> ImagesToScan => _imageManagerService.ImagesToScan;
+
+    internal async Task<string> SendImages(IEnumerable<Uri> images)
+        => await _ocrService.SendImages(images);
 }

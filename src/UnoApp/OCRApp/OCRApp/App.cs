@@ -1,7 +1,9 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using OCRApp.Presentation;
+using OCRApp.Services;
 using Uno.Extensions;
 using Uno.Extensions.Hosting;
 using Uno.Extensions.Navigation;
@@ -35,7 +37,8 @@ namespace OCRApp
                     .ConfigureServices((context, services) =>
                     {
                         // TODO: Register your services
-                        //services.AddSingleton<IMyService, MyService>();
+                        services.AddSingleton<IOCRService, OCRService>();
+                        services.AddSingleton<IImageManagerService, ImageManagerService>();
                     })
                     .UseNavigation(RegisterRoutes)
                 );
@@ -50,16 +53,19 @@ namespace OCRApp
                 new ViewMap(ViewModel: typeof(ShellViewModel)),
                 new ViewMap<MainPage, MainViewModel>(),
                 new ViewMap<HomePage, HomeViewModel>(),
-                new ViewMap<LoginPage, LoginViewModel>()
+                new ViewMap<AccountPage, AccountViewModel>()
             );
 
             routes.Register(
                 new RouteMap("", View: views.FindByViewModel<ShellViewModel>(),
                     Nested: new RouteMap[]
                     {
-                        new RouteMap("Main", View: views.FindByViewModel<MainViewModel>()),
-                        new RouteMap("Home", View: views.FindByViewModel<HomeViewModel>()),
-                        new RouteMap("Account", View: views.FindByViewModel<LoginViewModel>()),
+                        new RouteMap("Main", View: views.FindByViewModel<MainViewModel>(),
+                            Nested: new[]
+                            {
+                                new RouteMap("Home", View: views.FindByViewModel<HomeViewModel>(), IsDefault: true),
+                                new RouteMap("Account", View: views.FindByViewModel<AccountViewModel>()),
+                            }),
                     }
                 )
             );

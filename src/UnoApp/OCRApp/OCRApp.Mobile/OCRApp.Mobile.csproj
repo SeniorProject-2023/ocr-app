@@ -19,6 +19,10 @@
     <!-- Required for C# Hot Reload -->
     <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
+
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'=='' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">iossimulator-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'=='' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'macos'">osx-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'=='' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>

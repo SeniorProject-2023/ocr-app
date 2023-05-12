@@ -14,8 +14,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Hellloooo" />
-        <!--<FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
+        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="local:ImageWrapper">
                     <Grid>
@@ -23,9 +22,9 @@
                     </Grid>
                 </DataTemplate>
             </FlipView.ItemTemplate>
-        </FlipView>-->
+        </FlipView>
 
-        <!--<ScrollViewer Grid.Row="1"
+        <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Disabled"
                       VerticalScrollMode="Disabled"
                       HorizontalScrollBarVisibility="Auto">
@@ -44,6 +43,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>-->
+        </ScrollViewer>
     </Grid>
 </Page>

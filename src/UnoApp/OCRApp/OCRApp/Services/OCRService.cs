@@ -7,16 +7,12 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using OCRApp.Presentation;
+using OCRApp.Models;
 using Windows.Storage.Streams;
 
-namespace OCRApp.Models;
+namespace OCRApp.Services;
 
-internal record struct SignupResult(bool Success, string? Error);
-
-internal record struct LoginResult(string Refresh, string Access);
-
-internal static class BackendConnector
+internal sealed class OCRService : IOCRService
 {
 #if DEBUG
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
@@ -26,9 +22,11 @@ internal static class BackendConnector
 #endif
 
     private static HttpClient s_httpClient = new();
-    private static LoginResult s_loginResult;
+    private LoginResult _loginResult;
 
-    public static async Task<SignupResult> SignupAsync(string username, string password)
+    public string? LoggedInUsername { get; private set; }
+
+    public async Task<SignupResult> SignupAsync(string username, string password)
     {
         try
         {
@@ -49,7 +47,7 @@ internal static class BackendConnector
         }
     }
 
-    public static async Task<bool> LoginAsync(string username, string password)
+    public async Task<bool> LoginAsync(string username, string password)
     {
         // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
         var message = await s_httpClient.PostAsync($"{BaseUri}/users/login/", new StringContent($$"""
@@ -61,22 +59,23 @@ internal static class BackendConnector
             return false;
         }
 
-        s_loginResult = await message.Content.ReadFromJsonAsync<LoginResult>();
+        _loginResult = await message.Content.ReadFromJsonAsync<LoginResult>();
+        LoggedInUsername = username;
         return true;
     }
 
-    public static async Task<string> SendImages(IEnumerable<ImageWrapper> images)
+    public async Task<string> SendImages(IEnumerable<Uri> images)
     {
         using var content = new MultipartFormDataContent();
 
         foreach (var image in images)
         {
-            var random = RandomAccessStreamReference.CreateFromUri(image.Image.UriSource);
+            var random = RandomAccessStreamReference.CreateFromUri(image);
             var stream = await random.OpenReadAsync();
             content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
         }
 
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", s_loginResult.Access);
+        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
 
         var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content);
 
@@ -93,5 +92,11 @@ internal static class BackendConnector
         }; // the extra quotes are key here
         fileContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
         return fileContent;
+    }
+
+    public void Logout()
+    {
+        LoggedInUsername = null;
+        _loginResult = default;
     }
 }

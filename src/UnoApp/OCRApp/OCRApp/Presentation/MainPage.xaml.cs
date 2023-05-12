@@ -1,26 +1,23 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using OCRApp.Models;
 using OCRApp.Presentation;
-using Uno.Toolkit.UI;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
 namespace OCRApp;
 
-public sealed partial class MainPage : Page
+internal sealed partial class MainPage : Page
 {
     public MainPage()
     {
         this.InitializeComponent();
     }
 
-    public HomeViewModel VM { get; set; } = new();
+    public MainViewModel VM => (MainViewModel)DataContext;
 
     private async void SelectFileButton_Click(object sender, RoutedEventArgs e)
     {
@@ -55,7 +52,10 @@ public sealed partial class MainPage : Page
             await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
             var uri = new Uri($"ms-appdata:///Local/{fileName}");
             VM.ImagesToScan.Add(new ImageWrapper(uri));
-            VM.SelectedIndex = VM.ImagesToScan.Count - 1;
+
+            // TODO:
+            // SelectedIndex is in HomeViewModel, not MainViewModel. How to approach this??
+            //VM.SelectedIndex = VM.ImagesToScan.Count - 1;
         }
     }
 
@@ -69,18 +69,6 @@ public sealed partial class MainPage : Page
             PrimaryButtonText = "Ok",
         };
         await dialog.ShowAsync();
-    }
-
-    private void TabBar_SelectionChanged(TabBar sender, TabBarSelectionChangedEventArgs args)
-    {
-        //if (ReferenceEquals(args.NewItem, HomeTabBarItem))
-        //{
-        //    VM.ActivePage = new HomePage(VM);
-        //}
-        //else if (ReferenceEquals(args.NewItem, AccountTabBarItem))
-        //{
-        //    VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new WelcomePage(VM);
-        //}
     }
 
     private async void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -103,7 +91,8 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        await BackendConnector.SendImages(VM.ImagesToScan);
+        // TODO: Take results to a new view.
+        await VM.SendImages(VM.ImagesToScan.Select(x => x.Image.UriSource));
     }
 
 #if __ANDROID__ || __IOS__
@@ -119,11 +108,6 @@ public sealed partial class MainPage : Page
 
         var file = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
         await AddStorageFileAsync(file);
-
-        // Workaround https://github.com/unoplatform/uno/issues/11935
-        //var temp = this.content.Content;
-        //this.content.Content = null;
-        //this.content.Content = temp;
     }
 #endif
 }

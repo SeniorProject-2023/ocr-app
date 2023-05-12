@@ -1,22 +1,23 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+using OCRApp.Services;
 
 namespace OCRApp.Presentation;
 
-public sealed partial class HomeViewModel : ObservableObject
+internal sealed partial class HomeViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private Page? _activePage;
+    private readonly IImageManagerService _imageManagerService;
 
     [ObservableProperty]
     private int _selectedIndex;
 
-    [ObservableProperty]
-    public string? _loggedInUsername;
+    public HomeViewModel(IImageManagerService imageManagerService)
+    {
+        _imageManagerService = imageManagerService;
+    }
 
-    public ObservableCollection<ImageWrapper> ImagesToScan { get; } = new();
+    public ObservableCollection<ImageWrapper> ImagesToScan => _imageManagerService.ImagesToScan;
 
     partial void OnSelectedIndexChanged(int oldValue, int newValue)
     {

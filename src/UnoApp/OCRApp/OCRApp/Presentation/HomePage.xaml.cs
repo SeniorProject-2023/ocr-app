@@ -3,8 +3,10 @@ using OCRApp.Presentation;
 
 namespace OCRApp;
 
-public sealed partial class HomePage : Page
+internal sealed partial class HomePage : Page
 {
+    public HomeViewModel VM => (HomeViewModel)DataContext;
+
     public HomePage()
     {
         this.InitializeComponent();
