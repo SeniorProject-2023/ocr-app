@@ -8,11 +8,8 @@ namespace OCRApp;
 
 public sealed partial class LoginPage : Page
 {
-    public HomeViewModel VM { get; }
-
-    public LoginPage(HomeViewModel vm)
+    public LoginPage()
     {
-        VM = vm;
         this.InitializeComponent();
     }
 
@@ -22,8 +19,8 @@ public sealed partial class LoginPage : Page
         {
             if (await BackendConnector.LoginAsync(UsernameTextBox.Text, PasswordTextBox.Password))
             {
-                VM.LoggedInUsername = UsernameTextBox.Text;
-                VM.ActivePage = new WelcomePage(VM);
+                //VM.LoggedInUsername = UsernameTextBox.Text;
+                //VM.ActivePage = new WelcomePage(VM);
             }
             else
             {
@@ -52,6 +49,6 @@ public sealed partial class LoginPage : Page
 
     private void SignupHyperlink_Click(object sender, RoutedEventArgs e)
     {
-        VM.ActivePage = new SignUpPage(VM);
+        //VM.ActivePage = new SignUpPage(VM);
     }
 }

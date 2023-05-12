@@ -48,14 +48,18 @@ namespace OCRApp
         {
             views.Register(
                 new ViewMap(ViewModel: typeof(ShellViewModel)),
-                new ViewMap<MainPage, HomeViewModel>()
+                new ViewMap<MainPage, MainViewModel>(),
+                new ViewMap<HomePage, HomeViewModel>(),
+                new ViewMap<LoginPage, LoginViewModel>()
             );
 
             routes.Register(
                 new RouteMap("", View: views.FindByViewModel<ShellViewModel>(),
                     Nested: new RouteMap[]
                     {
-                        new RouteMap("Main", View: views.FindByViewModel<HomeViewModel>()),
+                        new RouteMap("Main", View: views.FindByViewModel<MainViewModel>()),
+                        new RouteMap("Home", View: views.FindByViewModel<HomeViewModel>()),
+                        new RouteMap("Account", View: views.FindByViewModel<LoginViewModel>()),
                     }
                 )
             );

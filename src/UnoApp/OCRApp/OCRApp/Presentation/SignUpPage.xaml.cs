@@ -8,11 +8,8 @@ namespace OCRApp;
 
 public sealed partial class SignUpPage : Page
 {
-    public HomeViewModel VM { get; }
-
-    public SignUpPage(HomeViewModel vm)
+    public SignUpPage()
     {
-        VM = vm;
         this.InitializeComponent();
     }
 
@@ -42,11 +39,11 @@ public sealed partial class SignUpPage : Page
         };
 
         await dialog.ShowAsync();
-        VM.ActivePage = new LoginPage(VM);
+        //VM.ActivePage = new LoginPage(VM);
     }
 
     private void LoginHyperLink_Click(object sender, RoutedEventArgs e)
     {
-        VM.ActivePage = new LoginPage(VM);
+        //VM.ActivePage = new LoginPage(VM);
     }
 }

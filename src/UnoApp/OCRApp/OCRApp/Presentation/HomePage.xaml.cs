@@ -5,11 +5,8 @@ namespace OCRApp;
 
 public sealed partial class HomePage : Page
 {
-    public HomeViewModel VM { get; }
-
-    public HomePage(HomeViewModel vm)
+    public HomePage()
     {
-        VM = vm;
         this.InitializeComponent();
     }
 }

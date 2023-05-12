@@ -16,7 +16,7 @@ namespace OCRApp.Presentation
 
         public async Task Start()
         {
-            await Navigator.NavigateViewModelAsync<HomeViewModel>(this);
+            await Navigator.NavigateViewModelAsync<MainViewModel>(this);
         }
     }
 }

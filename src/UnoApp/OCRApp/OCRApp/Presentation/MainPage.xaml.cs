@@ -73,14 +73,14 @@ public sealed partial class MainPage : Page
 
     private void TabBar_SelectionChanged(TabBar sender, TabBarSelectionChangedEventArgs args)
     {
-        if (ReferenceEquals(args.NewItem, HomeTabBarItem))
-        {
-            VM.ActivePage = new HomePage(VM);
-        }
-        else if (ReferenceEquals(args.NewItem, AccountTabBarItem))
-        {
-            VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new WelcomePage(VM);
-        }
+        //if (ReferenceEquals(args.NewItem, HomeTabBarItem))
+        //{
+        //    VM.ActivePage = new HomePage(VM);
+        //}
+        //else if (ReferenceEquals(args.NewItem, AccountTabBarItem))
+        //{
+        //    VM.ActivePage = VM.LoggedInUsername is null ? new LoginPage(VM) : new WelcomePage(VM);
+        //}
     }
 
     private async void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -121,9 +121,9 @@ public sealed partial class MainPage : Page
         await AddStorageFileAsync(file);
 
         // Workaround https://github.com/unoplatform/uno/issues/11935
-        var temp = this.content.Content;
-        this.content.Content = null;
-        this.content.Content = temp;
+        //var temp = this.content.Content;
+        //this.content.Content = null;
+        //this.content.Content = temp;
     }
 #endif
 }

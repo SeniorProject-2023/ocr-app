@@ -16,7 +16,7 @@ public sealed partial class WelcomePage : Page
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
-        VM.LoggedInUsername = null;
-        VM.ActivePage = new LoginPage(VM);
+        //VM.LoggedInUsername = null;
+        //VM.ActivePage = new LoginPage(VM);
     }
 }
