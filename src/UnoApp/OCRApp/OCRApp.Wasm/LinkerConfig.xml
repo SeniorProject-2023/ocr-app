@@ -1,0 +1,11 @@
+<linker>
+	<assembly fullname="OCRApp" />
+	<assembly fullname="OCRApp.Wasm" />
+
+	<!--
+  Uncomment this section when using JSON.NET
+  <assembly fullname="System.Core">
+	  <type fullname="System.Linq.Expressions*" />
+  </assembly>
+   -->
+</linker>

@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "OCRApp",
+  "display": "standalone",
+  "name": "OCRApp",
+  "short_name": "OCRApp",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
