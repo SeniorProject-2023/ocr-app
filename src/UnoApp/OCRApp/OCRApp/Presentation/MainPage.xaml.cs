@@ -52,10 +52,7 @@ internal sealed partial class MainPage : Page
             await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
             var uri = new Uri($"ms-appdata:///Local/{fileName}");
             VM.ImagesToScan.Add(new ImageWrapper(uri));
-
-            // TODO:
-            // SelectedIndex is in HomeViewModel, not MainViewModel. How to approach this??
-            //VM.SelectedIndex = VM.ImagesToScan.Count - 1;
+            VM.SelectedIndex = VM.ImagesToScan.Count - 1;
         }
     }
 

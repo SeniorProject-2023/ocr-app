@@ -1,34 +1,30 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml;
+using System.ComponentModel;
 using OCRApp.Services;
 
 namespace OCRApp.Presentation;
 
-internal sealed partial class HomeViewModel : ObservableObject
+internal sealed partial class HomeViewModel : INotifyPropertyChanged
 {
     private readonly IImageManagerService _imageManagerService;
 
-    [ObservableProperty]
-    private int _selectedIndex;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public HomeViewModel(IImageManagerService imageManagerService)
     {
         _imageManagerService = imageManagerService;
+        imageManagerService.SelectedIndexChanged += OnSelectedIndexChanged;
     }
+
+    private void OnSelectedIndexChanged(object? sender, (int OldValue, int newValue) e)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIndex)));
+
+    public int SelectedIndex
+    {
+        get => _imageManagerService.SelectedIndex;
+        set => _imageManagerService.SelectedIndex = value;
+    }
+
 
     public ObservableCollection<ImageWrapper> ImagesToScan => _imageManagerService.ImagesToScan;
-
-    partial void OnSelectedIndexChanged(int oldValue, int newValue)
-    {
-        if (oldValue > -1 && oldValue < ImagesToScan.Count)
-        {
-            ImagesToScan[oldValue].Visibility = Visibility.Collapsed;
-        }
-
-        if (newValue > -1 && newValue < ImagesToScan.Count)
-        {
-            ImagesToScan[newValue].Visibility = Visibility.Visible;
-        }
-    }
 }

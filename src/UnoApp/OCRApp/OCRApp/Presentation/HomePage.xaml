@@ -14,7 +14,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
+        <FlipView ItemsSource="{x:Bind VM.ImagesToScan, Mode=OneWay}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="local:ImageWrapper">
                     <Grid>
@@ -28,7 +28,7 @@
                       VerticalScrollBarVisibility="Disabled"
                       VerticalScrollMode="Disabled"
                       HorizontalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{x:Bind VM.ImagesToScan}">
+            <ItemsControl ItemsSource="{x:Bind VM.ImagesToScan, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" Height="50" />

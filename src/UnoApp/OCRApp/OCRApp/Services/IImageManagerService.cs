@@ -7,4 +7,7 @@ namespace OCRApp.Services;
 internal interface IImageManagerService
 {
     ObservableCollection<ImageWrapper> ImagesToScan { get; }
+    int SelectedIndex { get; set; }
+
+    event EventHandler<(int OldValue, int newValue)> SelectedIndexChanged;
 }
