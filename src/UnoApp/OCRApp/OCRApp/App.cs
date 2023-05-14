@@ -38,7 +38,6 @@ namespace OCRApp
                     {
                         // TODO: Register your services
                         services.AddSingleton<IOCRService, OCRService>();
-                        services.AddSingleton<IImageManagerService, ImageManagerService>();
                     })
                     .UseNavigation(RegisterRoutes)
                 );

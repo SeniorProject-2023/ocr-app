@@ -1,8 +1,11 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using OCRApp.Messages;
 using OCRApp.Presentation;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -51,8 +54,9 @@ internal sealed partial class MainPage : Page
             var fileName = $"{Guid.NewGuid()}.jpg";
             await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
             var uri = new Uri($"ms-appdata:///Local/{fileName}");
-            VM.ImagesToScan.Add(new ImageWrapper(uri));
-            VM.SelectedIndex = VM.ImagesToScan.Count - 1;
+            WeakReferenceMessenger.Default.Send(new NewImageMessage(uri));
+            ObservableCollection<ImageWrapper> imagesToScan = WeakReferenceMessenger.Default.Send<ImagesToScanRequestMessage>();
+            WeakReferenceMessenger.Default.Send(new SetSelectedIndexMessage(imagesToScan.Count - 1));
         }
     }
 
@@ -75,7 +79,9 @@ internal sealed partial class MainPage : Page
             await AskToLogin();
             return;
         }
-        else if (VM.ImagesToScan.Count == 0)
+
+        ObservableCollection<ImageWrapper> imagesToScan = WeakReferenceMessenger.Default.Send<ImagesToScanRequestMessage>();
+        if (imagesToScan.Count == 0)
         {
             var dialog = new ContentDialog()
             {
@@ -89,7 +95,7 @@ internal sealed partial class MainPage : Page
         }
 
         // TODO: Take results to a new view.
-        await VM.SendImages(VM.ImagesToScan.Select(x => x.Image.UriSource));
+        await VM.SendImages(imagesToScan.Select(x => x.Image.UriSource));
     }
 
 #if __ANDROID__ || __IOS__

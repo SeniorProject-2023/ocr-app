@@ -1,30 +1,23 @@
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using OCRApp.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using OCRApp.Messages;
 
 namespace OCRApp.Presentation;
 
-internal sealed partial class HomeViewModel : INotifyPropertyChanged
+internal sealed partial class HomeViewModel : ObservableObject
 {
-    private readonly IImageManagerService _imageManagerService;
+    [ObservableProperty]
+    private int _selectedIndex;
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public HomeViewModel(IImageManagerService imageManagerService)
+    public HomeViewModel()
     {
-        _imageManagerService = imageManagerService;
-        imageManagerService.SelectedIndexChanged += OnSelectedIndexChanged;
+        WeakReferenceMessenger.Default.Register<SetSelectedIndexMessage>(this, (_, m) => SelectedIndex = m.NewSelectedIndex);
+        WeakReferenceMessenger.Default.Register<HomeViewModel, ImagesToScanRequestMessage>(this, (r, m) => m.Reply(r.ImagesToScan));
+        WeakReferenceMessenger.Default.Register<NewImageMessage>(this, (_, m) => ImagesToScan.Add(new ImageWrapper(m.ImageUri)));
+        _imagesToScan = new();
     }
 
-    private void OnSelectedIndexChanged(object? sender, (int OldValue, int newValue) e)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIndex)));
-
-    public int SelectedIndex
-    {
-        get => _imageManagerService.SelectedIndex;
-        set => _imageManagerService.SelectedIndex = value;
-    }
-
-
-    public ObservableCollection<ImageWrapper> ImagesToScan => _imageManagerService.ImagesToScan;
+    [ObservableProperty]
+    private ObservableCollection<ImageWrapper> _imagesToScan;
 }
