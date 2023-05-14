@@ -6,12 +6,20 @@ namespace OCRApp.Presentation;
 
 public sealed partial class AccountPage : Page
 {
-    internal AccountViewModel VM => (AccountViewModel)DataContext;
+    internal AccountViewModel? VM => DataContext as AccountViewModel;
 
     public AccountPage()
     {
-        this.Loaded += (_, _) =>
+        // Workaround.
+        // Generally, I think Loaded should be used instead of DataContextChanged, and the VM null check shouldn't be needed.
+        this.DataContextChanged += (_, _) =>
         {
+            if (VM is null)
+            {
+                return;
+            }
+
+            Bindings.Update();
             if (VM.LoggedInUsername is null)
             {
                 VisualStateManager.GoToState(this, "Login", useTransitions: false);
@@ -28,7 +36,7 @@ public sealed partial class AccountPage : Page
     #region Logout
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
-        VM.Logout();
+        VM!.Logout();
         VisualStateManager.GoToState(this, "Login", useTransitions: false);
     }
     #endregion
@@ -43,7 +51,7 @@ public sealed partial class AccountPage : Page
             return;
         }
 
-        var result = await VM.SignupAsync(UsernameSignupTextBox.Text, PasswordSignupTextBox.Password);
+        var result = await VM!.SignupAsync(UsernameSignupTextBox.Text, PasswordSignupTextBox.Password);
         if (!result.Success)
         {
             SignupInfoBar.Message = result.Error!;
@@ -74,7 +82,7 @@ public sealed partial class AccountPage : Page
     {
         try
         {
-            if (await VM.LoginAsync(UsernameLoginTextBox.Text, PasswordLoginTextBox.Password))
+            if (await VM!.LoginAsync(UsernameLoginTextBox.Text, PasswordLoginTextBox.Password))
             {
                 VM.LoggedInUsername = UsernameLoginTextBox.Text;
                 VisualStateManager.GoToState(this, "Welcome", useTransitions: false);

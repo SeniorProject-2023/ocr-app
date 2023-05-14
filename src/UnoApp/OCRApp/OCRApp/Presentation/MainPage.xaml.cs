@@ -47,7 +47,7 @@ internal sealed partial class MainPage : Page
         await AddStorageFileAsync(file);
     }
 
-    private async Task AddStorageFileAsync(StorageFile? file)
+    private static async Task AddStorageFileAsync(StorageFile? file)
     {
         if (file != null)
         {
