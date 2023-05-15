@@ -3,32 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33620.401
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp", "OCRApp\OCRApp\OCRApp.csproj", "{53786DB3-7202-4D80-82A8-FDDA97243895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp", "OCRApp\OCRApp.csproj", "{53786DB3-7202-4D80-82A8-FDDA97243895}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{38807525-773F-4DB2-ACB1-1EA1ED400255}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Tests", "OCRApp\OCRApp.Tests\OCRApp.Tests.csproj", "{E0DB84F3-7B9B-4B56-B9D1-56F72771E18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Tests", "OCRApp.Tests\OCRApp.Tests.csproj", "{E0DB84F3-7B9B-4B56-B9D1-56F72771E18B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.UITests", "OCRApp\OCRApp.UITests\OCRApp.UITests.csproj", "{D4EBC03F-A117-446B-9A03-4D4114B321FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.UITests", "OCRApp.UITests\OCRApp.UITests.csproj", "{D4EBC03F-A117-446B-9A03-4D4114B321FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{D6D27A7C-F311-4A5B-AA45-CB7A5263C1AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Mobile", "OCRApp\OCRApp.Mobile\OCRApp.Mobile.csproj", "{57CF45C9-B8CE-42AD-A5BD-B6663913BE55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Mobile", "OCRApp.Mobile\OCRApp.Mobile.csproj", "{57CF45C9-B8CE-42AD-A5BD-B6663913BE55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Windows", "OCRApp\OCRApp.Windows\OCRApp.Windows.csproj", "{2D9CF4AA-6BB8-4B85-9673-1A1FC5BDEBD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Windows", "OCRApp.Windows\OCRApp.Windows.csproj", "{2D9CF4AA-6BB8-4B85-9673-1A1FC5BDEBD1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Wasm", "OCRApp\OCRApp.Wasm\OCRApp.Wasm.csproj", "{28AE251E-E8AA-4883-811E-0BBADBB1CD85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Wasm", "OCRApp.Wasm\OCRApp.Wasm.csproj", "{28AE251E-E8AA-4883-811E-0BBADBB1CD85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Gtk", "OCRApp\OCRApp.Skia.Gtk\OCRApp.Skia.Gtk.csproj", "{9ADD50A1-DA0C-4217-A41C-A061CE37F797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Gtk", "OCRApp.Skia.Gtk\OCRApp.Skia.Gtk.csproj", "{9ADD50A1-DA0C-4217-A41C-A061CE37F797}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Wpf", "OCRApp\OCRApp.Skia.WPF\OCRApp.Skia.Wpf.csproj", "{12A70B8F-BC02-4B24-9D53-40D7EEE52965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Wpf", "OCRApp.Skia.WPF\OCRApp.Skia.Wpf.csproj", "{12A70B8F-BC02-4B24-9D53-40D7EEE52965}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Linux.FrameBuffer", "OCRApp\OCRApp.Skia.Linux.FrameBuffer\OCRApp.Skia.Linux.FrameBuffer.csproj", "{3363E940-A79F-4397-A5B7-D19A66CF95EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRApp.Skia.Linux.FrameBuffer", "OCRApp.Skia.Linux.FrameBuffer\OCRApp.Skia.Linux.FrameBuffer.csproj", "{3363E940-A79F-4397-A5B7-D19A66CF95EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87431781-5D7B-4F44-80F9-BDE8BA004E02}"
 	ProjectSection(SolutionItems) = preProject
-		OCRApp\Directory.Build.props = OCRApp\Directory.Build.props
-		OCRApp\Directory.Build.targets = OCRApp\Directory.Build.targets
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
 Global
