@@ -7,7 +7,7 @@
     <ApplicationTitle>OCRApp</ApplicationTitle>
     <!-- App Identifier -->
     <ApplicationId>com.companyname.OCRApp</ApplicationId>
-    <ApplicationIdGuid>1091D997-36F2-4949-B1ED-6F93D62CDAEC</ApplicationIdGuid>
+    <ApplicationIdGuid>B04BA97B-CFFE-4732-8409-C97DFA2D4EB8</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
@@ -26,7 +26,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.Resizetizer" />
     <PackageReference Include="Uno.WinUI" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Uno.Extensions.Logging.WinUI" />
