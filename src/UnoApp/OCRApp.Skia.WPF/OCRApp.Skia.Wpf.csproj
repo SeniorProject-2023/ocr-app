@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.Resizetizer" />
     <PackageReference Include="Uno.WinUI.Skia.Wpf" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Uno.Extensions.Logging.WinUI" />

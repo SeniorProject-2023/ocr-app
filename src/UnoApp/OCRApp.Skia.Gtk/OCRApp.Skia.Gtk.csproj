@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.Resizetizer" />
     <PackageReference Include="Uno.WinUI.Skia.Gtk" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Uno.Extensions.Logging.WinUI" />

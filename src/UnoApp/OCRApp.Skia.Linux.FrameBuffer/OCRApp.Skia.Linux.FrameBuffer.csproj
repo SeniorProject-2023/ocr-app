@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.Resizetizer" />
     <PackageReference Include="Uno.WinUI.Skia.Linux.FrameBuffer" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Uno.Extensions.Logging.WinUI" />

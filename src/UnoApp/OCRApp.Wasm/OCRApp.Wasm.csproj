@@ -52,7 +52,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.Resizetizer" />
     <PackageReference Include="Microsoft.Windows.Compatibility" />
     <PackageReference Include="Uno.Wasm.Bootstrap" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
