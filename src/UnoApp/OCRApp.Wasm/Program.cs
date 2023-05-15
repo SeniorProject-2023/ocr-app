@@ -1,6 +1,6 @@
 namespace OCRApp.Wasm
 {
-    public class Program
+    public sealed class Program
     {
         private static App? _app;
 
