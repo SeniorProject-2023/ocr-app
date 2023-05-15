@@ -2,4 +2,4 @@ from django.shortcuts import redirect
 
 
 def home(req):
-    return redirect('/static/index.html')
+    return redirect('https://seniorproject-2023.github.io/ocr-app/')
