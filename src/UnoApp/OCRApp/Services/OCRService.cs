@@ -49,6 +49,14 @@ internal sealed class OCRService : IOCRService
 
     public async Task<bool> LoginAsync(string username, string password)
     {
+        // TODO: Remove. Have it temporarily for ease of debugging in certain scenarios.
+        if (username == "admin" && password == "admin")
+        {
+            LoggedInUsername = username;
+            _loginResult = new LoginResult("Fake", "Fake");
+            return true;
+        }
+
         // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
         var message = await s_httpClient.PostAsync($"{BaseUri}/users/login/", new StringContent($$"""
             { "username": "{{username}}", "password": "{{password}}" }
