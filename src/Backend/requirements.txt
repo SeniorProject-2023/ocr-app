@@ -3,6 +3,5 @@ djangorestframework
 djangorestframework-simplejwt
 mysqlclient
 django-cors-headers
-ultralytics
 datasets
 more_itertools
