@@ -24,21 +24,22 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
+          cd src/Backend
           python -m venv venv
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+        run: |
+          cd src/Backend
+          pip install -r requirements.txt
       
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            . 
-            !venv/
+            ./src/Backend
+            !./src/Backend/venv/
 
   deploy:
     runs-on: ubuntu-latest
