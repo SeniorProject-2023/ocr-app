@@ -4,6 +4,7 @@ djangorestframework-simplejwt
 mysqlclient
 django-cors-headers
 matplotlib
+opencv-python
 pandas
 Pillow
 psutil
