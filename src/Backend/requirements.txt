@@ -14,8 +14,6 @@ scipy
 seaborn
 sentry-sdk
 thop
-torch
-torchvision
 tqdm
 datasets
 more_itertools
