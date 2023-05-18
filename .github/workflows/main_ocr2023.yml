@@ -24,22 +24,21 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          cd src/Backend
           python -m venv venv
           source venv/bin/activate
-
+      
       - name: Install dependencies
-        run: |
-          cd src/Backend
-          pip install -r requirements.txt
-
+        run: pip install -r requirements.txt
+        
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            ./src/Backend
-            !./src/Backend/venv/
+            . 
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,4 +60,4 @@ jobs:
         with:
           app-name: 'ocr2023'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_251B4BBDF6DA4D81BFB37099D676C2D0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6884B0EE279945F1BCB0C9C951811496 }}
