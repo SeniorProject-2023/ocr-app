@@ -4,9 +4,9 @@ using Uno.UI.Runtime.Skia;
 
 namespace OCRApp.Skia.Gtk
 {
-    public sealed class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             ExceptionManager.UnhandledException += delegate (UnhandledExceptionArgs expArgs)
             {
@@ -14,7 +14,7 @@ namespace OCRApp.Skia.Gtk
                 expArgs.ExitApplication = true;
             };
 
-            var host = new GtkHost(() => new AppHead());
+            var host = new GtkHost(() => new AppHead(), args);
 
             host.Run();
         }

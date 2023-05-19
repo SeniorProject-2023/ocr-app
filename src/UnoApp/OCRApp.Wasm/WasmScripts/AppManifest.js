@@ -1,7 +1,7 @@
 var UnoAppManifest = {
 
-    splashScreenImage: "Assets/SplashScreen.png",
-    splashScreenColor: "transparent",
+    splashScreenImage: "Assets/SplashScreen.png",	
+    splashScreenColor: "transparent",	
     displayName: "OCRApp"
 
 }

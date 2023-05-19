@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="OCRApp.Presentation.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OCRApp.Presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Welcome">
+                    <VisualState.Setters>
+                        <Setter Target="WelcomePanel.Visibility" Value="Visible" />
+                        <Setter Target="LoginPanel.Visibility" Value="Collapsed" />
+                        <Setter Target="SignupPanel.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Login">
+                    <VisualState.Setters>
+                        <Setter Target="WelcomePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="LoginPanel.Visibility" Value="Visible" />
+                        <Setter Target="SignupPanel.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Signup">
+                    <VisualState.Setters>
+                        <Setter Target="WelcomePanel.Visibility" Value="Collapsed" />
+                        <Setter Target="LoginPanel.Visibility" Value="Collapsed" />
+                        <Setter Target="SignupPanel.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <StackPanel x:Name="WelcomePanel" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>
+            <Run Text="Welcome, " /><Run Text="{x:Bind VM.LoggedInUsername, Mode=OneWay}" /><Run Text="!" />
+            </TextBlock>
+            <Button Content="Logout" HorizontalAlignment="Center" Click="LogoutButton_Click" />
+        </StackPanel>
+
+        <StackPanel x:Name="LoginPanel" Spacing="20" Margin="100" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <TextBlock Text="Welcome!" HorizontalAlignment="Center" />
+            <TextBlock Text="Login to your account" HorizontalAlignment="Center" />
+            <TextBox x:Name="UsernameLoginTextBox" PlaceholderText="Username" />
+            <PasswordBox x:Name="PasswordLoginTextBox" PlaceholderText="Password" />
+
+            <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" Click="LoginButton_Click" />
+
+            <HyperlinkButton x:Name="SignupHyperlink" Content="Don't have an account? Signup!" Click="SignupHyperlink_Click" />
+        </StackPanel>
+
+        <StackPanel x:Name="SignupPanel" Spacing="20" Margin="100" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <InfoBar x:Name="SignupInfoBar" Title="Signup error" Severity="Error" />
+            <TextBlock Text="Signup" HorizontalAlignment="Center" />
+            <TextBox x:Name="UsernameSignupTextBox" PlaceholderText="Username" />
+            <PasswordBox x:Name="PasswordSignupTextBox" PlaceholderText="Password" />
+            <PasswordBox x:Name="ConfirmPasswordSignupTextBox" PlaceholderText="Confirm Password" />
+
+            <Button x:Name="SignupButton" Content="Signup" HorizontalAlignment="Center" Click="SignupButton_Click" />
+            <HyperlinkButton x:Name="LoginHyperLink" Content="Already have an account? Login!" Click="LoginHyperLink_Click" />
+
+        </StackPanel>
+    </Grid>
+</Page>
