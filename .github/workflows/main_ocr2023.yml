@@ -8,6 +8,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'src/UnoApp/**'
+
   workflow_dispatch:
 
 jobs:
