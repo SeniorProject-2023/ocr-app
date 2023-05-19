@@ -1,4 +1,4 @@
-import { config } from "/package_68360db67ebbf0e4878516edaab3f62bb6feea7a//uno-config.js";
+import { config } from "/ocr-app/package_68360db67ebbf0e4878516edaab3f62bb6feea7a//uno-config.js";
 
 console.debug("[ServiceWorker] Initializing");
 
