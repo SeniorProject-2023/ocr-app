@@ -14,5 +14,5 @@ internal interface IOCRService
 
     void Logout();
 
-    Task<string> SendImages(IEnumerable<Uri> images);
+    Task<IEnumerable<string>> SendImages(IEnumerable<Uri> images);
 }

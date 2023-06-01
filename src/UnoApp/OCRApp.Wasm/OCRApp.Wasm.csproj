@@ -3,7 +3,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <WasmShellWebAppBasePath Condition="'$(WasmShellWebAppBasePath)'==''">/</WasmShellWebAppBasePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>

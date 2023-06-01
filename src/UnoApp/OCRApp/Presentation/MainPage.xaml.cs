@@ -47,7 +47,7 @@ internal sealed partial class MainPage : Page
         await AddStorageFileAsync(file);
     }
 
-    private static async Task AddStorageFileAsync(StorageFile? file)
+    private async Task AddStorageFileAsync(StorageFile? file)
     {
         if (file != null)
         {
@@ -94,8 +94,8 @@ internal sealed partial class MainPage : Page
             return;
         }
 
-        // TODO: Take results to a new view.
-        await VM.SendImages(imagesToScan.Select(x => x.Image.UriSource));
+        var results = await VM.SendImages(imagesToScan.Select(x => x.Image.UriSource));
+        await VM.NavigateToResults(results);
     }
 
 #if __ANDROID__ || __IOS__
