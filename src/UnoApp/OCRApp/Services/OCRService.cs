@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,11 @@ namespace OCRApp.Services;
 
 internal sealed class OCRService : IOCRService
 {
+    private sealed class OCRResult
+    {
+        public string[] Success { get; set; } = Array.Empty<string>();
+    }
+
 #if DEBUG
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
     //private const string BaseUri = "http://127.0.0.1:8000";
@@ -72,7 +78,7 @@ internal sealed class OCRService : IOCRService
         return true;
     }
 
-    public async Task<string> SendImages(IEnumerable<Uri> images)
+    public async Task<IEnumerable<string>> SendImages(IEnumerable<Uri> images)
     {
         using var content = new MultipartFormDataContent();
 
@@ -85,9 +91,9 @@ internal sealed class OCRService : IOCRService
 
         s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
 
-        var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content);
-
-        return null!;
+        var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content).ConfigureAwait(false);
+        var detected = await message.Content.ReadFromJsonAsync<OCRResult>();
+        return detected!.Success;
     }
 
     private static StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
