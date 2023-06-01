@@ -12,8 +12,8 @@
     Version="1.0.0.0" />
 
   <Properties>
-	<DisplayName>OCRApp</DisplayName>
-	<PublisherDisplayName>OCRApp</PublisherDisplayName>
+    <DisplayName>OCRApp</DisplayName>
+    <PublisherDisplayName>OCRApp</PublisherDisplayName>
   </Properties>
 
   <Dependencies>
