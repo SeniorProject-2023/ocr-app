@@ -54,9 +54,8 @@ internal sealed partial class MainPage : Page
             var fileName = $"{Guid.NewGuid()}.jpg";
             await file.CopyAsync(ApplicationData.Current.LocalFolder, fileName);
             var uri = new Uri($"ms-appdata:///Local/{fileName}");
-            WeakReferenceMessenger.Default.Send(new NewImageMessage(uri));
-            ObservableCollection<ImageWrapper> imagesToScan = WeakReferenceMessenger.Default.Send<ImagesToScanRequestMessage>();
-            WeakReferenceMessenger.Default.Send(new SetSelectedIndexMessage(imagesToScan.Count - 1));
+            VM.SendNewImageMessage(uri);
+            VM.SendSetSelectedIndexMessage();
         }
     }
 
@@ -80,7 +79,7 @@ internal sealed partial class MainPage : Page
             return;
         }
 
-        ObservableCollection<ImageWrapper> imagesToScan = WeakReferenceMessenger.Default.Send<ImagesToScanRequestMessage>();
+        ObservableCollection<ImageWrapper> imagesToScan = VM.GetImagesToScan();
         if (imagesToScan.Count == 0)
         {
             var dialog = new ContentDialog()

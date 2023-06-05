@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
 using OCRApp.Presentation;
 using OCRApp.Services;
 using Uno.Extensions;
 using Uno.Extensions.Hosting;
 using Uno.Extensions.Navigation;
-using Windows.Storage;
 
 namespace OCRApp;
 
@@ -41,6 +40,7 @@ public class App : Application
                 {
                     // TODO: Register your services
                     services.AddSingleton<IOCRService, OCRService>();
+                    services.AddSingleton<IMessenger, WeakReferenceMessenger>();
                 })
                 .UseNavigation(RegisterRoutes, configure: config => config with { AddressBarUpdateEnabled = false })
             );
