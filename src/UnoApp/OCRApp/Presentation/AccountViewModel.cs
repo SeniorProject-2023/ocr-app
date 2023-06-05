@@ -9,7 +9,7 @@ namespace OCRApp.Presentation;
 internal sealed partial class AccountViewModel : ObservableObject
 {
     [ObservableProperty]
-    public string? _loggedInUsername;
+    private string? _loggedInUsername;
 
     private readonly IOCRService _ocrService;
 
@@ -21,9 +21,9 @@ internal sealed partial class AccountViewModel : ObservableObject
     internal async Task<SignupResult> SignupAsync(string username, string password)
         => await _ocrService.SignupAsync(username, password);
 
-    internal async Task<bool> LoginAsync(string text, string password)
+    internal async Task<bool> LoginAsync(string username, string password)
     {
-        var result = await _ocrService.LoginAsync(text, password);
+        var result = await _ocrService.LoginAsync(username, password);
         LoggedInUsername = _ocrService.LoggedInUsername;
         return result;
     }
