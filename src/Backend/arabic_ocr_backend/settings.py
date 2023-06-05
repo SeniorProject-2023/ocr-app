@@ -31,7 +31,7 @@ MODEL_BACKEND  = {
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["ocr2023.azurewebsites.net"]
+ALLOWED_HOSTS = ["localhost", "ocr2023.azurewebsites.net"]
 
 
 # Application definition

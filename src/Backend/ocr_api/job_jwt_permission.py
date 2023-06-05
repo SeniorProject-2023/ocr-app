@@ -1,8 +1,9 @@
 import jwt
 from rest_framework.permissions import BasePermission
 import importlib.util
+import json
 
-spec = importlib.util.spec_from_file_location("settings", "settings.py")
+spec = importlib.util.spec_from_file_location("../arabic_ocr_backend/settings", "settings.py")
 settings = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(settings)
 secret_key = settings.SECRET_KEY
@@ -10,12 +11,11 @@ hashing_alg = settings.HASHING_ALG
 
 class JobJWTPermission(BasePermission):
     def has_permission(self, request, view):
-        # Get the JWT from the Authorization header
-        job_header = request.headers.get('Job')
-        if not job_header:
+        body_dic = json.loads(request.body)
+        if 'job_token' not in body_dic:
             return False
-        job_token = job_header.split(' ')[1]
 
+        job_token = body_dic['job_token']
         try:
             # Decode the JWT
             payload = jwt.decode(job_token, secret_key, algorithms=[hashing_alg])
