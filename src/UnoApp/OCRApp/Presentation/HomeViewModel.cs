@@ -11,11 +11,11 @@ internal sealed partial class HomeViewModel : ObservableObject
     [ObservableProperty]
     private int _selectedIndex;
 
-    public HomeViewModel()
+    public HomeViewModel(IMessenger messenger)
     {
-        WeakReferenceMessenger.Default.Register<SetSelectedIndexMessage>(this, (_, m) => SelectedIndex = m.NewSelectedIndex);
-        WeakReferenceMessenger.Default.Register<HomeViewModel, ImagesToScanRequestMessage>(this, (r, m) => m.Reply(r.ImagesToScan));
-        WeakReferenceMessenger.Default.Register<NewImageMessage>(this, (_, m) => ImagesToScan.Add(new ImageWrapper(m.ImageUri)));
+        messenger.Register<SetSelectedIndexMessage>(this, (_, m) => SelectedIndex = m.NewSelectedIndex);
+        messenger.Register<HomeViewModel, ImagesToScanRequestMessage>(this, (r, m) => m.Reply(r.ImagesToScan));
+        messenger.Register<NewImageMessage>(this, (_, m) => ImagesToScan.Add(new ImageWrapper(m.ImageUri)));
         _imagesToScan = new();
     }
 
