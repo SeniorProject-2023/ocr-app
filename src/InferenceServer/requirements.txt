@@ -1,0 +1,10 @@
+datasets==2.12.0
+more_itertools==9.1.0
+rpyc==5.3.1
+opencv-python==4.7.0.72
+ultralytics==8.0.113
+more-itertools==9.1.0
+Pillow==9.4.0
+torch==2.0.0
+datasets==2.12.0
+numpy==1.24.2
