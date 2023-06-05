@@ -23,6 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
+HASHING_ALG = 'HS256'
+MODEL_BACKEND  = {
+    'HOST': os.environ['MODEL_BACKEND_HOST'],
+    'PORT': os.environ['MODEL_BACKEND_PORT']
+}
 
 DEBUG = False
 
