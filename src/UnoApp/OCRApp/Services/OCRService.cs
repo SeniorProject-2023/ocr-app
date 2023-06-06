@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using OCRApp.Models;
 using Windows.Storage.Streams;
@@ -18,6 +20,12 @@ internal sealed class OCRService : IOCRService
     private sealed class OCRResult
     {
         public string[] Success { get; set; } = Array.Empty<string>();
+    }
+
+    private sealed class SubmitJobResult
+    {
+        [JsonPropertyName("job_token")]
+        public string JobToken { get; set; } = null!;
     }
 
 #if DEBUG
@@ -78,7 +86,7 @@ internal sealed class OCRService : IOCRService
         return true;
     }
 
-    public async Task<IEnumerable<string>> SendImages(IEnumerable<Uri> images)
+    public async Task<string> SendImages(IEnumerable<Uri> images)
     {
         using var content = new MultipartFormDataContent();
 
@@ -92,8 +100,8 @@ internal sealed class OCRService : IOCRService
         s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
 
         var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content).ConfigureAwait(false);
-        var detected = await message.Content.ReadFromJsonAsync<OCRResult>();
-        return detected!.Success;
+        var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>();
+        return jobResult!.JobToken;
     }
 
     private static StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
@@ -113,4 +121,27 @@ internal sealed class OCRService : IOCRService
         LoggedInUsername = null;
         _loginResult = default;
     }
+
+    public async Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId)
+    {
+        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+
+        var message = await s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
+            { "job_token": "{{jobId}}" }
+            """)).ConfigureAwait(false);
+        var response = await message.Content.ReadAsStringAsync();
+        if (response.Contains("Not Done"))
+        {
+            return null;
+        }
+
+        return JsonSerializer.Deserialize<Rootobject>(response)!.Results.Values;
+    }
+}
+
+
+public class Rootobject
+{
+    [JsonPropertyName("results")]
+    public Dictionary<string, string> Results { get; set; } = null!;
 }

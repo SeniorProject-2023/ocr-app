@@ -68,9 +68,9 @@ def arabic_ocr(req):
 
         buffer = BytesIO()
         pickle.dump(images_list, buffer)
-        status = model_conn.root.register_task(buffer.getvalue(), generate_model_callback(job_uuid))
+        model_status = model_conn.root.register_task(buffer.getvalue(), generate_model_callback(job_uuid))
 
-        if status:
+        if model_status:
             encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid},
                                     secret_key, algorithm=hashing_alg)
             
@@ -79,7 +79,7 @@ def arabic_ocr(req):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated, JobJWTPermission])
 def check_for_job(req):
     # Access the 'uuid' element in the job jwt payload
