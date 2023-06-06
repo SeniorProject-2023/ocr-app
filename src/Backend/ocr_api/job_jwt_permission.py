@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission
 import importlib.util
 import json
 
-spec = importlib.util.spec_from_file_location("../arabic_ocr_backend", "settings.py")
+spec = importlib.util.spec_from_file_location("/arabic_ocr_backend/settings", "settings.py")
 settings = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(settings)
 secret_key = settings.SECRET_KEY
