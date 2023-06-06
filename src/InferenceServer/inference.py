@@ -5,8 +5,8 @@ from typing import Dict
 from threading import Thread
 import queue
 import cv2
-from filters import highPassFilter, whitePointSelect, blackPointSelect
-from combined import infer_letters, map2d, merge_boxes
+from .filters import highPassFilter, whitePointSelect, blackPointSelect
+from .combined import infer_letters, map2d, merge_boxes, infer_words, groupbyrow
 
 import cv2
 import numpy as np
@@ -14,11 +14,11 @@ from PIL import Image
 from deskew import determine_skew
 from jdeskew.utility import rotate
 from ultralytics.yolo.utils.plotting import Annotator
-from combined import infer_words, groupbyrow
 from functools import reduce
 from io import BytesIO
 import pickle
 
+server = None
 
 def infer_image(img_array):
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -84,7 +84,8 @@ class WordInference(rpyc.Service):
             data, callback = self.workq.get()
             infer(data, callback)
 
-
-print('starting server')
-server = ThreadedServer(WordInference, port=18811)
-server.start()
+def StartServer():
+    global server
+    print('[INFO] Starting Inference Server')
+    server = ThreadedServer(WordInference, port=18811)
+    server.start()

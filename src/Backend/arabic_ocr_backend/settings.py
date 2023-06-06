@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 HASHING_ALG = 'HS256'
 MODEL_BACKEND  = {
     'HOST': os.environ['MODEL_BACKEND_HOST'],
-    'PORT': os.environ['MODEL_BACKEND_PORT']
+    'PORT': 18811#os.environ['MODEL_BACKEND_PORT']
 }
 
 DEBUG = False
