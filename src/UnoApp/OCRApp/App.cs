@@ -69,7 +69,8 @@ public class App : Application
                             new RouteMap("Home", View: views.FindByViewModel<HomeViewModel>(), IsDefault: true),
                             new RouteMap("Account", View: views.FindByViewModel<AccountViewModel>()),
                         }),
-                    new RouteMap("Results", View: views.FindByViewModel<ResultsViewModel>()),                }
+                    new RouteMap("Results", View: views.FindByViewModel<ResultsViewModel>()),
+                }
             )
         );
     }

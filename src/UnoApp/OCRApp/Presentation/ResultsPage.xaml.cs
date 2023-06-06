@@ -22,4 +22,23 @@ public sealed partial class ResultsPage : Page
 
         this.InitializeComponent();
     }
+
+    private void Previous_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (flipView.SelectedIndex > 0)
+        {
+            flipView.SelectedIndex--;
+        }
+    }
+
+    private void Next_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (flipView.SelectedIndex < flipView.Items.Count - 1)
+        {
+            flipView.SelectedIndex++;
+        }
+    }
+
+    private string PlusOne(int selectedIndex)
+        => (selectedIndex + 1).ToString();
 }
