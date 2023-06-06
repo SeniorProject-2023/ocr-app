@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
@@ -93,8 +94,18 @@ internal sealed partial class MainPage : Page
             return;
         }
 
-        var results = await VM.SendImages(imagesToScan.Select(x => x.Image.UriSource));
-        await VM.NavigateToResults(results);
+        var jobId = await VM.SubmitJob(imagesToScan.Select(x => x.Image.UriSource));
+
+        while (true)
+        {
+            if (await VM.TryGetResultsForJobIdAsync(jobId) is { } results)
+            {
+                await VM.NavigateToResults(results);
+                break;
+            }
+
+            await Task.Delay(1000);
+        }
     }
 
 #if __ANDROID__ || __IOS__

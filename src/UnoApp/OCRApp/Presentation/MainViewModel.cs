@@ -30,7 +30,7 @@ internal sealed partial class MainViewModel : ObservableObject
         await _navigator.NavigateViewModelAsync<ResultsViewModel>(this, data: results);
     }
 
-    internal async Task<IEnumerable<string>> SendImages(IEnumerable<Uri> images)
+    internal async Task<string> SubmitJob(IEnumerable<Uri> images)
         => await _ocrService.SendImages(images);
 
     internal void SendNewImageMessage(Uri uri)
@@ -48,4 +48,7 @@ internal sealed partial class MainViewModel : ObservableObject
     {
         return _messenger.Send<ImagesToScanRequestMessage>();
     }
+
+    internal async Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId)
+        => await _ocrService.TryGetResultsForJobIdAsync(jobId);
 }
