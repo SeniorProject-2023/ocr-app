@@ -14,9 +14,11 @@ from pickle import Pickler, Unpickler
 from .job_jwt_permission import JobJWTPermission
 import pickle
 
-spec = importlib.util.spec_from_file_location("../arabic_ocr_backend/settings", "settings.py")
-settings = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(settings)
+from os import path
+import sys
+sys.path.append(path.join(path.dirname(__file__), '..'))
+from arabic_ocr_backend import settings
+
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
 model_backend = settings.MODEL_BACKEND
