@@ -19,6 +19,9 @@ namespace OCRApp.Droid
         LargeHeap = true,
         HardwareAccelerated = true,
         Theme = "@style/AppTheme"
+#if DEBUG // Allows insecure HTTP requests for purpose of local debugging.
+        , UsesCleartextTraffic = true
+#endif
     )]
     public class Application : Microsoft.UI.Xaml.NativeApplication
     {

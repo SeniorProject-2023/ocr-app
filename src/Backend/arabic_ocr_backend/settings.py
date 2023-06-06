@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["ocr2023.azurewebsites.net"]
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', 'ocr2023.azurewebsites.net')]
 
 
 # Application definition
