@@ -69,6 +69,5 @@ def arabic_ocr(req):
 def check_for_job(req):
     # Access the 'uuid' element in the job jwt payload
     job_uuid = req.job.payload['uuid']
-
     return Response({'results': jobs_dict[job_uuid] if job_uuid in jobs_dict else "Not Done"})
     
