@@ -28,3 +28,6 @@ jobs:
 
     - name: Build
       run: msbuild -m src/UnoApp/OCRApp.sln
+
+    - name: Publish Android APK
+      run: dotnet publish src/UnoApp/OCRApp.Mobile/OCRApp.Mobile.csproj -f:net7.0-android -c:Release -p:RunAOTCompilation=true

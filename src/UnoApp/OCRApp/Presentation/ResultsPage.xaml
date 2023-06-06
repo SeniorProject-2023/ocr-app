@@ -24,6 +24,16 @@
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
-        <Button Grid.Row="1" uen:Navigation.Request="-" Content="Go Back" />
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button x:Name="Previous" Click="Previous_Click" Content="&lt;" />
+                <TextBlock>
+                    <Run Text="{x:Bind PlusOne(flipView.SelectedIndex), Mode=OneWay}" /><Run Text="/" /><Run Text="{x:Bind flipView.Items.Count}" />
+                </TextBlock>
+                <Button x:Name="Next" Click="Next_Click" Content="&gt;" />
+            </StackPanel>
+            <Button uen:Navigation.Request="-" Content="Go Back" />
+        </StackPanel>
+        
     </Grid>
 </Page>
