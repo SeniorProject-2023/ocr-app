@@ -17,8 +17,12 @@ from ultralytics.yolo.utils.plotting import Annotator
 from functools import reduce
 from io import BytesIO
 import pickle
+from threading import Thread, Lock
 
 server = None
+serverUp = False
+statusLock = Lock()
+
 
 def infer_image(img_array):
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -84,8 +88,25 @@ class WordInference(rpyc.Service):
             data, callback = self.workq.get()
             infer(data, callback)
 
+
 def StartServer():
-    global server
+    def _start():
+        global server, statusLock, serverUp
+        statusLock.acquire()
+        server = ThreadedServer(WordInference, port=18811)
+        serverUp = True
+        statusLock.release()
+        server.start()
+
+    thread = Thread(target=_start)
+    thread.start()
     print('[INFO] Starting Inference Server')
-    server = ThreadedServer(WordInference, port=18811)
-    server.start()
+
+
+def isServerUp():
+    global statusLock, serverUp
+    localStatus = False
+    statusLock.acquire()
+    localStatus = serverUp
+    statusLock.release()
+    return localStatus

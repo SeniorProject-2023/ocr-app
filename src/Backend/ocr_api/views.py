@@ -21,7 +21,8 @@ from arabic_ocr_backend import settings
 import sys
 from os import path
 sys.path.append(path.join(path.join(path.dirname(__file__), '..'),'..'))
-from InferenceServer.inference import StartServer
+from InferenceServer.inference import StartServer, isServerUp
+
 
 print("Before")
 StartServer()
@@ -52,6 +53,8 @@ def generate_model_callback(uuid):
 @permission_classes([IsAuthenticated])
 def arabic_ocr(req):
     print(req.data)
+    if not isServerUp():
+        return Response({'message': 'Please try again after a while.'}, status=503)
     serializer = ImageSerializer(data=req.data)
     if serializer.is_valid():
         job_uuid = str(uuid.uuid4())
