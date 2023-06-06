@@ -18,12 +18,22 @@ from os import path
 import sys
 sys.path.append(path.join(path.dirname(__file__), '..'))
 from arabic_ocr_backend import settings
+import sys
+from os import path
+sys.path.append(path.join(path.join(path.dirname(__file__), '..'),'..'))
+from InferenceServer.inference import StartServer
+
+print("Before")
+StartServer()
+print("After")
 
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
 model_backend = settings.MODEL_BACKEND
 
 jobs_dict = dict()
+
+
 
 # Connect to the model backend rpyc server
 model_conn = rpyc.connect( model_backend['HOST'], model_backend['PORT'])
