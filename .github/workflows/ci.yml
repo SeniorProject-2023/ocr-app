@@ -31,3 +31,9 @@ jobs:
 
     - name: Publish Android APK
       run: dotnet publish src/UnoApp/OCRApp.Mobile/OCRApp.Mobile.csproj -f:net7.0-android -c:Release -p:RunAOTCompilation=true
+
+    - name: Upload Android APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-apk
+        path: /src/UnoApp/OCRApp.Mobile/bin/Release/net7.0-android/android-arm64/publish/com.companyname.OCRApp-Signed.apk
