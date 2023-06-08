@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
@@ -25,6 +26,17 @@
         </FlipView>
 
         <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Disabled"
+                      VerticalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                <Button Content="Delete current image" x:Name="DeleteCurrentImageButton" Click="DeleteCurrentImageButton_Click" />
+                <Button Content="Move current image to left" x:Name="MoveCurrentImageToLeftButton" Click="MoveCurrentImageToLeftButton_Click" />
+                <Button Content="Move current image to right" x:Name="MoveCurrentImageToRightButton" Click="MoveCurrentImageToRightButton_Click" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Disabled"
                       VerticalScrollMode="Disabled"
                       HorizontalScrollBarVisibility="Auto">

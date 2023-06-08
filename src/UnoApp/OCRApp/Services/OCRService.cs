@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -17,11 +16,6 @@ namespace OCRApp.Services;
 
 internal sealed class OCRService : IOCRService
 {
-    private sealed class OCRResult
-    {
-        public string[] Success { get; set; } = Array.Empty<string>();
-    }
-
     private sealed class SubmitJobResult
     {
         [JsonPropertyName("job_token")]
@@ -35,7 +29,7 @@ internal sealed class OCRService : IOCRService
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
 
-    private static HttpClient s_httpClient = new();
+    private static HttpClient s_httpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
     private LoginResult _loginResult;
 
     public string? LoggedInUsername { get; private set; }
