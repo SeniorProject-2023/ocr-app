@@ -49,4 +49,4 @@ jobs:
           app-name: 'ocr2023'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6884B0EE279945F1BCB0C9C951811496 }}
-          images: 'ghcr.io/SeniorProject-2023/ocr-app:${{ github.sha }}'
+          images: 'ghcr.io/seniorproject-2023/ocr-app:${{ github.sha }}'
