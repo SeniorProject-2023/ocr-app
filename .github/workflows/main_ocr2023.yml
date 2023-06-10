@@ -40,7 +40,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          tags: ghcr.io/seniorproject-2023/ocr-app:${{ github.sha }}
           file: src/Backend/Dockerfile
 
       - name: Deploy to Azure Web App
