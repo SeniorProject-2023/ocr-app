@@ -1,7 +1,7 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10
 
-RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 libglib2.0-0
+RUN apt-get update && apt-get install -y libgl1
 
 EXPOSE 8000
 
