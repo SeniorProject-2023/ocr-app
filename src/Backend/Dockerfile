@@ -1,8 +1,6 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10
 
-RUN apt-get update && apt-get install -y libgl1
-
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
@@ -13,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install pip requirements
 COPY ./src/Backend/requirements.txt .
-RUN python -m pip install -r requirements.txt --no-cache-dir
+RUN apt-get update && apt-get install -y libgl1 && python -m pip install -r requirements.txt --no-cache-dir
 
 WORKDIR /app
 COPY ./src/Backend /app
