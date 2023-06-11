@@ -13,4 +13,5 @@ numpy==1.24.2
 deskew==1.4.3
 jdeskew==0.2.1
 torch==2.0.1
-ultralytics==8.0.114
+ultralytics==8.0.115
+gunicorn==20.1.0
