@@ -5,8 +5,8 @@ from typing import Dict
 from threading import Thread
 import queue
 import cv2
-from .filters import highPassFilter, whitePointSelect, blackPointSelect
-from .combined import infer_letters, map2d, merge_boxes, infer_words, groupbyrow
+from filters import highPassFilter, whitePointSelect, blackPointSelect
+from combined import infer_letters, map2d, merge_boxes, infer_words, groupbyrow
 
 import cv2
 import numpy as np
@@ -90,17 +90,13 @@ class WordInference(rpyc.Service):
 
 
 def StartServer():
-    def _start():
-        global server, statusLock, serverUp
-        statusLock.acquire()
-        server = ThreadedServer(WordInference, port=18811)
-        serverUp = True
-        statusLock.release()
-        server.start()
-
-    thread = Thread(target=_start)
-    thread.start()
+    global server, statusLock, serverUp
+    statusLock.acquire()
+    server = ThreadedServer(WordInference, port=18811)
+    serverUp = True
+    statusLock.release()
     print('[INFO] Starting Inference Server')
+    server.start()
 
 
 def isServerUp():
