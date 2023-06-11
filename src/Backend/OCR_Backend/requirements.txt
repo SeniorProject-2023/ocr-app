@@ -14,3 +14,4 @@ deskew==1.4.3
 jdeskew==0.2.1
 ultralytics==8.0.115
 gunicorn==20.1.0
+boto3==1.26.151
