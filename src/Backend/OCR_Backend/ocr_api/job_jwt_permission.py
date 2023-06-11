@@ -1,6 +1,6 @@
 import jwt
 from rest_framework.permissions import BasePermission
-import importlib.util
+import datetime
 import json
 from os import path
 import sys
@@ -22,7 +22,7 @@ class JobJWTPermission(BasePermission):
             payload = jwt.decode(job_token, secret_key, algorithms=[hashing_alg])
         except jwt.InvalidTokenError:
             return False
-
+            
         # Check if the payload has the required fields
         if 'user_id' not in payload or 'uuid' not in payload or payload['user_id'] != request.user.id:
             return False
