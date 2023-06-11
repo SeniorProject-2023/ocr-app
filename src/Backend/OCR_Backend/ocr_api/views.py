@@ -3,14 +3,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ImageSerializer
-import cv2
 import numpy as np
 import uuid
 import jwt
-import importlib.util
 import rpyc
-from io import BytesIO, StringIO
-from pickle import Pickler, Unpickler
+from io import BytesIO
 from .job_jwt_permission import JobJWTPermission
 import pickle
 
@@ -21,12 +18,6 @@ from arabic_ocr_backend import settings
 import sys
 from os import path
 sys.path.append(path.join(path.join(path.dirname(__file__), '..'),'..'))
-from InferenceServer.inference import StartServer, isServerUp
-
-
-print("Before")
-StartServer()
-print("After")
 
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
@@ -34,11 +25,7 @@ model_backend = settings.MODEL_BACKEND
 
 jobs_dict = dict()
 
-
-
-# Connect to the model backend rpyc server
-model_conn = rpyc.connect( model_backend['HOST'], model_backend['PORT'])
-bgsrv = rpyc.BgServingThread(model_conn)
+model_conn = None
 
 def generate_model_callback(uuid):
     def handle_model_callback(result):
@@ -52,9 +39,16 @@ def generate_model_callback(uuid):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def arabic_ocr(req):
-    print(req.data)
-    if not isServerUp():
-        return Response({'message': 'Please try again after a while.'}, status=503)
+    global model_conn
+    if model_conn == None or not model_conn.ping():
+        try:
+            model_conn = rpyc.connect(model_backend['HOST'], model_backend['PORT'])
+        except:    
+            return Response({'message': 'Please try again after a while.'}, status=503)
+    else:
+        # Connection successful
+        bgsrv = rpyc.BgServingThread(model_conn)
+
     serializer = ImageSerializer(data=req.data)
     if serializer.is_valid():
         job_uuid = str(uuid.uuid4())

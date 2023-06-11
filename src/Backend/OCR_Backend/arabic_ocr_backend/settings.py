@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+import configparser
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,18 +22,37 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+# Load environment variables from config.ini file
+config = configparser.ConfigParser()
+config.read('arabic_ocr_backend\config.ini')
+
+# Set environment variables based on current environment
+if os.environ.get('ENVIRONMENT') == 'development':
+    DEBUG_CONFIG = config.getboolean('development', 'DEBUG')
+    MODEL_BACKEND_HOST = config.get('development', 'MODEL_BACKEND_HOST')
+    MODEL_BACKEND_PORT = config.getint('development', 'MODEL_BACKEND_PORT')
+    DB_HOST = config.get('development', 'DB_HOST')
+    DB_USER = config.get('development', 'DB_USER')
+    DB_PASSWORD = config.get('development', 'DB_PASSWORD')
+elif os.environ.get('ENVIRONMENT') == 'production':
+    DEBUG_CONFIG = config.getboolean('production', 'DEBUG')
+    MODEL_BACKEND_HOST = os.environ.get('MODEL_BACKEND_HOST')
+    MODEL_BACKEND_PORT = os.environ.getint('MODEL_BACKEND_PORT')
+    DB_HOST = os.environ.get('ARABIC_OCR_DATABASE_HOST')
+    DB_USER = os.environ.get('ARABIC_OCR_DATABASE_USER')
+    DB_PASSWORD = os.environ.get('ARABIC_OCR_DATABASE_PASS')
+    
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 HASHING_ALG = 'HS256'
-MODEL_BACKEND = { #TODO: restore this back later
-    'HOST': 'localhost',  # os.environ['MODEL_BACKEND_HOST'], T
-    'PORT': 18811  # os.environ['MODEL_BACKEND_PORT']
+MODEL_BACKEND = {
+    'HOST': MODEL_BACKEND_HOST,
+    'PORT': MODEL_BACKEND_PORT
 }
 
-DEBUG = True
+DEBUG = DEBUG_CONFIG
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', 'ocr2023.azurewebsites.net')]
-
 
 # Application definition
 
@@ -88,9 +108,9 @@ DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arabic_ocr_database',
-        "HOST": os.environ["ARABIC_OCR_DATABASE_HOST"],
-        "USER": os.environ["ARABIC_OCR_DATABASE_USER"],
-        "PASSWORD": os.environ["ARABIC_OCR_DATABASE_PASS"]
+        "HOST": DB_HOST,
+        "USER": DB_USER,
+        "PASSWORD": DB_PASSWORD
     }
 }
 
