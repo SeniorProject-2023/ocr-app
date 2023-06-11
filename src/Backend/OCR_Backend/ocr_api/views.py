@@ -10,29 +10,41 @@ import rpyc
 from io import BytesIO
 from .job_jwt_permission import JobJWTPermission
 import pickle
+import boto3
+import datetime
+import json
+import pytz
+import configparser
 
-from os import path
-import sys
-sys.path.append(path.join(path.dirname(__file__), '..'))
 from arabic_ocr_backend import settings
-import sys
-from os import path
-sys.path.append(path.join(path.join(path.dirname(__file__), '..'),'..'))
-
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
 model_backend = settings.MODEL_BACKEND
 
-jobs_dict = dict()
+config = configparser.ConfigParser()
+config.read('ocr_api\\aws_s3_config.ini')
+RESULTS_EXP_DAYS = config.get('aws', 'RESULT_EXP_DAYS')
+PRESIGNED_URL_EXP_SECOND = config.get('aws', 'PRESIGNED_URL_EXP_SECOND')
+
+# Create a timezone object for UTC+2
+timezone = pytz.timezone(config.get('aws', 'TIMEZONE'))
 
 model_conn = None
+
+s3 = boto3.client('s3', aws_access_key_id=settings.AWS['AWS_ACCESS_KEY_ID'], aws_secret_access_key=settings.AWS['AWS_SECRET_ACCESS_KEY'], 
+                            region_name=settings.AWS['AWS_S3_REGION_NAME'])
+bucket_name = settings.AWS['AWS_STORAGE_BUCKET_NAME']
 
 def generate_model_callback(uuid):
     def handle_model_callback(result):
         job_uuid = uuid
         decoded_result =  pickle.loads(result)
-        jobs_dict[job_uuid] = decoded_result
-
+        try:
+            expiration_date = datetime.datetime.now(timezone) + datetime.timedelta(days=RESULTS_EXP_DAYS)
+            file_name = str(job_uuid) + '.txt'
+            s3.upload_fileobj(BytesIO(str(json.dumps(decoded_result)).encode('utf-8')), bucket_name, file_name, ExtraArgs={'Expires': expiration_date})
+        except Exception as e:
+            print(e)
     return handle_model_callback
 
 # Create your views here.
@@ -40,14 +52,12 @@ def generate_model_callback(uuid):
 @permission_classes([IsAuthenticated])
 def arabic_ocr(req):
     global model_conn
-    if model_conn == None or not model_conn.ping():
+    if model_conn == None or model_conn.closed:
         try:
             model_conn = rpyc.connect(model_backend['HOST'], model_backend['PORT'])
-        except:    
+            rpyc.BgServingThread(model_conn)
+        except:
             return Response({'message': 'Please try again after a while.'}, status=503)
-    else:
-        # Connection successful
-        bgsrv = rpyc.BgServingThread(model_conn)
 
     serializer = ImageSerializer(data=req.data)
     if serializer.is_valid():
@@ -56,7 +66,6 @@ def arabic_ocr(req):
         images = serializer.validated_data['images']
         images_list = []
         for image in images:
-            #np_image = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_UNCHANGED)
             np_image = np.array(bytearray(image.read()), dtype=np.uint8)
             images_list.append(np_image)
 
@@ -65,7 +74,7 @@ def arabic_ocr(req):
         model_status = model_conn.root.register_task(buffer.getvalue(), generate_model_callback(job_uuid))
 
         if model_status:
-            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid},
+            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid, "exp": datetime.datetime.now() + datetime.timedelta(minutes=2)},
                                     secret_key, algorithm=hashing_alg)
             
             return Response({'job_token': encoded_job_id})
@@ -78,5 +87,16 @@ def arabic_ocr(req):
 def check_for_job(req):
     # Access the 'uuid' element in the job jwt payload
     job_uuid = req.job.payload['uuid']
-    return Response({'results': jobs_dict[job_uuid] if job_uuid in jobs_dict else "Not Done"})
+    try:
+        url = s3.generate_presigned_url(
+        ClientMethod='get_object',
+        Params={
+            'Bucket': bucket_name,
+            'Key': job_uuid + '.txt'
+        },
+        ExpiresIn=PRESIGNED_URL_EXP_SECOND
+        )
+        return Response({'results': url})
+    except Exception as e:
+        return Response({'results': "Not Done"})
     
