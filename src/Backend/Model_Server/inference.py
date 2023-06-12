@@ -20,8 +20,6 @@ import pickle
 from threading import Thread, Lock
 
 server = None
-serverUp = False
-statusLock = Lock()
 
 
 def infer_image(img_array):
@@ -87,22 +85,3 @@ class WordInference(rpyc.Service):
         while self.active:
             data, callback = self.workq.get()
             infer(data, callback)
-
-
-def StartServer():
-    global server, statusLock, serverUp
-    statusLock.acquire()
-    server = ThreadedServer(WordInference, port=18811)
-    serverUp = True
-    statusLock.release()
-    print('[INFO] Starting Inference Server')
-    server.start()
-
-
-def isServerUp():
-    global statusLock, serverUp
-    localStatus = False
-    statusLock.acquire()
-    localStatus = serverUp
-    statusLock.release()
-    return localStatus

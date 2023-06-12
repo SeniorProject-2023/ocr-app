@@ -9,12 +9,14 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-# Install pip requirements
-COPY ./src/Backend/requirements.txt .
+ENV ENVIRONMENT=development
+
+COPY ./requirements.txt .
 RUN apt-get update && apt-get install -y libgl1 && python -m pip install -r requirements.txt --no-cache-dir
 
 WORKDIR /app
-COPY ./src/Backend /app
+COPY . /app
+
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers

@@ -24,26 +24,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from config.ini file
 config = configparser.ConfigParser()
-config.read('arabic_ocr_backend\config.ini')
+config.read(os.path.join('arabic_ocr_backend', 'config.ini'))
 
 # Set environment variables based on current environment
-if os.environ.get('ENVIRONMENT') == 'development':
-    DEBUG_CONFIG = config.getboolean('development', 'DEBUG')
-    MODEL_BACKEND_HOST = config.get('development', 'MODEL_BACKEND_HOST')
-    MODEL_BACKEND_PORT = config.getint('development', 'MODEL_BACKEND_PORT')
-    DB_HOST = config.get('development', 'DB_HOST')
-    DB_USER = config.get('development', 'DB_USER')
-    DB_PASSWORD = config.get('development', 'DB_PASSWORD')
-elif os.environ.get('ENVIRONMENT') == 'production':
+ENVIRONMENT = os.environ.get('ENVIRONMENT')
+if ENVIRONMENT == 'development' or ENVIRONMENT == 'docker_development':
+    DEBUG_CONFIG = config.getboolean(ENVIRONMENT, 'DEBUG')
+    MODEL_BACKEND_HOST = config.get(ENVIRONMENT, 'MODEL_BACKEND_HOST')
+    MODEL_BACKEND_PORT = config.getint(ENVIRONMENT, 'MODEL_BACKEND_PORT')
+    DB_HOST = config.get(ENVIRONMENT, 'DB_HOST')
+    DB_USER = config.get(ENVIRONMENT, 'DB_USER')
+    DB_PASSWORD = config.get(ENVIRONMENT, 'DB_PASSWORD')
+    SECRET = config.get(ENVIRONMENT, 'SECRET_KEY')
+elif ENVIRONMENT == 'production':
     DEBUG_CONFIG = config.getboolean('production', 'DEBUG')
     MODEL_BACKEND_HOST = os.environ.get('MODEL_BACKEND_HOST')
     MODEL_BACKEND_PORT = os.environ.getint('MODEL_BACKEND_PORT')
     DB_HOST = os.environ.get('ARABIC_OCR_DATABASE_HOST')
     DB_USER = os.environ.get('ARABIC_OCR_DATABASE_USER')
     DB_PASSWORD = os.environ.get('ARABIC_OCR_DATABASE_PASS')
+    SECRET = os.environ.get('SECRET_KEY')
     
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = SECRET
 HASHING_ALG = 'HS256'
 MODEL_BACKEND = {
     'HOST': MODEL_BACKEND_HOST,
@@ -52,7 +55,7 @@ MODEL_BACKEND = {
 
 DEBUG = DEBUG_CONFIG
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', 'ocr2023.azurewebsites.net')]
+ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOSTS', 'ocr2023.azurewebsites.net')]
 
 # Application definition
 
