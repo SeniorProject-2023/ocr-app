@@ -86,22 +86,23 @@ internal sealed class OCRService : IOCRService
         return true;
     }
 
-    public async Task<string> SendImages(IEnumerable<Uri> images)
+    public Task<string> SendImages(IEnumerable<Uri> images)
     {
-        using var content = new MultipartFormDataContent();
+        //using var content = new MultipartFormDataContent();
 
-        foreach (var image in images)
-        {
-            var random = RandomAccessStreamReference.CreateFromUri(image);
-            var stream = await random.OpenReadAsync();
-            content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
-        }
+        //foreach (var image in images)
+        //{
+        //    var random = RandomAccessStreamReference.CreateFromUri(image);
+        //    var stream = await random.OpenReadAsync();
+        //    content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
+        //}
 
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+        //s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
 
-        var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content).ConfigureAwait(false);
-        var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>();
-        return jobResult!.JobToken;
+        //var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content).ConfigureAwait(false);
+        //var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>();
+        //return jobResult!.JobToken;
+        return Task.FromResult("Token");
     }
 
     private static StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
@@ -122,20 +123,21 @@ internal sealed class OCRService : IOCRService
         _loginResult = default;
     }
 
-    public async Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId)
+    public Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId)
     {
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+        return Task.FromResult<IEnumerable<string>?>(new[] { "Output1", "Output2" });
+        //s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
 
-        var message = await s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
-            { "job_token": "{{jobId}}" }
-            """)).ConfigureAwait(false);
-        var response = await message.Content.ReadAsStringAsync();
-        if (response.Contains("Not Done"))
-        {
-            return null;
-        }
+        //var message = await s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
+        //    { "job_token": "{{jobId}}" }
+        //    """)).ConfigureAwait(false);
+        //var response = await message.Content.ReadAsStringAsync();
+        //if (response.Contains("Not Done"))
+        //{
+        //    return null;
+        //}
 
-        return JsonSerializer.Deserialize<Rootobject>(response)!.Results.Values;
+        //return JsonSerializer.Deserialize<Rootobject>(response)!.Results.Values;
     }
 }
 
