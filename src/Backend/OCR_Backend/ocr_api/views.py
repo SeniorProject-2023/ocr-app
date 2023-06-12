@@ -43,11 +43,9 @@ def arabic_ocr(req):
     if model_conn == None or not model_conn.ping():
         try:
             model_conn = rpyc.connect(model_backend['HOST'], model_backend['PORT'])
+            rpyc.BgServingThread(model_conn)
         except:    
             return Response({'message': 'Please try again after a while.'}, status=503)
-    else:
-        # Connection successful
-        bgsrv = rpyc.BgServingThread(model_conn)
 
     serializer = ImageSerializer(data=req.data)
     if serializer.is_valid():
