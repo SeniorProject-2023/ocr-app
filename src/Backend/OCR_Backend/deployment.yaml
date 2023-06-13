@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: ocr-backend
+  name: ocr-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: ocr-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        service: ocr-backend
+        api: external
+    spec:
+      containers:
+      - image: mostafa1/ocr-backend
+        name: ocr-backend
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "4024Mi"
+            cpu: "250m"
+          limits:
+            memory: "5024Mi"
+            cpu: "500m"           
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: ENVIRONMENT
+        - name: MODEL_BACKEND_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: MODEL_BACKEND_HOST
+        - name: MODEL_BACKEND_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: MODEL_BACKEND_PORT
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: DB_HOST
+        - name: AWS_STORAGE_BUCKET_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_STORAGE_BUCKET_NAME
+        - name: AWS_S3_REGION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_S3_REGION_NAME
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: DB_PASSWORD
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: SECRET_KEY 
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_ACCESS_KEY_ID 
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_SECRET_ACCESS_KEY      
+        volumeMounts:
+        - name: aws-secret
+          mountPath: "/root/.aws/"
+          readOnly: true        
+      restartPolicy: Always
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret
