@@ -8,14 +8,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="50">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="0, 0, 0, 10">
+        <CommandBar Grid.Row="0" Content="Home screen">
+            <AppBarButton Icon="Back" Click="MoveCurrentImageToLeftButton_Click" />
+            <AppBarButton Icon="Forward" Click="MoveCurrentImageToRightButton_Click" />
+            <AppBarButton Icon="Delete" Click="DeleteCurrentImageButton_Click" />
+        </CommandBar>
+
+        <FlipView ItemsSource="{x:Bind VM.ImagesToScan}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" x:Name="flipView" Background="Transparent" Grid.Row="1" Margin="10">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="local:ImageWrapper">
                     <Grid>
@@ -25,18 +31,8 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Disabled"
-                      VerticalScrollMode="Disabled"
-                      HorizontalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                <Button Content="Delete current image" x:Name="DeleteCurrentImageButton" Click="DeleteCurrentImageButton_Click" />
-                <Button Content="Move current image to left" x:Name="MoveCurrentImageToLeftButton" Click="MoveCurrentImageToLeftButton_Click" />
-                <Button Content="Move current image to right" x:Name="MoveCurrentImageToRightButton" Click="MoveCurrentImageToRightButton_Click" />
-            </StackPanel>
-        </ScrollViewer>
-
         <ScrollViewer Grid.Row="2"
+                      Margin="10"
                       VerticalScrollBarVisibility="Disabled"
                       VerticalScrollMode="Disabled"
                       HorizontalScrollBarVisibility="Auto">
