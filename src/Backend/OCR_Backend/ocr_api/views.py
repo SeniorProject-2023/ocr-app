@@ -24,8 +24,8 @@ model_backend = settings.MODEL_BACKEND
 
 config = configparser.ConfigParser()
 config.read(os.path.join('ocr_api', 'aws_s3_config.ini'))
-RESULTS_EXP_DAYS = config.get('aws', 'RESULT_EXP_DAYS')
-PRESIGNED_URL_EXP_SECOND = config.get('aws', 'PRESIGNED_URL_EXP_SECOND')
+RESULTS_EXP_DAYS = config.getint('aws', 'RESULT_EXP_DAYS')
+PRESIGNED_URL_EXP_SECOND = config.getint('aws', 'PRESIGNED_URL_EXP_SECOND')
 
 # Create a timezone object for UTC+2
 timezone = pytz.timezone(config.get('aws', 'TIMEZONE'))
@@ -75,7 +75,7 @@ def arabic_ocr(req):
         model_status = model_conn.root.register_task(buffer.getvalue(), generate_model_callback(job_uuid))
 
         if model_status:
-            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid, "exp": datetime.datetime.now() + datetime.timedelta(minutes=2)},
+            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid, "exp": datetime.datetime.now() + datetime.timedelta(days=RESULTS_EXP_DAYS)},
                                     secret_key, algorithm=hashing_alg)
             
             return Response({'job_token': encoded_job_id})
