@@ -23,13 +23,8 @@ spec:
       containers:
       - image: mostafa1/ocr-backend
         name: ocr-backend
-        readinessProbe:
-          httpGet:
-            path: /health/
-            port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          failureThreshold: 3
+        ports:
+            - containerPort: 8000
         imagePullPolicy: Always
         resources:
           requests:
@@ -69,6 +64,11 @@ spec:
             configMapKeyRef:
               name: env-config
               key: AWS_S3_REGION_NAME
+        - name: ALLOWED_HOSTS
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: ALLOWED_HOSTS
         - name: DB_USER
           valueFrom:
             secretKeyRef:
@@ -93,13 +93,5 @@ spec:
           valueFrom:
             secretKeyRef:
               name: env-secret
-              key: AWS_SECRET_ACCESS_KEY      
-        volumeMounts:
-        - name: aws-secret
-          mountPath: "/root/.aws/"
-          readOnly: true        
+              key: AWS_SECRET_ACCESS_KEY           
       restartPolicy: Always
-      volumes:
-      - name: aws-secret
-        secret:
-          secretName: aws-secret

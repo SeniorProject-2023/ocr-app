@@ -3,7 +3,7 @@ services:
   ocr-backend:
     build:
       context: ./OCR_Backend
-    image: mostafa1/ocr_backend:latest
+    image: mostafa1/ocr-backend:latest
     ports:
       - "8000:8000"
     environment:

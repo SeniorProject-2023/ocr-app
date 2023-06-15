@@ -14,8 +14,7 @@ COPY ./requirements.txt .
 RUN apt-get update && apt-get install -y libgl1 && python -m pip install -r requirements.txt --no-cache-di && python -m pip install gdown
 
 WORKDIR /model
-COPY . /model
-
 RUN gdown 1pfFmbmzbiPPryt2LEltOvml7HH9SrMVQ -O ./letter_model.pt
+COPY . /model
 
 CMD ["python", "__init__.py"]

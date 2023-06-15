@@ -15,6 +15,7 @@ import datetime
 import json
 import pytz
 import configparser
+import os
 
 from arabic_ocr_backend import settings
 secret_key = settings.SECRET_KEY
@@ -22,7 +23,7 @@ hashing_alg = settings.HASHING_ALG
 model_backend = settings.MODEL_BACKEND
 
 config = configparser.ConfigParser()
-config.read('ocr_api\\aws_s3_config.ini')
+config.read(os.path.join('ocr_api', 'aws_s3_config.ini'))
 RESULTS_EXP_DAYS = config.get('aws', 'RESULT_EXP_DAYS')
 PRESIGNED_URL_EXP_SECOND = config.get('aws', 'PRESIGNED_URL_EXP_SECOND')
 

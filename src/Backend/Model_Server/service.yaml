@@ -4,7 +4,6 @@ metadata:
   labels:
     service: model-server
   name: model-server
-  namespace: backend
 spec:
   ports:
   - name: "18811"

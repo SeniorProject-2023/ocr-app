@@ -1,0 +1,3 @@
+delete_deployments.bat
+deploy.bat
+env-secret.yaml
