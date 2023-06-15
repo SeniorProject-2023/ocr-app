@@ -39,10 +39,10 @@ if ENVIRONMENT == 'development' or ENVIRONMENT == 'docker_development':
 elif ENVIRONMENT == 'production':
     DEBUG_CONFIG = config.getboolean('production', 'DEBUG')
     MODEL_BACKEND_HOST = os.environ.get('MODEL_BACKEND_HOST')
-    MODEL_BACKEND_PORT = os.environ.getint('MODEL_BACKEND_PORT')
-    DB_HOST = os.environ.get('ARABIC_OCR_DATABASE_HOST')
-    DB_USER = os.environ.get('ARABIC_OCR_DATABASE_USER')
-    DB_PASSWORD = os.environ.get('ARABIC_OCR_DATABASE_PASS')
+    MODEL_BACKEND_PORT = int(os.environ.get('MODEL_BACKEND_PORT'))
+    DB_HOST = os.environ.get('DB_HOST')
+    DB_USER = os.environ.get('DB_USER')
+    DB_PASSWORD = os.environ.get('DB_PASSWORD')
     SECRET = os.environ.get('SECRET_KEY')
     
 # SECURITY WARNING: keep the secret key used in production secret!
