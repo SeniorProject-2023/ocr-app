@@ -1,0 +1,22 @@
+version: "1"
+services:
+  ocr-backend:
+    build:
+      context: ./OCR_Backend
+    image: mostafa1/ocr_backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=docker_development
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      replicas: 1
+  model-server:
+    build:
+      context: ./Model_Server
+    image: mostafa1/model-server:latest
+    ports:
+      - "18811:18811"
+    deploy:
+      replicas: 1
