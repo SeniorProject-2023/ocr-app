@@ -1,3 +1,4 @@
 delete_deployments.bat
 deploy.bat
 env-secret.yaml
+Model_Server/letter_model.pt

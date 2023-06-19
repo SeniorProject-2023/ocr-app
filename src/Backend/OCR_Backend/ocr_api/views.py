@@ -16,8 +16,8 @@ import json
 import pytz
 import configparser
 import os
-
 from arabic_ocr_backend import settings
+
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
 model_backend = settings.MODEL_BACKEND
@@ -46,6 +46,7 @@ def generate_model_callback(uuid):
             s3.upload_fileobj(BytesIO(str(json.dumps(decoded_result)).encode('utf-8')), bucket_name, file_name, ExtraArgs={'Expires': expiration_date})
         except Exception as e:
             print(e)
+
     return handle_model_callback
 
 # Create your views here.
@@ -57,7 +58,7 @@ def arabic_ocr(req):
         try:
             model_conn = rpyc.connect(model_backend['HOST'], model_backend['PORT'])
             rpyc.BgServingThread(model_conn)
-        except:    
+        except:
             return Response({'message': 'Please try again after a while.'}, status=503)
 
     serializer = ImageSerializer(data=req.data)
@@ -75,8 +76,9 @@ def arabic_ocr(req):
         model_status = model_conn.root.register_task(buffer.getvalue(), generate_model_callback(job_uuid))
 
         if model_status:
-            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid, "exp": datetime.datetime.now() + datetime.timedelta(days=RESULTS_EXP_DAYS)},
-                                    secret_key, algorithm=hashing_alg)
+            encoded_job_id = jwt.encode({"user_id": req.user.id, "uuid": job_uuid, 
+                                         "exp": datetime.datetime.now() + datetime.timedelta(days=RESULTS_EXP_DAYS)}, 
+                                         secret_key, algorithm=hashing_alg)
             
             return Response({'job_token': encoded_job_id})
         
