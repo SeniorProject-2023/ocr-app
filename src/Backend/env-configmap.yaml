@@ -6,7 +6,7 @@ data:
   ENVIRONMENT: production
   MODEL_BACKEND_HOST: model-server
   MODEL_BACKEND_PORT: "18811"
-  DB_HOST: ocr-db.ce95gag4bxxx.us-east-1.rds.amazonaws.com
-  AWS_STORAGE_BUCKET_NAME: ocr-bucket067693015928
+  DB_HOST: ocr-backend-db.ce95gag4bxxx.us-east-1.rds.amazonaws.com
+  AWS_STORAGE_BUCKET_NAME: ocr-results0234-1152-6495
   AWS_S3_REGION_NAME: us-east-1
   ALLOWED_HOSTS: "*"

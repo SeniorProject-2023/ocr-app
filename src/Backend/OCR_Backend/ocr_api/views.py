@@ -31,9 +31,13 @@ PRESIGNED_URL_EXP_SECOND = config.getint('aws', 'PRESIGNED_URL_EXP_SECOND')
 timezone = pytz.timezone(config.get('aws', 'TIMEZONE'))
 
 model_conn = None
-
-s3 = boto3.client('s3', aws_access_key_id=settings.AWS['AWS_ACCESS_KEY_ID'], aws_secret_access_key=settings.AWS['AWS_SECRET_ACCESS_KEY'], 
-                            region_name=settings.AWS['AWS_S3_REGION_NAME'])
+AWS = settings.AWS
+s3 = None
+if AWS['AWS_ACCESS_KEY_ID'] == None or settings.AWS['AWS_SECRET_ACCESS_KEY'] == None or settings.AWS['AWS_S3_REGION_NAME'] == None:
+    s3 = boto3.client('s3') # This means the session bt default  will be created using the role assigned to the EC2 instance
+else:
+    s3 = boto3.client('s3', aws_access_key_id=settings.AWS['AWS_ACCESS_KEY_ID'], aws_secret_access_key=settings.AWS['AWS_SECRET_ACCESS_KEY'], 
+                                region_name=settings.AWS['AWS_S3_REGION_NAME'])
 bucket_name = settings.AWS['AWS_STORAGE_BUCKET_NAME']
 
 def generate_model_callback(uuid):

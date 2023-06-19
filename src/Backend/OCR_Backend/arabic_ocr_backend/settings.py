@@ -54,10 +54,10 @@ MODEL_BACKEND = {
 }
 
 AWS = {
-    'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID'),
-    'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    'AWS_STORAGE_BUCKET_NAME': os.environ.get('AWS_STORAGE_BUCKET_NAME'),
-    'AWS_S3_REGION_NAME': os.environ.get('AWS_S3_REGION_NAME') # e.g. 'us-east-1'
+    'AWS_ACCESS_KEY_ID': os.environ.get('AWS_ACCESS_KEY_ID', None),
+    'AWS_SECRET_ACCESS_KEY': os.environ.get('AWS_SECRET_ACCESS_KEY', None),
+    'AWS_STORAGE_BUCKET_NAME': os.environ.get('AWS_STORAGE_BUCKET_NAME', None),
+    'AWS_S3_REGION_NAME': os.environ.get('AWS_S3_REGION_NAME', None) # e.g. 'us-east-1'
 }
 
 DEBUG = DEBUG_CONFIG
