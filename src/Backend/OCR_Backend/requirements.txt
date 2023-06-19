@@ -9,6 +9,5 @@ deskew==1.4.3
 jdeskew==0.2.1
 ultralytics==8.0.115
 gunicorn==20.1.0
-torch==2.0.1
 uuid==1.30
 Pillow==9.4.0
