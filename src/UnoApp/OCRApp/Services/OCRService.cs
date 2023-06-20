@@ -24,7 +24,7 @@ internal sealed class OCRService : IOCRService
 
 #if DEBUG
     //private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    private const string BaseUri = "http://192.168.1.8:8000";
+    private const string BaseUri = "http://192.168.1.5:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -41,10 +41,10 @@ internal sealed class OCRService : IOCRService
             // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
             var message = await s_httpClient.PostAsync($"{BaseUri}/users/signup/", new StringContent($$"""
             { "username": "{{username}}", "password": "{{password}}" }
-            """, Encoding.UTF8, "application/json"));
+            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
             if (message.StatusCode != HttpStatusCode.OK)
             {
-                return new SignupResult(false, await message.Content.ReadAsStringAsync());
+                return new SignupResult(false, await message.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
 
             return new SignupResult(true, null);
@@ -68,16 +68,40 @@ internal sealed class OCRService : IOCRService
         // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
         var message = await s_httpClient.PostAsync($"{BaseUri}/users/login/", new StringContent($$"""
             { "username": "{{username}}", "password": "{{password}}" }
-            """, Encoding.UTF8, "application/json"));
+            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
 
         if (message.StatusCode != HttpStatusCode.OK)
         {
             return false;
         }
 
-        _loginResult = await message.Content.ReadFromJsonAsync<LoginResult>();
+        _loginResult = await message.Content.ReadFromJsonAsync<LoginResult>().ConfigureAwait(false);
+        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
         LoggedInUsername = username;
         return true;
+    }
+
+    private async Task<bool> RefreshAsync()
+    {
+        var message = await s_httpClient.PostAsync($"{BaseUri}/users/refresh-token/", new StringContent($$"""
+            { "refresh": "{{_loginResult.Refresh}}" }
+            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+        var refreshResult = await message.Content.ReadFromJsonAsync<RefreshTokenResult>().ConfigureAwait(false);
+        _loginResult.Access = refreshResult.Access;
+        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+        return message.StatusCode == HttpStatusCode.OK;
+    }
+
+    private async Task<HttpResponseMessage> GetResponseMessageAfterRefreshIfNeededAsync(Func<Task<HttpResponseMessage>> getMessage)
+    {
+        var message = await getMessage().ConfigureAwait(false);
+        if (message.StatusCode == HttpStatusCode.Unauthorized && await RefreshAsync().ConfigureAwait(false))
+        {
+            message = await getMessage().ConfigureAwait(false);
+        }
+
+        return message;
     }
 
     public async Task<string> SendImages(IEnumerable<Uri> images)
@@ -91,10 +115,8 @@ internal sealed class OCRService : IOCRService
             content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
         }
 
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
-
-        var message = await s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content).ConfigureAwait(false);
-        var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>();
+        var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content));
+        var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>().ConfigureAwait(false);
         return jobResult!.JobToken;
     }
 
@@ -118,17 +140,15 @@ internal sealed class OCRService : IOCRService
 
     public async Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId)
     {
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
-
-        var message = await s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
-            { "job_token": "{{jobId}}" }
-            """)).ConfigureAwait(false);
-        var response = await message.Content.ReadAsStringAsync();
-        if (response.Contains("Not Done"))
+        var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
+                { "job_token": "{{jobId}}" }
+                """)));
+        if (message.StatusCode == HttpStatusCode.Accepted)
         {
             return null;
         }
 
+        var response = await message.Content.ReadAsStringAsync().ConfigureAwait(false);
         return JsonSerializer.Deserialize<Rootobject>(response)!.Results.Values;
     }
 }
