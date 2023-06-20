@@ -80,9 +80,9 @@ def infer_words(word_model: YOLO, img: np.ndarray):
     for r in results:
         boxes = r.boxes
         for box in boxes:
-            xyxy_tolist = box.xyxy[0].tolist()
-            x1, y1, x2, y2 = xyxy_tolist
-            returnable.append(xyxy_tolist)
+            x1, y1, x2, y2 = box.xyxy[0].cpu(
+                ).data.numpy().astype(int).tolist()
+            returnable.append(box.xyxy[0].tolist())
             img = cv2.rectangle(img, (x1, y1), (x2, y2),
                                 (255, 255, 255), -1)
     return returnable
