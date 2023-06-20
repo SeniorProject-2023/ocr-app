@@ -54,7 +54,7 @@ def generate_model_callback(uuid):
 def arabic_ocr(req):
     print(req.data)
     if not isServerUp():
-        return Response({'message': 'Please try again after a while.'}, status=503)
+        return Response({'message': 'Please try again after a while.'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
     serializer = ImageSerializer(data=req.data)
     if serializer.is_valid():
         job_uuid = str(uuid.uuid4())
@@ -84,5 +84,6 @@ def arabic_ocr(req):
 def check_for_job(req):
     # Access the 'uuid' element in the job jwt payload
     job_uuid = req.job.payload['uuid']
-    return Response({'results': jobs_dict[job_uuid] if job_uuid in jobs_dict else "Not Done"})
-    
+    if job_uuid in jobs_dict:
+        return Response({'results': jobs_dict[job_uuid]})
+    return Response({'results': "Not Done"}, status=status.HTTP_202_ACCEPTED)
