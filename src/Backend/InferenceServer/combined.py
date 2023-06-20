@@ -53,22 +53,6 @@ name_to_unicode = {
     'space': ord(" "),
 }
 
-arabic_punctuations = '''`÷×؛<>_()*&^%][ـ،/:"؟.,'{}~¦+|!”…“–ـ'''
-english_punctuations = string.punctuation
-punctuations_list = arabic_punctuations + english_punctuations
-arabic_diacritics = re.compile("""
-                                 ّ    | # Tashdid
-                                 َ    | # Fatha
-                                 ً    | # Tanwin Fath
-                                 ُ    | # Damma
-                                 ٌ    | # Tanwin Damm
-                                 ِ    | # Kasra
-                                 ٍ    | # Tanwin Kasr
-                                 ْ    | # Sukun
-                                 ـ     # Tatwil/Kashida
-                             """, re.VERBOSE)
-
-
 def normalize_arabic(text):
     text = re.sub("[إأآا]", "ا", text)
     text = re.sub("ى", "ي", text)
@@ -78,16 +62,6 @@ def normalize_arabic(text):
     text = re.sub("گ", "ك", text)
 
     return text
-
-
-def remove_diacritics(text):
-    text = re.sub(arabic_diacritics, '', text)
-    return text
-
-
-def remove_punctuations(text):
-    translator = str.maketrans('', '', punctuations_list)
-    return text.translate(translator)
 
 
 def load_image(img_path: str):
@@ -106,9 +80,9 @@ def infer_words(word_model: YOLO, img: np.ndarray):
     for r in results:
         boxes = r.boxes
         for box in boxes:
-            x1, y1, x2, y2 = box.xyxy[0].cpu(
-            ).data.numpy().astype(int).tolist()
-            returnable.append(box)
+            xyxy_tolist = box.xyxy[0].tolist()
+            x1, y1, x2, y2 = xyxy_tolist
+            returnable.append(xyxy_tolist)
             img = cv2.rectangle(img, (x1, y1), (x2, y2),
                                 (255, 255, 255), -1)
     return returnable
@@ -138,7 +112,7 @@ def infer_letters(model: YOLO, img: np.ndarray, out_full_path=None, debug=False,
             cv2.imwrite(out_full_path, img)
         # cv2_imshow(img)
 
-    return normalize_arabic(remove_diacritics(remove_punctuations(word)))
+    return normalize_arabic(word)
 
 
 def get_y_center(b):

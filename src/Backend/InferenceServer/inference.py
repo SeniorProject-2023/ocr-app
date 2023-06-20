@@ -36,12 +36,14 @@ def infer_image(word_model: YOLO, letter_model: YOLO, img_array):
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
     pil_img_before_inference = Image.fromarray(img)
     word_boxes = infer_words(word_model, img)
-    box_bounds = [box.xyxy[0].cpu().data.numpy() for box in word_boxes]
+
     box_bounds = [
-        b + np.multiply(np.array([b[0] - b[2], b[1] - b[3], b[2] - b[0], b[3] - b[1]]), [0.05, 0.2, 0.05, 0.05]) for
-        b in box_bounds]  # pad the boxes
-    box_bounds = [np.array([max(0, b[0]), max(0, b[1]), min(img.shape[1] - 1, b[2]), min(img.shape[0] - 1, b[3])])
-                  for b in box_bounds]  # make sure padding doesn't spill out of image
+        [
+          max(0, b[0] + ((b[0] - b[2]) * 0.05)),
+          max(0, b[1] + ((b[1] - b[3]) * 0.2)),
+          min(img.shape[1] - 1, b[2] + ((b[2] - b[0]) * 0.05)),
+          min(img.shape[0] - 1, b[3] + ((b[3] - b[1]) * 0.05))
+        ] for b in word_boxes]  # pad the boxes and make sure padding doesn't spill out of image
     box_bounds = reduce(lambda x, y: np.vstack((x, y)), box_bounds)
     rows_of_boxes = groupbyrow(box_bounds)
     rows_of_boxes = [merge_boxes(row) for row in rows_of_boxes]
