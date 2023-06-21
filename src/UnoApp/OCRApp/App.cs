@@ -45,6 +45,7 @@ public class App : Application
                 .UseNavigation(RegisterRoutes, configure: config => config with { AddressBarUpdateEnabled = false })
             );
         MainWindow = builder.Window;
+        MainWindow.Title = "OCRApp";
 
         Host = await builder.NavigateAsync<Shell>();
     }

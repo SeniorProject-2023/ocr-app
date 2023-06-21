@@ -22,8 +22,8 @@ internal sealed class OCRService : IOCRService
     }
 
 #if DEBUG
-    //private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    private const string BaseUri = "http://192.168.1.5:8000";
+    private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    //private const string BaseUri = "http://192.168.1.5:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
