@@ -24,9 +24,7 @@ sys.path.append(path.join(path.join(path.dirname(__file__), '..'),'..'))
 from InferenceServer.inference import StartServer, isServerUp
 
 
-print("Before")
 StartServer()
-print("After")
 
 secret_key = settings.SECRET_KEY
 hashing_alg = settings.HASHING_ALG
