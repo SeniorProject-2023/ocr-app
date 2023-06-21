@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using OCRApp.Models;
@@ -89,7 +88,7 @@ internal sealed class OCRService : IOCRService
 
         var refreshResult = await message.Content.ReadFromJsonAsync<RefreshTokenResult>().ConfigureAwait(false);
         _loginResult.Access = refreshResult.Access;
-        s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+        s_httpClient.DefaultRequestHeaders.Authorization = null;
         return message.StatusCode == HttpStatusCode.OK;
     }
 
@@ -115,7 +114,7 @@ internal sealed class OCRService : IOCRService
             content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
         }
 
-        var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content));
+        var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content)).ConfigureAwait(false);
         var jobResult = await message.Content.ReadFromJsonAsync<SubmitJobResult>().ConfigureAwait(false);
         return jobResult!.JobToken;
     }
@@ -142,20 +141,13 @@ internal sealed class OCRService : IOCRService
     {
         var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/check-for-job/", new StringContent($$"""
                 { "job_token": "{{jobId}}" }
-                """)));
+                """))).ConfigureAwait(false);
         if (message.StatusCode == HttpStatusCode.Accepted)
         {
             return null;
         }
 
-        var response = await message.Content.ReadAsStringAsync().ConfigureAwait(false);
-        return JsonSerializer.Deserialize<Rootobject>(response)!.Results.Values;
+        var response = await message.Content.ReadFromJsonAsync<OCRResults>().ConfigureAwait(false);
+        return response!.Results.Values;
     }
-}
-
-
-public class Rootobject
-{
-    [JsonPropertyName("results")]
-    public Dictionary<string, string> Results { get; set; } = null!;
 }
