@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Imaging;
 
-namespace OCRApp.Presentation;
+namespace OCRApp.ViewModels;
 
 [Bindable(true)]
 public sealed partial class ImageWrapper : ObservableObject

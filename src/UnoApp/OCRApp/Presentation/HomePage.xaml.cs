@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using OCRApp.Presentation;
+using OCRApp.ViewModels;
 
 namespace OCRApp;
 

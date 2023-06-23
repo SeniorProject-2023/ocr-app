@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OCRApp.Presentation;
+namespace OCRApp.ViewModels;
 
 internal partial class ResultsViewModel
 {

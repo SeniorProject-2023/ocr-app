@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using OCRApp.Presentation;
 using OCRApp.Tests.Infrastructure;
+using OCRApp.ViewModels;
 
 namespace OCRApp.Tests;
 

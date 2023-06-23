@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using OCRApp.Presentation;
 using OCRApp.Services;
+using OCRApp.ViewModels;
 using Uno.Extensions;
 using Uno.Extensions.Hosting;
 using Uno.Extensions.Navigation;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.Presentation;
+using OCRApp.ViewModels;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;

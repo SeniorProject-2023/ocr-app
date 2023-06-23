@@ -8,7 +8,7 @@ using OCRApp.Messages;
 using OCRApp.Services;
 using Uno.Extensions.Navigation;
 
-namespace OCRApp.Presentation;
+namespace OCRApp.ViewModels;
 
 internal sealed partial class MainViewModel : ObservableObject
 {

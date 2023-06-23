@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using OCRApp.Models;
 using OCRApp.Services;
 
-namespace OCRApp.Presentation;
+namespace OCRApp.ViewModels;
 
 internal sealed partial class AccountViewModel : ObservableObject
 {

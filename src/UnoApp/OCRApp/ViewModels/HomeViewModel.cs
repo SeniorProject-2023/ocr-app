@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml;
 using OCRApp.Messages;
 
-namespace OCRApp.Presentation;
+namespace OCRApp.ViewModels;
 
 internal sealed partial class HomeViewModel : ObservableObject
 {
