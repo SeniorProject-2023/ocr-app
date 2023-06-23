@@ -51,13 +51,18 @@ public sealed partial class AccountPage : Page
             return;
         }
 
+        LoadingControl.IsLoading = true;
+
         var result = await VM!.SignupAsync(UsernameSignupTextBox.Text, PasswordSignupTextBox.Password);
         if (!result.Success)
         {
+            LoadingControl.IsLoading = false;
             SignupInfoBar.Message = result.Error!;
             SignupInfoBar.IsOpen = true;
             return;
         }
+
+        LoadingControl.IsLoading = false;
 
         var dialog = new ContentDialog()
         {

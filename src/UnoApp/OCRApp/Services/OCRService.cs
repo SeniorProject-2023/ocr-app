@@ -22,8 +22,8 @@ internal sealed class OCRService : IOCRService
     }
 
 #if DEBUG
-    //private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    private const string BaseUri = "http://192.168.1.5:8000";
+    private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    //private const string BaseUri = "http://192.168.1.5:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -80,18 +80,6 @@ internal sealed class OCRService : IOCRService
         return true;
     }
 
-    private async Task<bool> RefreshAsync()
-    {
-        var message = await s_httpClient.PostAsync($"{BaseUri}/users/refresh-token/", new StringContent($$"""
-            { "refresh": "{{_loginResult.Refresh}}" }
-            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
-
-        var refreshResult = await message.Content.ReadFromJsonAsync<RefreshTokenResult>().ConfigureAwait(false);
-        _loginResult.Access = refreshResult.Access;
-        s_httpClient.DefaultRequestHeaders.Authorization = null;
-        return message.StatusCode == HttpStatusCode.OK;
-    }
-
     private async Task<HttpResponseMessage> GetResponseMessageAfterRefreshIfNeededAsync(Func<Task<HttpResponseMessage>> getMessage)
     {
         var message = await getMessage().ConfigureAwait(false);
@@ -101,6 +89,19 @@ internal sealed class OCRService : IOCRService
         }
 
         return message;
+
+        async Task<bool> RefreshAsync()
+        {
+            s_httpClient.DefaultRequestHeaders.Authorization = null;
+            var message = await s_httpClient.PostAsync($"{BaseUri}/users/refresh-token/", new StringContent($$"""
+            { "refresh": "{{_loginResult.Refresh}}" }
+            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+            var refreshResult = await message.Content.ReadFromJsonAsync<RefreshTokenResult>().ConfigureAwait(false);
+            _loginResult.Access = refreshResult.Access;
+            s_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _loginResult.Access);
+            return message.StatusCode == HttpStatusCode.OK;
+        }
     }
 
     public async Task<string> SendImages(IEnumerable<Uri> images)

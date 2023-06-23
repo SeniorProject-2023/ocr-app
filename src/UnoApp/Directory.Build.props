@@ -15,6 +15,9 @@
     <IsMac>false</IsMac>
     <IsMacCatalyst>false</IsMacCatalyst>
     <IsWinAppSdk>false</IsWinAppSdk>
+    <!--<UnoDragDropExternalSupport>false</UnoDragDropExternalSupport>-->
+    <!--<PublishTrimmed Condition="'$(Configuration)' == 'Debug'">false</PublishTrimmed>
+    <RunAOTCompilation Condition="'$(Configuration)' == 'Debug'">false</RunAOTCompilation>-->
   </PropertyGroup>
 
   <Choose>

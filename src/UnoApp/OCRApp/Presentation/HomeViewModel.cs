@@ -9,7 +9,7 @@ namespace OCRApp.Presentation;
 internal sealed partial class HomeViewModel : ObservableObject
 {
     [ObservableProperty]
-    private int _selectedIndex;
+    private int _selectedIndex = -1;
 
     public HomeViewModel(IMessenger messenger)
     {

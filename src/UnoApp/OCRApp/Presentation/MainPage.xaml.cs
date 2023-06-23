@@ -3,12 +3,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using OCRApp.Messages;
 using OCRApp.Presentation;
-using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -94,6 +91,9 @@ internal sealed partial class MainPage : Page
             return;
         }
 
+        LoadingControl.IsLoading = true;
+        var sw = Stopwatch.StartNew();
+
         var jobId = await VM.SubmitJob(imagesToScan.Select(x => x.Image.UriSource));
 
         while (true)
@@ -106,6 +106,12 @@ internal sealed partial class MainPage : Page
 
             await Task.Delay(1000);
         }
+
+        sw.Stop();
+        Console.WriteLine(sw.Elapsed.ToString());
+        Debug.WriteLine(sw.Elapsed.ToString());
+
+        LoadingControl.IsLoading = false;
     }
 
 #if __ANDROID__ || __IOS__

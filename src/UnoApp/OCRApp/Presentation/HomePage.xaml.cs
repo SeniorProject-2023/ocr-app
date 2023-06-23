@@ -20,7 +20,7 @@ internal sealed partial class HomePage : Page
 
     private void DeleteCurrentImageButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        if (VM!.SelectedIndex < 0)
+        if (VM!.SelectedIndex < 0 || VM.ImagesToScan.Count - 1 < VM.SelectedIndex)
         {
             return;
         }
