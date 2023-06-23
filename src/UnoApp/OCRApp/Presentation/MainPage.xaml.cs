@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.Presentation;
+using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -109,7 +110,7 @@ internal sealed partial class MainPage : Page
 
         sw.Stop();
         Console.WriteLine(sw.Elapsed.ToString());
-        Debug.WriteLine(sw.Elapsed.ToString());
+        global::System.Diagnostics.Debug.WriteLine(sw.Elapsed.ToString());
 
         LoadingControl.IsLoading = false;
     }
