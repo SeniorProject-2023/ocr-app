@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OCRApp.Business.Models;
 using OCRApp.Models;
 
 namespace OCRApp.Services;
@@ -16,4 +17,6 @@ internal interface IOCRService
 
     Task<string> SendImages(IEnumerable<Uri> images);
     Task<IEnumerable<string>?> TryGetResultsForJobIdAsync(string jobId);
+
+    public Task<History> GetHistoryAsync();
 }

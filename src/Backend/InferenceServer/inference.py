@@ -1,4 +1,5 @@
 import rpyc
+import requests
 from rpyc.utils.server import ThreadedServer
 import numpy as np
 from threading import Thread
@@ -16,6 +17,7 @@ import pickle
 from threading import Thread, Lock
 import os
 from ultralytics import YOLO
+import concurrent.futures
 
 server = None
 serverUp = False
@@ -23,7 +25,7 @@ statusLock = Lock()
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-def infer_image(word_model: YOLO, letter_model: YOLO, img_array):
+def infer_image(word_model: YOLO, img_array):
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -51,18 +53,34 @@ def infer_image(word_model: YOLO, letter_model: YOLO, img_array):
     rows_of_word_imgs = map2d(lambda box: np.array(
         pil_img_before_inference.crop(box)), rows_of_boxes)
 
-    rows_of_word_texts = map2d(lambda x: infer_letters(
-        letter_model, x, debug=False, conf=0.3, iou=0.5, agnostic_nms=True), rows_of_word_imgs)
-    final_rows = [" ".join(reversed(row)) for row in rows_of_word_texts]
-    return "\n".join(final_rows)
+    word_imgs = [x for y in rows_of_word_imgs for x in y]
+    #rows_of_word_texts = map2d(lambda x: infer_letters(x), rows_of_word_imgs)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+        res = list(executor.map(infer_letters, word_imgs))
+
+    final_text = ""
+    counter = 0
+    for i in range(len(rows_of_word_imgs)):
+        for j in range(len(rows_of_word_imgs[i])):
+            if j > 0:
+                final_text = final_text + " " + res[counter]
+            else:
+                final_text = final_text + res[counter]
+            counter = counter + 1
+        final_text = final_text + "\n"
+
+    reversed_lines = [' '.join(reversed(line.split(' '))) for line in final_text.split("\n")]
+    final_text = "\n".join(reversed_lines)
+
+    
+    return final_text
 
 
 def infer(images, callback):
     response = {}
     word_model = YOLO(f'{current_dir}/word_model.pt')
-    letter_model = YOLO(f'{current_dir}/letter_model.pt')
     for img, id in zip(images, range(len(images))):
-        response[id] = infer_image(word_model, letter_model, img)
+        response[id] = infer_image(word_model, img)
     print(response)
     buffer = BytesIO()
     pickle.dump(response, buffer)

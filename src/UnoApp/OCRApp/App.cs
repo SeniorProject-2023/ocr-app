@@ -57,7 +57,8 @@ public class App : Application
             new ViewMap<MainPage, MainViewModel>(),
             new ViewMap<HomePage, HomeViewModel>(),
             new ViewMap<AccountPage, AccountViewModel>(),
-            new ViewMap<ResultsPage, ResultsViewModel>(Data: new DataMap<IEnumerable<string>>())
+            new ViewMap<ResultsPage, ResultsViewModel>(Data: new DataMap<IEnumerable<string>>()),
+            new ViewMap<HistoryPage, HistoryViewModel>()
         );
 
         routes.Register(
@@ -71,6 +72,7 @@ public class App : Application
                             new RouteMap("Account", View: views.FindByViewModel<AccountViewModel>()),
                         }),
                     new RouteMap("Results", View: views.FindByViewModel<ResultsViewModel>()),
+                    new RouteMap("History", View: views.FindByViewModel<HistoryViewModel>()),
                 }
             )
         );

@@ -40,6 +40,12 @@ public sealed partial class AccountPage : Page
         VM!.Logout();
         VisualStateManager.GoToState(this, "Login", useTransitions: false);
     }
+
+    private async void ReviewHistory_Click(object sender, RoutedEventArgs e)
+    {
+        await VM!.NavigateToHistoryAsync();
+        
+    }
     #endregion
 
     #region Signup

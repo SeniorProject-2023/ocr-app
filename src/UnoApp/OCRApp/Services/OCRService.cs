@@ -8,6 +8,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using OCRApp.Business.Models;
 using OCRApp.Models;
 using Windows.Storage.Streams;
 
@@ -22,8 +23,8 @@ internal sealed class OCRService : IOCRService
     }
 
 #if DEBUG
-    private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    //private const string BaseUri = "http://192.168.1.5:8000";
+    //private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    private const string BaseUri = "http://192.168.1.5:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -150,5 +151,20 @@ internal sealed class OCRService : IOCRService
 
         var response = await message.Content.ReadFromJsonAsync<OCRResults>().ConfigureAwait(false);
         return response!.Results.Values;
+    }
+
+    public Task<History> GetHistoryAsync()
+    {
+        return Task.FromResult(new History
+        {
+            HistoryItems = new[]
+            {
+                new HistoryItem()
+                {
+                    DateTime = DateTime.Now,
+                    Output = new string[] { "مرحبا", "بكم" },
+                }
+            }
+        });
     }
 }

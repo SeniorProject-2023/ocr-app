@@ -44,4 +44,12 @@
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Presentation\HistoryPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Presentation\HistoryPage.xaml" />
+  </ItemGroup>
+
 </Project>
