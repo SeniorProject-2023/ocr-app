@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
+using Uno.Extensions.Navigation.UI.Controls;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
 namespace OCRApp.Presentation;
 
+[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 public sealed partial class ResultsPage : Page
 {
     internal ResultsViewModel? VM => DataContext as ResultsViewModel;

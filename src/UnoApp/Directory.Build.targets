@@ -1,10 +1,9 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>4.10.0-dev.107</UnoVersion>
+    <UnoVersion>4.10.0-dev.380</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
-    <MicrosoftWindowsSDKNETRefVersion>10.0.22621.28</MicrosoftWindowsSDKNETRefVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>
-    <UnoExtensionsVersion>2.4.0-dev.297</UnoExtensionsVersion>
+    <UnoExtensionsVersion>2.5.0-dev.148</UnoExtensionsVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Uno.WinUI" Version="$(UnoVersion)" />
@@ -37,11 +36,7 @@
     <PackageReference Update="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Update="Microsoft.Windows.Compatibility" Version="6.0.0" />
     <PackageReference Update="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
-    <PackageReference Update="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="$(MicrosoftWindowsSDKNETRefVersion)" />
-    <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="$(MicrosoftWindowsSDKNETRefVersion)" />
+    <PackageReference Update="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
+    <PackageReference Update="Microsoft.WindowsAppSDK" Version="1.2.230313.1" />
   </ItemGroup>
 </Project>

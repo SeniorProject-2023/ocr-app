@@ -16,7 +16,7 @@ public class AccountViewModelTests
             ExpectedLoginOutcome = ExpectedLoginOutcome.Success,
         };
 
-        var vm = new AccountViewModel(mockService);
+        var vm = new AccountViewModel(mockService, null!);
         Assert.IsNull(vm.LoggedInUsername);
         var loginResult = await vm.LoginAsync("youssef", "123456");
         Assert.IsTrue(loginResult);
@@ -31,7 +31,7 @@ public class AccountViewModelTests
             ExpectedLoginOutcome = ExpectedLoginOutcome.Failure,
         };
 
-        var vm = new AccountViewModel(mockService);
+        var vm = new AccountViewModel(mockService, null!);
         Assert.IsNull(vm.LoggedInUsername);
         var loginResult = await vm.LoginAsync("youssef", "123456");
         Assert.IsFalse(loginResult);
@@ -46,7 +46,7 @@ public class AccountViewModelTests
             ExpectedLoginOutcome = ExpectedLoginOutcome.Exception,
         };
 
-        var vm = new AccountViewModel(mockService);
+        var vm = new AccountViewModel(mockService, null!);
         Assert.IsNull(vm.LoggedInUsername);
         // TODO: Instead of that behavior, we could have an Error property on the view model which surfaces exceptions.
         //       This could be better than surfacing the exception to the view model callers.

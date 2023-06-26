@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+using OCRApp.Business.Models;
 using OCRApp.Models;
 using OCRApp.Services;
 
@@ -26,6 +27,8 @@ namespace OCRApp.Tests.Infrastructure
         }
 
         public string? LoggedInUsername { get; private set; }
+
+        string? IOCRService.LoggedInUsername => throw new NotImplementedException();
 
         public Task<bool> LoginAsync(string username, string password)
         {
@@ -79,6 +82,11 @@ namespace OCRApp.Tests.Infrastructure
         }
 
         Task<SignupResult> IOCRService.SignupAsync(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<History> IOCRService.GetHistoryAsync()
         {
             throw new NotImplementedException();
         }

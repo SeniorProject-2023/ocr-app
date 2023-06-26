@@ -24,7 +24,7 @@ internal sealed class OCRService : IOCRService
 
 #if DEBUG
     //private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    private const string BaseUri = "http://192.168.1.5:8000";
+    private const string BaseUri = "http://192.168.1.3:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -153,18 +153,14 @@ internal sealed class OCRService : IOCRService
         return response!.Results.Values;
     }
 
-    public Task<History> GetHistoryAsync()
+    public async Task<History> GetHistoryAsync()
     {
-        return Task.FromResult(new History
+        var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.GetAsync($"{BaseUri}/api/history/")).ConfigureAwait(false);
+        var response = await message.Content.ReadFromJsonAsync<HistoryItem[]>().ConfigureAwait(false);
+        return new History
         {
-            HistoryItems = new[]
-            {
-                new HistoryItem()
-                {
-                    DateTime = DateTime.Now,
-                    Output = new string[] { "مرحبا", "بكم" },
-                }
-            }
-        });
+            HistoryItems = response!,
+        };
     }
 }
+

@@ -2,9 +2,11 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
+using Uno.Extensions.Navigation.UI.Controls;
 
 namespace OCRApp.Presentation;
 
+[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 public sealed partial class AccountPage : Page
 {
     internal AccountViewModel? VM => DataContext as AccountViewModel;

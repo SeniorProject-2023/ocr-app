@@ -94,6 +94,7 @@ internal sealed partial class MainPage : Page
         }
 
         LoadingControl.IsLoading = true;
+
         var sw = Stopwatch.StartNew();
 
         var jobId = await VM.SubmitJob(imagesToScan.Select(x => x.Image.UriSource));

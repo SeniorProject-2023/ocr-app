@@ -40,6 +40,6 @@ internal sealed partial class AccountViewModel : ObservableObject
 
     internal async Task NavigateToHistoryAsync()
     {
-        await _navigator.NavigateViewModelAsync<HistoryViewModel>(this);
+        await _navigator.NavigateViewModelAsync<HistoryViewModel>(this, "/");
     }
 }

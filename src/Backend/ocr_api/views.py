@@ -2,7 +2,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ImageSerializer
+from django.db.models import Q
+from django.utils import timezone
+
+from ocr_api.models import HistoryItem, HistoryItemElement
+from .serializers import HistoryItemSerializer, ImageSerializer
 import cv2
 import numpy as np
 import uuid
@@ -80,8 +84,27 @@ def arabic_ocr(req):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, JobJWTPermission])
 def check_for_job(req):
-    # Access the 'uuid' element in the job jwt payload
-    job_uuid = req.job.payload['uuid']
-    if job_uuid in jobs_dict:
-        return Response({'results': jobs_dict[job_uuid]})
-    return Response({'results': "Not Done"}, status=status.HTTP_202_ACCEPTED)
+    try:
+        # Access the 'uuid' element in the job jwt payload
+        job_uuid = req.job.payload['uuid']
+        history_item = HistoryItem(user=req.user, date_and_time=timezone.now())
+        history_item.save()
+        if job_uuid in jobs_dict:
+            results = jobs_dict[job_uuid]
+            for result in results.values():
+                history_item_text = HistoryItemElement(history_item=history_item, text=result)
+                history_item_text.save()
+
+            return Response({'results': results})
+        return Response({'results': "Not Done"}, status=status.HTTP_202_ACCEPTED)
+    except Exception as e:
+        return Response({'results': str(e)})
+
+@api_view(['GET'])
+def get_history(req):
+    try:
+        items = HistoryItem.objects.filter(user__id=req.user.id).prefetch_related('elements')
+        serializer = HistoryItemSerializer(items, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({'test': str(e)})

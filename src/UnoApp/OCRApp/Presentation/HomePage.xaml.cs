@@ -1,8 +1,10 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
+using Uno.Extensions.Navigation.UI.Controls;
 
 namespace OCRApp;
 
+[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 internal sealed partial class HomePage : Page
 {
     public HomeViewModel? VM => DataContext as HomeViewModel;
