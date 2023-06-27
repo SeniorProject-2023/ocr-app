@@ -1,0 +1,7 @@
+Assets/SplashScreen.png
+Uno.Fonts.Fluent/Fonts/uno-fluentui-assets.ttf
+Uno.Fonts.Roboto/Fonts/Roboto-Light.ttf
+Uno.Fonts.Roboto/Fonts/Roboto-Medium.ttf
+Uno.Fonts.Roboto/Fonts/Roboto-Regular.ttf
+OCRApp/Assets/SharedAssets.md
+OCRApp.Wasm.exe
