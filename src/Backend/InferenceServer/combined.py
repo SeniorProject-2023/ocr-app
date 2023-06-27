@@ -5,9 +5,11 @@ import cv2
 from more_itertools import split_when
 from ultralytics import YOLO
 import urllib3
+import os
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 global_session = requests.Session()
+api_key = os.environ['ML_API_KEY']
 
 def infer_words(word_model: YOLO, img: np.ndarray):
     # returns List[(word_image, bb, class)]
@@ -18,8 +20,6 @@ def infer_words(word_model: YOLO, img: np.ndarray):
 def infer_letters(img: np.ndarray):
     global global_session
     while True:
-        # TODO: Remove this hard-coded key.
-        api_key = 'IpLcbz1k0SREcuoNEGah9aRPuu7zXaLS'
         if not api_key:
             raise Exception("A key should be provided to invoke the endpoint")
 
