@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <FlipView ItemsSource="{x:Bind VM.Results}" x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="15">
+        <FlipView ItemsSource="{x:Bind VM.Results}" SelectedIndex="{x:Bind VM.SelectedIndex, Mode=TwoWay}" Background="Transparent" Grid.Row="0" Margin="15">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="sys:String">
                     <Grid>
@@ -28,7 +28,7 @@
             <StackPanel Orientation="Horizontal" Spacing="10">
                 <Button x:Name="Previous" Click="Previous_Click" Content="&lt;" />
                 <TextBlock VerticalAlignment="Center">
-                    <Run Text="{x:Bind PlusOne(flipView.SelectedIndex), Mode=OneWay}" /><Run Text="/" /><Run Text="{x:Bind flipView.Items.Count}" />
+                    <Run Text="{x:Bind PlusOne(VM.SelectedIndex), Mode=OneWay}" /><Run Text="/" /><Run Text="{x:Bind VM.OutputCount}" />
                 </TextBlock>
                 <Button x:Name="Next" Click="Next_Click" Content="&gt;" />
             </StackPanel>

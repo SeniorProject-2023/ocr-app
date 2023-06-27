@@ -18,21 +18,9 @@ public sealed partial class ResultsPage : Page
         this.InitializeComponent();
     }
 
-    private void Previous_Click(object sender, RoutedEventArgs e)
-    {
-        if (flipView.SelectedIndex > 0)
-        {
-            flipView.SelectedIndex--;
-        }
-    }
+    private void Previous_Click(object sender, RoutedEventArgs e) => VM!.GoPrevious();
 
-    private void Next_Click(object sender, RoutedEventArgs e)
-    {
-        if (flipView.SelectedIndex < flipView.Items.Count - 1)
-        {
-            flipView.SelectedIndex++;
-        }
-    }
+    private void Next_Click(object sender, RoutedEventArgs e) => VM!.GoNext();
 
     private string PlusOne(int selectedIndex)
         => (selectedIndex + 1).ToString();
