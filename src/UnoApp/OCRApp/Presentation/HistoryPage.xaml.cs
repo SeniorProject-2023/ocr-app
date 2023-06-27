@@ -4,13 +4,11 @@ using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
-using Uno.Extensions.Navigation.UI.Controls;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
 namespace OCRApp.Presentation;
 
-[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 public sealed partial class HistoryPage : Page
 {
     internal HistoryViewModel VM => (DataContext as HistoryViewModel)!;
@@ -19,39 +17,33 @@ public sealed partial class HistoryPage : Page
     {
         this.DataContextChanged += HistoryPage_DataContextChanged;
         this.InitializeComponent();
-        // TODO: Loading.IsLoading = true;
     }
 
     private async void HistoryPage_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
     {
         if (VM is HistoryViewModel vm)
         {
-            var historyItems = await vm.GetHistoryAsync();
-            myListView.ItemsSource = historyItems;
-            myListView.SelectionChanged += MyListView_SelectionChanged;
+            LoadingControl.IsLoading = true;
+            await vm.LoadHistoryAsync();
+            LoadingControl.IsLoading = false;
         }
-    }
-
-    private void MyListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.AddedItems.Count == 1)
-            flipView.ItemsSource = ((HistoryItemViewModel)e.AddedItems[0]).Output;
     }
 
     private void Previous_Click(object sender, RoutedEventArgs e)
     {
-        if (flipView.SelectedIndex > 0)
-        {
-            flipView.SelectedIndex--;
-        }
+        VM.GoToPreviousOutput();
     }
 
     private void Next_Click(object sender, RoutedEventArgs e)
     {
-        if (flipView.SelectedIndex < flipView.Items.Count - 1)
-        {
-            flipView.SelectedIndex++;
-        }
+        VM.GoToNextOutput();
+    }
+
+    private async void RefreshButton_Click(object sender, RoutedEventArgs e)
+    {
+        LoadingControl.IsLoading = true;
+        await VM.LoadHistoryAsync();
+        LoadingControl.IsLoading = false;
     }
 
     private string PlusOne(int selectedIndex)

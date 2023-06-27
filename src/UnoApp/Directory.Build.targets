@@ -3,7 +3,7 @@
     <UnoVersion>4.10.0-dev.380</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>
-    <UnoExtensionsVersion>2.5.0-dev.148</UnoExtensionsVersion>
+    <UnoExtensionsVersion>2.5.0-dev.151</UnoExtensionsVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Uno.WinUI" Version="$(UnoVersion)" />

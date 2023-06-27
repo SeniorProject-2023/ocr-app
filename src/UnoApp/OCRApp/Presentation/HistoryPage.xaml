@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
+    xmlns:uen="using:Uno.Extensions.Navigation.UI"
+    xmlns:controls="using:OCRApp.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -19,9 +21,10 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <Button Content="Refresh" />
-            <ListView x:Name="myListView" Grid.Row="1">
+            <Button Content="Refresh" Click="RefreshButton_Click"  HorizontalAlignment="Stretch" Margin="0,5,0,5" />
+            <ListView x:Name="myListView" ItemsSource="{x:Bind VM.History, Mode=OneWay}" Grid.Row="1" SelectedIndex="{x:Bind VM.SelectedHistoryItemIndex, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:HistoryItemViewModel">
                         <StackPanel Orientation="Vertical"
@@ -37,15 +40,16 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Grid.Row="2" uen:Navigation.Request="-" Content="Go back" HorizontalAlignment="Stretch" Margin="0,5,0,5" />
         </Grid>
 
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Visibility="{x:Bind VM.RightGridVisibility, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <FlipView x:Name="flipView" Background="Transparent" Grid.Row="0" Margin="15">
+            <FlipView x:Name="flipView" ItemsSource="{x:Bind VM.ActiveHistoryItem.Output, Mode=OneWay}" Background="Transparent" Grid.Row="0" Margin="15">
                 <FlipView.ItemTemplate>
                     <DataTemplate x:DataType="sys:String">
                         <Grid>
@@ -58,14 +62,20 @@
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <Button x:Name="Previous" Click="Previous_Click" Content="&lt;" />
                     <TextBlock VerticalAlignment="Center">
-                    <Run Text="{x:Bind PlusOne(flipView.SelectedIndex), Mode=OneWay}" /><Run Text="/" /><Run Text="{x:Bind flipView.Items.Count}" />
+                    <Run Text="{x:Bind PlusOne(VM.SelectedOutputIndex), Mode=OneWay}" /><Run Text="/" /><Run Text="{x:Bind VM.OutputCount, Mode=OneWay}" />
                     </TextBlock>
                     <Button x:Name="Next" Click="Next_Click" Content="&gt;" />
                 </StackPanel>
 
                 <Button Content="Save" HorizontalAlignment="Stretch" Click="SaveButton_Click" />
-                <Button Content="Go back" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Grid>
+
+        <controls:Loading Grid.ColumnSpan="2" x:Name="LoadingControl">
+            <controls:Loading.Background>
+                <AcrylicBrush TintColor="Black" TintOpacity="0.4" />
+            </controls:Loading.Background>
+            <ProgressRing IsActive="True" />
+        </controls:Loading>
     </Grid>
 </Page>

@@ -4,7 +4,6 @@ using Uno.Extensions.Navigation.UI.Controls;
 
 namespace OCRApp;
 
-[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 internal sealed partial class HomePage : Page
 {
     public HomeViewModel? VM => DataContext as HomeViewModel;
@@ -12,12 +11,6 @@ internal sealed partial class HomePage : Page
     public HomePage()
     {
         this.InitializeComponent();
-        // Workaround. This should not be needed.
-        DataContextChanged += (_, _) =>
-        {
-            if (VM is not null)
-                Bindings.Update();
-        };
     }
 
     private void DeleteCurrentImageButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

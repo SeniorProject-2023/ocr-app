@@ -6,7 +6,6 @@ using Uno.Extensions.Navigation.UI.Controls;
 
 namespace OCRApp.Presentation;
 
-[ForceUpdate(false)] // Workaround https://github.com/unoplatform/uno.extensions/pull/1595
 public sealed partial class AccountPage : Page
 {
     internal AccountViewModel? VM => DataContext as AccountViewModel;
@@ -22,7 +21,6 @@ public sealed partial class AccountPage : Page
                 return;
             }
 
-            Bindings.Update();
             if (VM.LoggedInUsername is null)
             {
                 VisualStateManager.GoToState(this, "Login", useTransitions: false);
