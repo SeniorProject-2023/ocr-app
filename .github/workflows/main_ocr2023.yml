@@ -24,11 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download letter model using gdown
-        run: |
-          pip install gdown
-          gdown 1pfFmbmzbiPPryt2LEltOvml7HH9SrMVQ -O src/Backend/InferenceServer/letter_model.pt
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
