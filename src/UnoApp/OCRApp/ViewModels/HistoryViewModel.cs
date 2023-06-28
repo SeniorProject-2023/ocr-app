@@ -6,12 +6,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using OCRApp.Business.Models;
 using OCRApp.Services;
+using Uno.Extensions.Navigation;
 
 namespace OCRApp.ViewModels;
 
 internal partial class HistoryViewModel : ObservableObject
 {
     private readonly IOCRService _ocrService;
+    private readonly INavigator _navigator;
 
     /// <summary>
     /// The list of history items of the users.
@@ -35,9 +37,10 @@ internal partial class HistoryViewModel : ObservableObject
     [ObservableProperty]
     private int _outputCount;
 
-    public HistoryViewModel(IOCRService ocrService)
+    public HistoryViewModel(IOCRService ocrService, INavigator navigator)
     {
         _ocrService = ocrService;
+        _navigator = navigator;
     }
 
     partial void OnSelectedHistoryItemIndexChanged(int value)
@@ -80,6 +83,10 @@ internal partial class HistoryViewModel : ObservableObject
         SelectedOutputIndex++;
     }
 
+    internal async Task GoBack()
+    {
+        await _navigator.NavigateViewModelAsync<MainViewModel>(this);
+    }
 
     internal async Task LoadHistoryAsync()
     {

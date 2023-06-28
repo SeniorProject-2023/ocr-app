@@ -87,10 +87,10 @@ def check_for_job(req):
     try:
         # Access the 'uuid' element in the job jwt payload
         job_uuid = req.job.payload['uuid']
-        history_item = HistoryItem(user=req.user, date_and_time=timezone.now())
-        history_item.save()
         if job_uuid in jobs_dict:
             results = jobs_dict[job_uuid]
+            history_item = HistoryItem(user=req.user, date_and_time=timezone.now())
+            history_item.save()
             for result in results.values():
                 history_item_text = HistoryItemElement(history_item=history_item, text=result)
                 history_item_text.save()

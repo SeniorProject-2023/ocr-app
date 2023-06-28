@@ -39,6 +39,11 @@ public sealed partial class HistoryPage : Page
         VM.GoToNextOutput();
     }
 
+    private async void GoBack_Click(object sender, RoutedEventArgs e)
+    {
+        await VM.GoBack();
+    }
+
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
         LoadingControl.IsLoading = true;
