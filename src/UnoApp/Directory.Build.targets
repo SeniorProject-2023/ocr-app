@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>4.10.0-dev.380</UnoVersion>
+    <UnoVersion>5.0.0-dev.1155</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>
     <UnoExtensionsVersion>2.5.0-dev.151</UnoExtensionsVersion>
@@ -22,7 +22,8 @@
     <PackageReference Update="Uno.Extensions.Navigation.WinUI" Version="$(UnoExtensionsVersion)" />
     <PackageReference Update="Uno.Extensions.Navigation.Toolkit.WinUI" Version="$(UnoExtensionsVersion)" />
     <PackageReference Update="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-    <PackageReference Update="Uno.Toolkit.WinUI.Material" Version="2.6.0-dev.40" />
+    <PackageReference Update="Uno.Toolkit.WinUI.Material" Version="3.1.0-dev.24" />
+    <PackageReference Update="Uno.Toolkit.WinUI" Version="3.1.0-dev.24" />
     <PackageReference Update="Uno.Fonts.Fluent" Version="2.2.0" />
     <PackageReference Update="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaSharpVersion)" />
     <PackageReference Update="SkiaSharp.Skottie" Version="$(SkiaSharpVersion)" />
