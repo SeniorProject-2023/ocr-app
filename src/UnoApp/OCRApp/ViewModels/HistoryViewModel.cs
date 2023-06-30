@@ -46,7 +46,7 @@ internal partial class HistoryViewModel : ObservableObject
     partial void OnSelectedHistoryItemIndexChanged(int value)
     {
         if (value >= 0 &&
-            History.ToArray() is { Length: > 0} historyItems &&
+            History.ToArray() is { Length: > 0 } historyItems &&
             historyItems[value].Output.Length > 0)
         {
             ActiveHistoryItem = historyItems[value];
