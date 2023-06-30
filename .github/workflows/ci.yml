@@ -36,4 +36,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: android-apk
-        path: src/UnoApp/OCRApp.Mobile/bin/Release/net7.0-android/android-arm64/publish/com.companyname.OCRApp-Signed.apk
+        path: src/UnoApp/OCRApp.Mobile/bin/Release/net7.0-android/**/com.companyname.OCRApp-Signed.apk
