@@ -23,13 +23,13 @@ internal sealed class OCRService : IOCRService
     }
 
 #if DEBUG
-    //private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    private const string BaseUri = "http://192.168.1.4:8000";
+    private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    //private const string BaseUri = "http://192.168.1.4:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
 
-    private static HttpClient s_httpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
+    private static HttpClient s_httpClient = new() { Timeout = TimeSpan.FromSeconds(60) };
     private LoginResult _loginResult;
 
     public string? LoggedInUsername { get; private set; }
