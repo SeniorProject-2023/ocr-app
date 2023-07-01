@@ -96,25 +96,42 @@ internal sealed partial class MainPage : Page
         LoadingControl.IsLoading = true;
 
         var sw = Stopwatch.StartNew();
-
-        var jobId = await VM.SubmitJob(imagesToScan.Select(x => x.Image.UriSource));
-
-        while (true)
+        try
         {
-            if (await VM.TryGetResultsForJobIdAsync(jobId) is { } results)
+            var jobId = await VM.SubmitJob(imagesToScan.Select(x => x.Image.UriSource));
+
+            while (true)
             {
-                await VM.NavigateToResults(results);
-                break;
+                if (await VM.TryGetResultsForJobIdAsync(jobId) is { } results)
+                {
+                    await VM.NavigateToResults(results);
+                    break;
+                }
+
+                await Task.Delay(1000);
             }
-
-            await Task.Delay(1000);
         }
+        catch (Exception ex)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "An error has occurred",
+                Content = ex.ToString(),
+                XamlRoot = this.XamlRoot,
+                PrimaryButtonText = "Ok",
+            };
+            await dialog.ShowAsync();
+            return;
 
-        sw.Stop();
-        Console.WriteLine(sw.Elapsed.ToString());
-        global::System.Diagnostics.Debug.WriteLine(sw.Elapsed.ToString());
+        }
+        finally
+        {
+            sw.Stop();
+            Console.WriteLine(sw.Elapsed.ToString());
+            global::System.Diagnostics.Debug.WriteLine(sw.Elapsed.ToString());
 
-        LoadingControl.IsLoading = false;
+            LoadingControl.IsLoading = false;
+        }
     }
 
 #if __ANDROID__ || __IOS__
