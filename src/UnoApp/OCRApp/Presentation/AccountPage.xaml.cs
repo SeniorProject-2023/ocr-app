@@ -58,29 +58,48 @@ public sealed partial class AccountPage : Page
             return;
         }
 
-        LoadingControl.IsLoading = true;
+        try
+        {
+            LoadingControl.IsLoading = true;
 
-        var result = await VM!.SignupAsync(UsernameSignupTextBox.Text, PasswordSignupTextBox.Password);
-        if (!result.Success)
+            var result = await VM!.SignupAsync(UsernameSignupTextBox.Text, PasswordSignupTextBox.Password);
+            if (!result.Success)
+            {
+                SignupInfoBar.Message = result.Error!;
+                SignupInfoBar.IsOpen = true;
+                return;
+            }
+
+            LoadingControl.IsLoading = false;
+
+            var dialog = new ContentDialog()
+            {
+                Title = "Account created successfully",
+                Content = "You can now login with your new account!",
+                XamlRoot = this.XamlRoot,
+                PrimaryButtonText = "Ok",
+            };
+
+            await dialog.ShowAsync();
+            VisualStateManager.GoToState(this, "Login", useTransitions: false);
+        }
+        catch (Exception ex)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "Error creating account.",
+                Content = ex.Message,
+                XamlRoot = this.XamlRoot,
+                PrimaryButtonText = "Ok",
+            };
+
+            await dialog.ShowAsync();
+        }
+        finally
         {
             LoadingControl.IsLoading = false;
-            SignupInfoBar.Message = result.Error!;
-            SignupInfoBar.IsOpen = true;
-            return;
         }
 
-        LoadingControl.IsLoading = false;
-
-        var dialog = new ContentDialog()
-        {
-            Title = "Account created successfully",
-            Content = "You can now login with your new account!",
-            XamlRoot = this.XamlRoot,
-            PrimaryButtonText = "Ok",
-        };
-
-        await dialog.ShowAsync();
-        VisualStateManager.GoToState(this, "Login", useTransitions: false);
     }
 
     private void LoginHyperLink_Click(object sender, RoutedEventArgs e)
@@ -117,7 +136,7 @@ public sealed partial class AccountPage : Page
             var dialog = new ContentDialog()
             {
                 Title = "Unknown error",
-                Content = ex.ToString(),
+                Content = ex.Message,
                 XamlRoot = this.XamlRoot,
                 PrimaryButtonText = "Ok",
             };

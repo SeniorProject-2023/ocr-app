@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OCRApp.ViewModels;
@@ -21,11 +22,9 @@ public sealed partial class HistoryPage : Page
 
     private async void HistoryPage_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
     {
-        if (VM is HistoryViewModel vm)
+        if (VM is HistoryViewModel)
         {
-            LoadingControl.IsLoading = true;
-            await vm.LoadHistoryAsync();
-            LoadingControl.IsLoading = false;
+            await RefreshAsync();
         }
     }
 
@@ -44,11 +43,34 @@ public sealed partial class HistoryPage : Page
         await VM.GoBack();
     }
 
+    private async Task RefreshAsync()
+    {
+        try
+        {
+            LoadingControl.IsLoading = true;
+            await VM.LoadHistoryAsync();
+        }
+        catch (Exception ex)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "Error retrieving history",
+                Content = ex.Message,
+                XamlRoot = this.XamlRoot,
+                PrimaryButtonText = "Ok",
+            };
+
+            await dialog.ShowAsync();
+        }
+        finally
+        {
+            LoadingControl.IsLoading = false;
+        }
+    }
+
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
-        LoadingControl.IsLoading = true;
-        await VM.LoadHistoryAsync();
-        LoadingControl.IsLoading = false;
+        await RefreshAsync();
     }
 
     private string PlusOne(int selectedIndex)
