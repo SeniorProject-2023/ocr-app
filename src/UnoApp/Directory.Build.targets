@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <UnoVersion>5.0.0-dev.1155</UnoVersion>
+    <UnoVersion>5.0.0-dev.1223</UnoVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <UnoWasmBootstrapVersion>7.0.19</UnoWasmBootstrapVersion>
     <UnoExtensionsVersion>2.5.0-dev.151</UnoExtensionsVersion>

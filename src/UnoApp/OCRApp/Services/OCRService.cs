@@ -23,8 +23,8 @@ internal sealed class OCRService : IOCRService
     }
 
 #if DEBUG
-    private const string BaseUri = "https://ocr2023.azurewebsites.net";
-    //private const string BaseUri = "http://192.168.1.4:8000";
+    //private const string BaseUri = "https://ocr2023.azurewebsites.net";
+    private const string BaseUri = "http://192.168.1.4:8000";
 #else
     private const string BaseUri = "https://ocr2023.azurewebsites.net";
 #endif
@@ -36,23 +36,16 @@ internal sealed class OCRService : IOCRService
 
     public async Task<SignupResult> SignupAsync(string username, string password)
     {
-        try
+        // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
+        var message = await s_httpClient.PostAsync($"{BaseUri}/users/signup/", new StringContent($$"""
+        { "username": "{{username}}", "password": "{{password}}" }
+        """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+        if (message.StatusCode != HttpStatusCode.OK)
         {
-            // TODO: DONT CREATE JSON LIKE THIS. USE PostAsyJsonAsync INSTEAD!!!
-            var message = await s_httpClient.PostAsync($"{BaseUri}/users/signup/", new StringContent($$"""
-            { "username": "{{username}}", "password": "{{password}}" }
-            """, Encoding.UTF8, "application/json")).ConfigureAwait(false);
-            if (message.StatusCode != HttpStatusCode.OK)
-            {
-                return new SignupResult(false, await message.Content.ReadAsStringAsync().ConfigureAwait(false));
-            }
+            return new SignupResult(false, await message.Content.ReadAsStringAsync().ConfigureAwait(false));
+        }
 
-            return new SignupResult(true, null);
-        }
-        catch (Exception ex)
-        {
-            return new SignupResult(false, ex.ToString());
-        }
+        return new SignupResult(true, null);
     }
 
     public async Task<bool> LoginAsync(string username, string password)
@@ -123,6 +116,12 @@ internal sealed class OCRService : IOCRService
 
     private static StreamContent CreateFileContent(Stream stream, string fileName, string contentType)
     {
+        if (stream.CanSeek && stream.Position != 0)
+        {
+            // Defensive condition. It shouldn't be hit, but just in case.
+            stream.Position = 0;
+        }
+
         var fileContent = new StreamContent(stream);
         fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
         {
