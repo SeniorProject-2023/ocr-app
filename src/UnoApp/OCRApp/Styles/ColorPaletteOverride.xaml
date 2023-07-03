@@ -18,9 +18,9 @@
             <Color x:Key="ErrorContainerColor">#FFDAD6</Color>
             <Color x:Key="OnErrorColor">#FFFFFF</Color>
             <Color x:Key="OnErrorContainerColor">#410002</Color>
-            <Color x:Key="BackgroundColor">#FDFBFF</Color>
+            <Color x:Key="BackgroundColor">#a9cdfc</Color>
             <Color x:Key="OnBackgroundColor">#001B3D</Color>
-            <Color x:Key="SurfaceColor">#FDFBFF</Color>
+            <Color x:Key="SurfaceColor">#a9cdfc</Color>
             <Color x:Key="OnSurfaceColor">#001B3D</Color>
             <Color x:Key="SurfaceVariantColor">#DFE2EB</Color>
             <Color x:Key="OnSurfaceVariantColor">#43474E</Color>
