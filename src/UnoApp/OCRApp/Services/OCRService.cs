@@ -12,6 +12,10 @@ using OCRApp.Business.Models;
 using OCRApp.Models;
 using Windows.Storage.Streams;
 
+#if __ANDROID__
+using Android.Graphics;
+#endif
+
 namespace OCRApp.Services;
 
 internal sealed class OCRService : IOCRService
@@ -105,8 +109,18 @@ internal sealed class OCRService : IOCRService
         foreach (var image in images)
         {
             var random = RandomAccessStreamReference.CreateFromUri(image);
-            var stream = await random.OpenReadAsync();
-            content.Add(CreateFileContent(stream.AsStreamForRead(), "image.jpg", "image/jpeg"));
+            var stream = (await random.OpenReadAsync()).AsStreamForRead();
+#if __ANDROID__
+            if (stream.Length >= 300 * 1024 && await BitmapFactory.DecodeStreamAsync(stream).ConfigureAwait(false) is Bitmap bitmap)
+            {
+                bitmap = Bitmap.CreateScaledBitmap(bitmap, 1300, 1300, false)!;
+                // https://stackoverflow.com/questions/9814206/how-to-change-a-android-graphics-bitmap-into-a-byte-array-in-c-sharp
+                var memoryStream = new MemoryStream();
+                bitmap.Compress(Bitmap.CompressFormat.Jpeg, 50, memoryStream);
+                stream = memoryStream;
+            }
+#endif
+            content.Add(CreateFileContent(stream, "image.jpg", "image/jpeg"));
         }
 
         var message = await GetResponseMessageAfterRefreshIfNeededAsync(() => s_httpClient.PostAsync($"{BaseUri}/api/arabic-ocr/", content)).ConfigureAwait(false);
