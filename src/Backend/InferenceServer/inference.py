@@ -5,7 +5,7 @@ import numpy as np
 from threading import Thread
 import queue
 import cv2
-from .filters import highPassFilter, whitePointSelect, blackPointSelect
+from .filters import get_angle, highPassFilter, whitePointSelect, blackPointSelect
 from .combined import infer_letters, map2d, merge_boxes, infer_words, groupbyrow
 
 from PIL import Image
@@ -18,6 +18,7 @@ from threading import Thread, Lock
 import os
 from ultralytics import YOLO
 import concurrent.futures
+from skimage.filters import threshold_sauvola
 
 server = None
 serverUp = False
@@ -29,12 +30,14 @@ def infer_image(word_model: YOLO, img_array):
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    img = highPassFilter(img)
-    img = whitePointSelect(img)
-    img = blackPointSelect(img)
-    _, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    img = rotate(img, determine_skew(img),
-                 border_mode=cv2.BORDER_CONSTANT, border_value=255)
+    #img = highPassFilter(img)
+    #img = whitePointSelect(img)
+    #img = blackPointSelect(img)
+    # https://github.com/scikit-image/scikit-image/blob/main/doc/examples/segmentation/plot_niblack_sauvola.py
+    # using defaults
+    img = threshold_sauvola(img, window_size=25)
+    #_, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    img = rotate(img, get_angle(img), border_mode=cv2.BORDER_CONSTANT, border_value=255)
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
     pil_img_before_inference = Image.fromarray(img)
     word_boxes = infer_words(word_model, img)

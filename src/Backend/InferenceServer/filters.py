@@ -32,3 +32,43 @@ def whitePointSelect(img, whitePoint=127):
     img = img.astype('uint8')
 
     return img
+
+def get_angle(
+        gray_img: np.ndarray, angle_max: float = 15, steps_per_degree: int = 15
+):
+    width = height = cv2.getOptimalDFTSize(max(gray_img.shape))
+    gray_img = cv2.copyMakeBorder(
+        src=gray_img,
+        top=0,
+        bottom=height - gray_img.shape[0],
+        left=0,
+        right=width - gray_img.shape[1],
+        borderType=cv2.BORDER_CONSTANT,
+        value=255,
+    )
+
+    dft = np.fft.fft2(gray_img)
+    shifted_dft = np.fft.fftshift(dft)
+    m = np.abs(shifted_dft)
+
+    r = c = m.shape[0] // 2
+
+    tr = np.linspace(-1 * angle_max, angle_max, int(angle_max * steps_per_degree * 2)) / 180 * np.pi
+    profile_arr = tr.copy()
+
+    def f(t):
+        _f = np.vectorize(
+            lambda x: m[c + int(x * np.cos(t)), c + int(-1 * x * np.sin(t))]
+        )
+        _l = _f(range(0, r))
+        val_init = np.sum(_l)
+        return val_init
+
+    vf = np.vectorize(f)
+    li = vf(profile_arr)
+
+    a = tr[np.argmax(li)] / np.pi * 180
+
+    if a == -1 * angle_max:
+        return 0
+    return a
