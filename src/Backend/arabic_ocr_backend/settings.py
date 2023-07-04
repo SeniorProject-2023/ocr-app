@@ -29,7 +29,7 @@ MODEL_BACKEND = { #TODO: restore this back later
     'PORT': 18811  # os.environ['MODEL_BACKEND_PORT']
 }
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS', 'ocr2023.azurewebsites.net')]
 
