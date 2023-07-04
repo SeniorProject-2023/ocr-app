@@ -34,7 +34,7 @@ def whitePointSelect(img, whitePoint=127):
     return img
 
 def get_angle(
-        gray_img: np.ndarray, angle_max: float = 15, steps_per_degree: int = 15
+        gray_img: np.ndarray, angle_max: float = 45, steps_per_degree: int = 15
 ):
     width = height = cv2.getOptimalDFTSize(max(gray_img.shape))
     gray_img = cv2.copyMakeBorder(

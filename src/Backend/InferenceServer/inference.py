@@ -35,7 +35,7 @@ def infer_image(word_model: YOLO, img_array):
     #img = blackPointSelect(img)
     # https://github.com/scikit-image/scikit-image/blob/main/doc/examples/segmentation/plot_niblack_sauvola.py
     # using defaults
-    img = threshold_sauvola(img, window_size=25)
+    img = threshold_sauvola(img, window_size=15)
     #_, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     img = rotate(img, get_angle(img), border_mode=cv2.BORDER_CONSTANT, border_value=255)
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
